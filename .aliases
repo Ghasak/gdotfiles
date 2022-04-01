@@ -1,0 +1,665 @@
+#------------------------------------------------------------------------------
+#
+# ░█████╗░██╗░░░░░██╗░█████╗░░██████╗███████╗░██████╗
+# ██╔══██╗██║░░░░░██║██╔══██╗██╔════╝██╔════╝██╔════╝
+# ███████║██║░░░░░██║███████║╚█████╗░█████╗░░╚█████╗░
+# ██╔══██║██║░░░░░██║██╔══██║░╚═══██╗██╔══╝░░░╚═══██╗
+# ██║░░██║███████╗██║██║░░██║██████╔╝███████╗██████╔╝
+# ╚═╝░░╚═╝╚══════╝╚═╝╚═╝░░╚═╝╚═════╝░╚══════╝╚═════╝░
+#
+#------------------------------------------------------------------------------
+# -eq # Equal
+# -ne # Not equal
+# -lt # Less than
+# -le # Less than or equal
+# -gt # Greater than
+# -ge # Greater than or equal
+
+# Shortcuts
+alias ch='history | grep "git commit"'
+alias hg='history | grep'
+alias yt='subl ~/Google\ Drive/YouTube/Scripts/'
+alias cyt='cd ~/Google\ Drive/YouTube/Scripts/'
+alias oyt='open ~/Google\ Drive/YouTube/Scripts/'
+
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+	colorflag="--color"
+else # OS X `ls`
+	colorflag="-G"
+fi
+
+#------------------------------------------------------------------------------
+#           Show all the color that I have in my Terminal
+#------------------------------------------------------------------------------
+# for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+# List all files colorized in long format, including dot files
+alias la="ls -lahF ${colorflag}"
+
+# Always use color output for `ls`
+alias ls="command ls ${colorflag}"
+export LS_COLORS='no=00:fi=00:di=04;35:ln=01;36:pi=40;33:so=01;35:do=01;\
+35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;\
+31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;\
+31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;\
+35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;\
+35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;\
+35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;\
+35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
+export LSCOLORS='Gxfxcxdxbxegedabagacad'
+
+# Always enable colored `grep` output
+# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
+# Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+alias update_system='sudo softwareupdate -i -a'
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# To prep before screencasts
+alias tut_mode='defaults write com.apple.dock autohide -bool true && killall Dock;
+               defaults write com.apple.finder CreateDesktop -bool false && killall Finder;
+               defaults write com.apple.menuextra.clock IsAnalog -bool true && killall SystemUIServer;
+               rm -rf ~/.Trash/*;
+               rm -rf ~/Downloads/*'
+alias reg_mode='defaults write com.apple.dock autohide -bool false && killall Dock;
+               defaults write com.apple.finder CreateDesktop -bool true && killall Finder;
+               defaults write com.apple.menuextra.clock IsAnalog -bool false && killall SystemUIServer;'
+
+alias clean='rm -rf ~/.Trash/*; rm -rf ~/Downloads/*'
+alias wipe_env='rm -rf ~/tutorial_env; python3 -m venv ~/tutorial_env'
+alias tut_env='source ~/tutorial_env/bin/activate'
+alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+
+#------------------------------------------------------------------------------
+#
+#           █▀▀ ▀█ █▀▀
+#           █▀░ █▄ █▀░
+#
+#   https://betterprogramming.pub/boost-your-command- \
+#   line-productivity-with-fuzzy-finder-985aa162ba5d
+#------------------------------------------------------------------------------
+# export FZF_DEFAULT_OPTS="
+# --layout=reverse
+# --info=inline
+# --height=80%
+# --multi
+# --preview-window=:hidden
+# --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+# --color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
+# --prompt='∼ ' --pointer='▶' --marker='✓'
+# --bind '?:toggle-preview'
+# --bind 'ctrl-a:select-all'
+# --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
+# --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
+# --bind 'ctrl-v:execute(code {+})'
+# "
+# 'wild: Exact match, return items that include wild.
+# ^music: Prefix-exact-match, return items that start with music.
+# .mp3$: Suffix-exact-match, return items that end with .mp3.
+# !fire: Inverse-exact-match, return items that do not include fire.
+# !^music: Inverse-prefix-exact-match, return items that do not start with music.
+# !.mp3$: Inverse-suffix-exact-match, return items that do not end with .mp3.
+
+alias fzf="fzf --preview '([[ -f {} ]] && (bat --style=numbers --color=always\
+     {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
+
+#export FZF_DEFAULT_OPTS='--height 96% --reverse --preview  "cat {}"'
+# This is very important to exclude some directory in your serach
+# https://dev.to/matrixersp/how-to-use-fzf-with-ripgrep-to-selectively-ignore-vcs-files-4e27
+alias fzfi='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git}" | fzf'
+
+#------------------------------------------------------------------------------
+#
+# ░█▀▀▀ ░█▀▀▀█ ░█▀▀▀ 　 　 ░█▀▀█ █▀▀▀
+# ░█▀▀▀ ─▄▄▄▀▀ ░█▀▀▀ 　 　 ░█▄▄▀ █─▀█
+# ░█─── ░█▄▄▄█ ░█─── 　 　 ░█─░█ ▀▀▀▀
+#           This is the most important fuction
+#           searching for a keyword in your given repository
+#           and fetch to you not only directory names but also
+#           where this word has been mentioned
+# find-in-file - usage: fif <SEARCH_TERM>
+#           NOTE: you can costume your configuration also to
+#           exclude some directories use
+#           "!{filename}"
+#------------------------------------------------------------------------------
+fif() {
+  if [ ! "$#" -gt 0 ]; then
+    echo "Need a string to search for!";
+    return 1;
+  fi
+  rg --files-with-matches --no-messages "$1" | fzf $FZF_PREVIEW_WINDOW --preview "rg --ignore-case --pretty --context 10 '$1' {}"
+}
+
+# like normal z when used with arguments but displays an fzf prompt when used without.
+# z() {
+#     [ $# -gt 0 ] && _z "$*" && return
+#     cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+# }
+#
+# function deep_search(){
+#   echo "##################################################" | lolcat
+#   echo "
+# █▀▀▄ █▀▀ █▀▀ █▀▀█ 　 █▀▀ █▀▀ █▀▀█ █▀▀█ █▀▀ █░░█
+# █░░█ █▀▀ █▀▀ █░░█ 　 ▀▀█ █▀▀ █▄▄█ █▄▄▀ █░░ █▀▀█
+# ▀▀▀░ ▀▀▀ ▀▀▀ █▀▀▀ 　 ▀▀▀ ▀▀▀ ▀░░▀ ▀░▀▀ ▀▀▀ ▀░░▀" | lolcat
+#   echo "##################################################" | lolcat
+#   cat << EOF
+#   The following function need to input
+#   Parameters:
+#     - First input is the keyword to be searched
+#     - Second input is the file to look inside.
+#       - markdown --> md
+#       - portable documetn file -> pdf
+#   Tools:
+#     - rg -> ripgrep
+#     - sk -> skim
+#
+#
+# EOF
+#
+# # For specific type of file
+# # rg  -in $1 *.$2  | sk --preview="bat {} --color=always"
+# # Orginal command
+# # rg --files | sk --preview="bat {} --color=always"
+# # Modified by me:
+#   if [ ! "$#" -gt 0 ]; then
+#     echo "Need a string to search for!";
+#     return 1;
+#   fi
+#   if [ "$#" = 1 ]; then
+#     echo "Using Sliver Serach ... "
+#     rg --files-with-matches --no-messages "$1" | fzf $FZF_PREVIEW_WINDOW --preview "rg --ignore-case --pretty --context 10 '$1' {}"
+#
+#   else
+#     echo "Using Plantnium Search ... "
+#     pt -i $1 2> /dev/null | fzf $FZF_PREVIEW_WINDOW --preview "rg --ignore-case --pretty --context 10 '$1' {}"
+#     #rg  -in $1 *.$2
+#     #grep -in  $1 *.$2 | fzf $FZF_PREVIEW_WINDOW --preview "rg --ignore-case --pretty --context 10 '$1' {}"
+#
+#   fi
+#
+#
+#
+#   }
+#
+## find any item matching search query in file name
+#------------------------------------------------------------------------------
+#		     File List in Given Directory
+#  Source:https://stackoverflow.com/questions/51306276/awk-get-file-name-from-ls
+#------------------------------------------------------------------------------
+file_list(){
+  for file in *; do
+    printf '%s\n' "${file%.*}"
+  done
+  }
+#------------------------------------------------------------------------------
+#			Searching Utilties
+#------------------------------------------------------------------------------
+# https://superuser.com/questions/226566/how-do-i-find-a-file-by-filename-in-mac-osx-terminal
+spot(){
+  mdfind "kMDItemDisplayName=='*$1*'cd";
+}
+
+# restrict to files under (recursive) a specific path
+findpaper(){
+    mdfind -onlyin "/Users/foo/articles" "kMDItemDisplayName=='*$1*'cd";
+}
+
+# default to open the first entry unless 2nd positional argument is given
+openpaper(){
+    FILEID=$(printf "%sp" ${2:-1})
+
+    open "$(mdfind -name -onlyin "/Users/foo/articles" "kMDItemDisplayName=='*$1*'cd" | sed -n "${FILEID}")"
+}
+#
+#
+#------------------------------------------------------------------------------
+#                   https://github.com/phiresky/ripgrep-all
+#------------------------------------------------------------------------------
+rga-fzf() {
+	RG_PREFIX="rga --files-with-matches"
+	local file
+	file="$(
+		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+			fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
+				--phony -q "$1" \
+				--bind "change:reload:$RG_PREFIX {q}" \
+				--preview-window="70%:wrap"
+	)" &&
+	echo "opening $file" &&
+	xdg-open "$file"
+}
+
+pdf_deep_search(){
+  rga -i -L -n  --no-messages --column -F --stats "$1"
+  }
+#------------------------------------------------------------------------------
+#       This function will fetch all bookmarks \
+#           of your goolge chrome websbrowser
+#------------------------------------------------------------------------------
+b() {
+  local bookmarks_path=~/Library/Application\ Support/Google/Chrome/Default/Bookmarks
+  local jq_script='def ancestors: while(. | length >= 2; del(.[-1,-2])); . as $in | paths(.url?) as $key | $in | getpath($key) | {name,url, path: [$key[0:-2] | ancestors as $a | $in | getpath($a) | .name?] | reverse | join("/") } | .path + "/" + .name + "\t" + .url'
+  jq -r $jq_script < "$bookmarks_path" \
+  | sed -E $'s/(.*)\t(.*)/\\1\t\x1b[36m\\2\x1b[m/g' \
+  | fzf --ansi \
+  | cut -d$'\t' -f2 \
+  | xargs open
+}
+#------------------------------------------------------------------------------
+#               Using FZF Globally (Globally means; not in nvim)
+#  Resources:
+#       - https://github.com/junegunn/fzf
+#       - https://www.youtube.com/watch?v=qgG5Jhi_Els
+alias searchx="echo '
+█▀▀ ▀█ █▀▀
+█▀░ █▄ █▀░' | lolcat  && sleep 1 && find . -type f | fzf"
+
+
+#------------------------------------------------------------------------------
+alias diskSize="echo '
+█▀▀▄ █▀▀ █▀▀▄ █░░█
+█░░█ █░░ █░░█ █░░█
+▀░░▀ ▀▀▀ ▀▀▀░ ░▀▀▀' | lolcat && sleep 1 && ncdu --color dark"
+# you can use: du -h -s <dir_name>
+# check man du
+#------------------------------------------------------------------------------
+#                   Disk Space more Colored Utility
+alias duf=duf
+#------------------------------------------------------------------------------
+#
+#                    All Programming cheatSheet
+#           https://github.com/chubin/cheat.sh#installation
+#
+#------------------------------------------------------------------------------
+CHEAT_SHEET_PATH_DIR="$HOME/.CHEAT_SHEET_PATH_DIR/"
+export PATH="$CHEAT_SHEET_PATH_DIR/:$PATH"
+
+alias cheatSheet=cht.sh
+#------------------------------------------------------------------------------
+#                       Using Google in Terminal
+#                       https://github.com/jarun/googler
+#------------------------------------------------------------------------------
+alias define='googler define'
+#-site:seoarticlefactory.com"'
+# List of Countries :
+# https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains
+# us: Untied States
+alias googler='googler -n 5 --colors bjdxxy -c us'
+#
+#------------------------------------------------------------------------------
+#
+#               Search StackOverFlow from Terminal
+#               https://github.com/santinic/how2
+
+#------------------------------------------------------------------------------
+#   echo specifiy the language first then the query
+alias stackOverflow="how2 -l"
+
+#------------------------------------------------------------------------------
+#               Using Navigation the location of the files in
+#                       the given repository
+#
+#------------------------------------------------------------------------------
+alias broot=broot
+
+#------------------------------------------------------------------------------
+#           Recorde your Terminal and export similar as a video
+#                       https://asciinema.org
+#------------------------------------------------------------------------------
+alias asciinema=asciinema
+
+#------------------------------------------------------------------------------
+#                   Making an animated GIF in Linux
+#                   https://www.youtube.com/watch?v=gT2y1SVf2hI
+#                   1. Install imagemagick:
+#               sudo apt-get install imagemagick
+#               2. Place all your images to a separate folder
+#               3. Convert images to GIF
+#               convert -delay 100 -loop 0 *.jpeg animatedGIF.gif
+#               -delay specifies the delay between frame in milliseconds.
+#               -loop indicates how many loops to run. 0 means infinity.
+#------------------------------------------------------------------------------
+alias  imagemagick=imagemagick
+#------------------------------------------------------------------------------
+#           Predict the next work in terminal -> works with
+#               coc-nextword extension
+#           https://github.com/high-moctane/nextword
+#           you need to add the directory  to .zshrc
+#------------------------------------------------------------------------------
+alias nextword=nextword
+#------------------------------------------------------------------------------
+#   Clean all typescript in the directory
+#------------------------------------------------------------------------------
+alias cleanupDS="find . -type f -name '*.typescript' -ls -delete"
+#------------------------------------------------------------------------------
+# ▒█▀▀▀ █▀▀█ █▀▀█ █▀▀▀ ░▀░ ▀▀█▀▀
+# ▒█▀▀▀ █░░█ █▄▄▀ █░▀█ ▀█▀ ░░█░░
+# ▒█░░░ ▀▀▀▀ ▀░▀▀ ▀▀▀▀ ▀▀▀ ░░▀░░
+#   Best viewer for the Git repository using forgit
+#   Link: https://github.com/wfxr/forgit#manual-installation
+#------------------------------------------------------------------------------
+# ga: Interactive git add selector.
+# glo: Interactive git log viewer.
+# gd: Interactive git diff viewer. For better diffs, delta is recommended.
+# grh: Interactive git reset HEAD <file> selector.
+# gcf: Interactive git checkout <file> selector.
+# gss: Interactive git stash viewer.
+# gclean: Interactive git clean selector.
+alias ga=ga
+alias glo=glo
+alias grh=grh
+#------------------------------------------------------------------------------
+#           Show difference between two files
+#           Source: https://github.com/nickjj/dotfiles/blob/\
+#           62d4d11bc1cf2e357a427ba56f41bb6b51685c5d/.aliases#L80
+#------------------------------------------------------------------------------
+# ga: Interactive git add selector.
+vdiff () {
+    if [ "${#}" -ne 2 ] ; then
+        echo "vdiff requires two arguments"
+        echo "  comparing dirs:  vdiff dir_a dir_b"
+        echo "  comparing files: vdiff file_a file_b"
+        return 1
+    fi
+
+    local left="${1}"
+    local right="${2}"
+
+    if [ -d "${left}" ] && [ -d "${right}" ]; then
+        vim +"DirDiff ${left} ${right}"
+    else
+        vim -d "${left}" "${right}"
+    fi
+}
+#------------------------------------------------------------------------------
+#               Global Packages of NPM package manager
+#               if you want to see local for your given
+#               project file use:
+#                   - npm install npm-gui
+#               for global list of modules use
+#                   - npm -g install npm -gui
+#               HINT: the command aliased here to the global packages
+#------------------------------------------------------------------------------
+
+alias npmList="npm-gui localhost:9000"
+#------------------------------------------------------------------------------
+#                           Getting the IP_Address
+#------------------------------------------------------------------------------
+if [ -f ~/.GScript/ip_address.sh ]; then
+  alias IP_address=$(echo $(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'))
+else
+  alias  IP_address=$(echo $(~/.GScript/ip_address.sh))
+fi
+
+#------------------------------------------------------------------------------
+#               Project Template Builder in Python
+#       - need the scripts to be setup in the specified directory
+#------------------------------------------------------------------------------
+#alias projectBuilder="make -C ~/.Gscript/project_template_builder"
+fucntion projectBuilder(){
+      cp ~/.GScript/project_template_builder/Makefile \
+         ~/.GScript/project_template_builder/requirements.txt \
+         ~/.GScript/project_template_builder/constructProject.sh \
+         ~/.GScript/project_template_builder/cleaningScript.sh . 2>/dev/null && make
+  }
+
+
+alias lazydocker=lazydocker
+alias lazygit=lazygit
+
+
+
+#------------------------------------------------------------------------------
+#
+#            ▒█░░▒█ █░░█ ░▀░ █▀▀ █░░█ 　 ▒█▀▀█ █▀▀█ █▀▀█ ▀▀█▀▀
+#            ▒█▒█▒█ █▀▀█ ▀█▀ █░░ █▀▀█ 　 ▒█▄▄█ █░░█ █▄▄▀ ░░█░░
+#            ▒█▄▀▄█ ▀░░▀ ▀▀▀ ▀▀▀ ▀░░▀ 　 ▒█░░░ ▀▀▀▀ ▀░▀▀ ░░▀░░
+#
+#                 Identify which port is lisening to
+#                 You can see also
+#                 bat (cat) /etc/hosts
+# https://stackoverflow.com/questions/4421633/who-is-listening-on-a-given-tcp-port-on-mac-os-x
+#------------------------------------------------------------------------------
+# On macOS Big Sur and later, use this command:
+# sudo lsof -i -P | grep LISTEN
+# or to just see just IPv4:
+#
+# sudo lsof -nP -i4TCP:$PORT | grep LISTEN
+# On older versions, use one of the following forms:
+#
+# sudo lsof -nP -iTCP:$PORT | grep LISTEN
+# sudo lsof -nP -i:$PORT | grep LISTEN
+# Substitute $PORT with the port number or a comma-separated list of port numbers.
+#
+# Prepend sudo (followed by a space) if you need information on ports below 1024.
+#
+# The -n flag is for displaying IP addresses instead of host names. This makes
+# the command execute much faster, because DNS lookups to get the host names
+# can be slow (several seconds or a minute for many hosts).
+#
+# The -P flag is for displaying raw port numbers instead of resolved names like
+# http, ftp or more esoteric service names like dpserve, socalia.
+#
+# See the comments for more options.
+#
+# For completeness, because frequently used together:
+#
+# To kill the PID:
+#
+# sudo kill -9 <PID>
+# kill -9 60401
+#------------------------------------------------------------------------------
+listening() {
+    if [ $# -eq 0 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+        echo "Usage: listening [pattern]"
+    fi
+}
+alias whichPortI="echo '
+█░█░█ █░█ █ █▀▀ █░█   █▀█ █▀█ █▀█ ▀█▀
+▀▄▀▄▀ █▀█ █ █▄▄ █▀█   █▀▀ █▄█ █▀▄ ░█░l' | boxes | lolcat && sudo lsof -i -P | grep LISTEN | boxes | lolcat"
+alias whichPortII="echo '
+▒█░░▒█ █░░█ ░▀░ █▀▀ █░░█ 　 ▒█▀▀█ █▀▀█ █▀▀█ ▀▀█▀▀
+▒█▒█▒█ █▀▀█ ▀█▀ █░░ █▀▀█ 　 ▒█▄▄█ █░░█ █▄▄▀ ░░█░░
+▒█▄▀▄█ ▀░░▀ ▀▀▀ ▀▀▀ ▀░░▀ 　 ▒█░░░ ▀▀▀▀ ▀░▀▀ ░░▀░░' | boxes |lolcat && listening | boxes |lolcat"
+
+admin_pass="pass"
+alias whichPortIII="sudo -S -v <<< $admin_pass | lsof -i -P | grep LISTEN | boxes | lolcat"
+#------------------------------------------------------------------------------
+#           quicklook for file from terminal with Quick Look
+#           Use with:
+#               quick_look <file_name>
+#------------------------------------------------------------------------------
+alias quick_look="qlmanage -p $1"
+#------------------------------------------------------------------------------
+#                   Note Taking with Nvim
+#                   Using <nb> CLI
+#                   Source: https://github.com/xwmx/nb
+#                   To integrate with Nvim use
+#                   < nb set editor nvim >
+#------------------------------------------------------------------------------
+alias nb=nb
+#------------------------------------------------------------------------------
+#                           BENCH
+#             Utilty to measure the speed of your code
+#             Source: https://github.com/Gabriel439/bench
+#             Example:
+#                 => bench "pypy3 G05_UsingPyPy.py usingPypy --n 10000"
+#------------------------------------------------------------------------------
+alias bench=bench
+#------------------------------------------------------------------------------
+#                       WIFI Signal in Terminal
+#            Utilty to know the channels of all your wifi signals
+#  source: https://apple.stackexchange.com/questions/81221/how-do-i-get-wi-fi-info-from-within-terminal
+#          http://support.moonpoint.com/os/os-x/wireless/wifi-signal-strength
+#  Run first:
+#  sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
+#  you can check:
+#           - airport -s => give you all channels
+#           - airport -h => give you wifi-strength (check argCtlRSSI)
+#  while true; do airport -I | grep agrCtlRSSI; sleep 1 ; done
+#------------------------------------------------------------------------------
+alias airport="airport" # you can use [-s => channels ]
+
+
+#------------------------------------------------------------------------------
+#                  SAVING SAFARI TABS
+#                  Safari Saving tabs in terminal and use them as
+#                  bookmarks session
+#                  Source: https://apple.stackexchange.com/questions/389090/how-to-save-list-of-open-safari-tabs-in-a-text-file
+#------------------------------------------------------------------------------
+#List the URL of all tabs in the frontmost window:
+function safari_save_current_tabs(){
+  osascript -e{'set text item delimiters to linefeed','tell app"safari"to(url of tabs of window 1)as text'} |boxes | lolcat
+  }
+#List the URL of all tabs in all windows:
+function safari_save_all_tabs(){
+    osascript -e{'set text item delimiters to linefeed','tell app"safari"to(url of tabs of windows)as text'} | lolcat
+  }
+#List the URL and title of all tabs in the frontmost window:
+function safari_save_current_tabs_with_title(){
+  osascript -e{'set o to""','tell app"safari"','repeat with t in tabs of window 1','set o to o&url of t&" "&name of t&"\n"',end,end,o}|sed \$d | boxes | lolcat
+
+  }
+
+#------------------------------------------------------------------------------
+#               CURRENT_SUB_DIRS_FILES
+#               Getting all files and folers in the current subdirector
+#               [not recurisive]
+#------------------------------------------------------------------------------
+function current_sub_dirs_files(){
+  RED="\e[31m"
+  GREEN="\e[32m"
+  LIGHT_YELLOW="\e[93m"
+  ENDCOLOR="\e[0m"
+
+   for file in  $(echo $(lsd | sort -nrk4,4 | awk '{print $13}'));do
+     if [ -d $file ]; then
+       echo -n -e  "=> ${GREEN}\uf07b ${ENDCOLOR} "  && echo  "${file}"
+     elif [ -f $file ]; then
+       echo -n -e  "=> ${RED}\uf15b ${ENDCOLOR} "  && echo   "${file}"
+     else
+       echo -n -e  "=> ${LIGHT_YELLOW}\uf128  ${ENDCOLOR} "  && echo  "${file}"
+     fi
+     done
+ }
+
+#------------------------------------------------------------------------------
+#                   WHICH APPs ARE RUNNING
+#               What programs are running right now
+#               SOURCE:
+#------------------------------------------------------------------------------
+function which_apps_are_running(){
+         osascript -e 'tell application "Finder" to get the name of every process whose visible is true'
+  }
+
+
+
+#------------------------------------------------------------------------------
+#                       NEWTAB (ITERM2)
+#                   Open a new tab in termainl (iterm2)
+#------------------------------------------------------------------------------
+function newTab(){
+  osascript \
+    -e 'tell application "iTerm" to activate' \
+    -e 'tell application "System Events" to tell process "iTerm" to keystroke "t" using command down' \
+    -e 'tell application "System Events" to tell process "iTerm" to keystroke "clear"' \
+    -e 'tell application "System Events" to tell process "iTerm" to key code 52'
+    -e 'tell application "System Events" to tell process "iTerm" to keystroke "lsd"' \
+    -e 'tell application "System Events" to tell process "iTerm" to key code 52'
+}
+
+#------------------------------------------------------------------------------
+#                      Coloring my Scripts
+#                      Check also (colorize) at (~/.GScript/)
+#                      Reference:
+#                      https://unix.stackexchange.com/questions/276471/piping-a-command-through-a-color-filter
+#                      colorscheme: https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
+#                      Formula:
+#                       => echo '    foo\n    bar' | red
+#------------------------------------------------------------------------------
+black()  { IFS= ; while read -r line; do echo -e '\e[30m'$line'\e[0m'; done; }
+red()    { IFS= ; while read -r line; do echo -e '\e[31m'$line'\e[0m'; done; }
+green()  { IFS= ; while read -r line; do echo -e '\e[32m'$line'\e[0m'; done; }
+yellow() { IFS= ; while read -r line; do echo -e '\e[33m'$line'\e[0m'; done; }
+blue()   { IFS= ; while read -r line; do echo -e '\e[34m'$line'\e[0m'; done; }
+purple() { IFS= ; while read -r line; do echo -e '\e[35m'$line'\e[0m'; done; }
+cyan()   { IFS= ; while read -r line; do echo -e '\e[36m'$line'\e[0m'; done; }
+white()  { IFS= ; while read -r line; do echo -e '\e[37m'$line'\e[0m'; done; }
+
+#------------------------------------------------------------------------------
+#       This is the
+#------------------------------------------------------------------------------
+alias refresh="script && trash typescript"
+
+#------------------------------------------------------------------------------
+#               Checking the weather (default : Tokyo)
+#------------------------------------------------------------------------------
+function weather(){
+  if [ ! $@ ]; then
+      printf 'Note: No arguments are given.'
+      curl wttr.in/tokyo
+  elif [ $# -eq 1 ]; then
+      printf "You have selected the city: ${1}"
+      curl wttr.in/"${1}"
+  fi
+  }
+
+#------------------------------------------------------------------------------
+#               Open PDF reader (ZATHURA), instance
+#------------------------------------------------------------------------------
+alias zathura="zathura & disown"
+function zathura_how_many_instances_to_make(){
+  n="$1"
+  for ((s = 1; s <= n; s++)); do zathura; done
+}
+alias zathura_how_many_instances_check="ps aux | grep zathura"
+function  zathura_kill_all(){
+  kill -9 $(ps aux | grep zathura| awk '{print $2}' | xargs sh -c 'echo $@' | xargs)
+  }
+
+#------------------------------------------------------------------------------
+#           Give me authentrication
+#------------------------------------------------------------------------------
+function personal_app_authentications(){
+  xattr -r -d com.apple.quarantine "/Applications/$1"
+  }
+#------------------------------------------------------------------------------
+#                    Japanese language APIs
+#------------------------------------------------------------------------------
+# The following libraries:
+# 1. romkan https://github.com/soimort/python-romkan
+# python -c "import romkan; print(romkan.to_roma('にんじゃ'))"
+# 2. pykakasi (lightweight library) https://github.com/miurahr/pykakasi
+alias koora="open -a safari 'https://hd.onlinekora.tv/'"
+
+#------------------------------------------------------------------------------
+#                    Testing nvim lunching speed
+#------------------------------------------------------------------------------
+function nvim_speed_test(){
+  RED="\e[31m"
+  GREEN="\e[32m"
+  LIGHT_YELLOW="\e[93m"
+  ENDCOLOR="\e[0m"
+  for ((i = 1; i < 10; i++)); do
+    echo "${RED}\uf9c4 ${GREEN}\ue7c5 ${LIGHT_YELLOW} \uf432  Trial no. ${RED}\ue27a  ${GREEN}${i}${ENDCOLOR}\n";
+    vim-startuptime --vimpath=nvim | head -n 4 | grep "Total Average";
+    echo "${GREEN}\uf6fb \uf6fb \uf6fb \uf6fb \uf6fb \uf6fb \uf6fb${ENDCOLOR}";
+  done
+  }
+
