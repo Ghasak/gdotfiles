@@ -1,4 +1,4 @@
-# ###########################################
+#export LC_ALL=en_US.UTF-8 ###########################################
 #
 #      ███████╗███████╗██╗  ██╗██████╗  ██████╗
 #      ╚══███╔╝██╔════╝██║  ██║██╔══██╗██╔════╝
@@ -27,8 +27,16 @@ source $HOME/.zshrc_prompt
 source $HOME/.aliases
 source $HOME/zsh-git-prompt/zshrc.sh
 
-
-
+# Adding utf-8 for other langauges
+export LC_ALL=en_US.UTF-8
+LANG="en_US.UTF-8"
+LC_COLLATE="en_US.UTF-8"
+LC_CTYPE="en_US.UTF-8"
+LC_MESSAGES="en_US.UTF-8"
+LC_MONETARY="en_US.UTF-8"
+LC_NUMERIC="en_US.UTF-8"
+LC_TIME="en_US.UTF-8"
+LC_ALL="en_US.UTF-8"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -152,7 +160,18 @@ source /Users/gmbp/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # For auto completetion ( I dont like this one )
 # source ${HOME}/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
+###################################################
+#         Auto-completetion of Homebrew            #
+###################################################
+# https://docs.brew.sh/Shell-Completion
+# https://medium.com/@benriemer/fast-install-and-correct-setup-for-homebrew-on-mac-6de816f98142
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
+  autoload -Uz compinit
+  compinit
+fi
 
 
 
@@ -177,6 +196,7 @@ source /Users/gmbp/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 #*************************************************************************
+#  __________________
 #
 #  GH-TERM CONFIDENTIAL
 #  __________________
@@ -790,3 +810,10 @@ export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/14/bin/"
 ###################################################
 # upgrade the bash version comes with the original installation of mac
 export PATH="$HOME/opt/homebrew/bin/:$PATH"
+
+###################################################
+#   MacOS terminal command History checking
+###################################################
+# checking the history using mcfly
+eval "$(mcfly init zsh)"
+# checking the history using hstr
