@@ -119,9 +119,14 @@ export ZSH="$HOME/.oh-my-zsh"
 plugins=(git
     #zsh-autocomplete
     # other plugins...
-    # Auto suggestions from here: https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
+    # Auto suggestions from here:
+    # https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
     zsh-autosuggestions
+    # Auto jump from here:
     autojump
+    # syntax zsh-syntax-highlighting from here:
+    # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+    zsh-syntax-highlighting
   )
 
 source $ZSH/oh-my-zsh.sh
@@ -155,7 +160,8 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source /Users/gmbp/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# This was the pervios implementation of the zsh-syntax-highlighting, now it is in the oh-my-zsh plugin
+#source /Users/gmbp/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # For auto completetion ( I dont like this one )
 # source ${HOME}/zsh-autocomplete/zsh-autocomplete.plugin.zsh
@@ -817,3 +823,4 @@ export PATH="$HOME/opt/homebrew/bin/:$PATH"
 # checking the history using mcfly
 eval "$(mcfly init zsh)"
 # checking the history using hstr
+
