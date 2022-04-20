@@ -663,3 +663,18 @@ function nvim_speed_test(){
   done
   }
 
+#------------------------------------------------------------------------------
+#                 Open obsidian in terminal
+#------------------------------------------------------------------------------
+alias obsidian="open -a obsidian"
+
+#------------------------------------------------------------------------------
+#                 check my battary status
+#------------------------------------------------------------------------------
+alias mybattary='system_profiler SPPowerDataType | grep -A3 -B7 "Condition"'
+
+#------------------------------------------------------------------------------
+#                 Using exa as relpacement to ls
+#------------------------------------------------------------------------------
+alias exa="exa --color=always --group-directories-first --git --header --long --recurse --time-style=long-iso --tree  --icons"
+#https://github.com/ogham/exa/blob/master/screenshots.png
