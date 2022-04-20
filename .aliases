@@ -678,3 +678,5 @@ alias mybattary='system_profiler SPPowerDataType | grep -A3 -B7 "Condition"'
 #------------------------------------------------------------------------------
 alias exa="exa --color=always --group-directories-first --git --header --long --recurse --time-style=long-iso --tree  --icons"
 #https://github.com/ogham/exa/blob/master/screenshots.png
+# ---------------------------------------------------
+alias refresh_term="exec zsh"
