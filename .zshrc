@@ -1,4 +1,4 @@
-#export LC_ALL=en_US.UTF-8 ###########################################
+# ###########################################
 #
 #      ███████╗███████╗██╗  ██╗██████╗  ██████╗
 #      ╚══███╔╝██╔════╝██║  ██║██╔══██╗██╔════╝
@@ -822,4 +822,8 @@ export PATH="$HOME/opt/homebrew/bin/:$PATH"
 # checking the history using mcfly
 eval "$(mcfly init zsh)"
 # checking the history using hstr
-
+###################################################
+#           Zathura -pdf reader
+#           will read form this location
+###################################################
+export PATH="$PATH:/usr/local/"

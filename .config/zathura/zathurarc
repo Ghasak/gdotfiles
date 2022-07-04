@@ -1,0 +1,121 @@
+# place in ~/.config/zathura/
+# Zathura configuration file
+# See man `man zathurarc'
+#-----------------------------
+
+# enable clipboard
+set selection-clipboard clipboard
+# Setting default browser for zathura
+#set sandbox none
+# See man `man zathurarc'
+map r reload
+map p print
+map i recolor
+map J zoom out
+map K zoom in
+map R rotate
+# unmap f
+#map f toggle_fullscreen
+#map [fullscreen] f toggle_fullscreen
+
+# Open document in fit-width mode by default
+set window-height 1000
+# set window-width 1000
+set adjust-open "best-fit"
+
+# scrollbars
+#set show-scrollbars "true"
+set window-title-basename "true"
+set window-title-page "true"
+
+set scroll-wrap "true"
+set continuous-hist-save "true"
+# set zoom-center "true"
+# set vertical-center "true"
+
+# One page per row by default
+set pages-per-row 1
+
+#stop at page boundries
+set scroll-page-aware "true"
+#set smooth-scroll "true"
+set scroll-full-overlap 0.01
+set scroll-step 100
+
+#zoom settings
+set zoom-min 10
+set guioptions ""
+
+
+set inputbar-bg "#151515" #00 currently not used
+set inputbar-fg "#D6D1B1" #02
+
+set notification-error-bg       "#586e75" # base01  # seem not work
+set notification-error-fg       "#dc322f" # red
+set notification-warning-bg     "#586e75" # base01
+set notification-warning-fg     "#dc322f" # red
+set notification-bg             "#586e75" # base01
+set notification-fg             "#b58900" # yellow
+
+
+# This is for compleation as you write in status bar then hit tab
+set completion-group-bg         "#363636" # base03
+set completion-group-fg         "#F42B03" # base0
+set completion-bg               "#363636" # base02
+set completion-fg               "#D6D1B1" # base1
+set completion-highlight-bg     "#E89005" # base01
+set completion-highlight-fg     "#eee8d5" # base2
+
+# Recolor book content's color
+set recolor "true"
+set recolor-lightcolor "#353535" #00
+set recolor-darkcolor "#D6D1B1" #06
+set recolor-reverse-video "true"
+set recolor-keephue "true"
+
+# Define the color in index mode
+set index-bg                   "#363636" # base02
+set index-fg                   "#"D6D1B1 # base1
+set index-active-bg             "#DB5375" # base01
+set index-active-fg             "#eee8d5" # base2
+
+# This is the default when you use (:) (e.g. :open ~/Desktop/...)
+set inputbar-bg                 "#353535" # base01
+set inputbar-fg                 "#E89005" #"#FFE74C" # base2
+# This is the status bar shown by using (ctlr + n)
+set statusbar-bg                "#353535" # base02
+set statusbar-fg                "#DB5375" #"#EEF5DB" # base1
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+# This is for searching option (:/<key_word)
+set highlight-color             "#dc322f" # base00  # hightlight match when search keyword(vim's /)
+set highlight-active-color      "#6A9FB5" # blue
+#set highlight-color "#F4BF75" #0A
+#set highlight-active-color "#6A9FB5" #0D
+
+# zathurarc-dark
+set font "inconsolata 20"
+set default-bg  "#363636" #00    # This is background behind the pdf page
+set default-fg  "#FFBFA0"        ##FFBFA0" #01 , this is the cursor color
+# Recolor mode settings
+#
+
+#set default-bg                  "#363636" # base02
+#set default-fg                  "#363636" # base1
+set render-loading              true
+set render-loading-fg           "#353535" # base02
+set render-loading-bg           "#353535" # base02
+
+
+# Startup options
+#
+set adjust-open width
+set recolor false
+
+# Reverse search for vimtex
+set synctex true
+# set synctex-editor-command "vim --remote-silent +%{line} %{input}"
+set synctex-editor-command "nvr --remote +%"line" %"input""
+
+# Navigation with ranger to the pdf
+#map <C-o> feedkeys ":exec selectInRanger $FILE<Return>"

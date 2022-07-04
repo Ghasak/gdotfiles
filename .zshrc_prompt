@@ -370,9 +370,7 @@ setopt nopromptbang prompt{cr,percent,sp,subst}
 autoload -Uz add-zsh-hook
 add-zsh-hook preexec prompt_preexec
 add-zsh-hook precmd prompt_precmd
-
 #RPS1='%F{cyan}${prompt_elapsed_time}%F{none}'
-
 # =============================================================================
 
 function dice() {
@@ -382,12 +380,10 @@ function dice() {
     DICE_ARRAY[4]=$'\uf6cc'
     DICE_ARRAY[5]=$'\uf6cd'
     DICE_ARRAY[6]=$'\uf6ce'
-
     nb=$(($RANDOM % 6 + 1))
     #RPROMPT="${DICE_ARRAY[$nb]}";
     TEMP_DIC="${DICE_ARRAY[$nb]}"
     psvar[1]=${TEMP_DIC}
-
 }
 # =============================================================================
 # We adding here the zsh hook that specified as function type, we can pass variables using %v, if you want to use other variable use %2v %3v
@@ -494,7 +490,6 @@ function virtualenv_info {
 }
 # \ufbf2 => ﯲ
 # \uf233 =>
-
 #  RED="\e[31m"
 #       echo -n -e  "=> ${LIGHT_YELLOW}\uf128  ${ENDCOLOR} "  && echo  "${file}"
 # =============================================================================
@@ -515,7 +510,7 @@ PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7%4v%f%F{120}%F{180}%F{b
 PS1+=$'\n%F{blue}\u2570%F{blue}${ARROW}%F{yellow}${ARROW}%F{red}${ARROW}%F{blue}%{$reset_color%} ' #
 #PS1+=$'\n%F{blue}\u2570\U2500%F{blue}\uf1ce%{$reset_color%}  '
 #RPROMPT=$'%F{blue}\ufa1a${prompt_elapsed_time} %F{yellow}%1v%{$reset_color%} $(git_time_since_commit)$(Modified_git_status) %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON}  %D{%b %d, %Y}- ${CLOCK_ICON}  %D{%L:%M:%S %p}]%{$reset_color%}'
-RPROMPT=$'%F{blue}\ufa1a:${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON}  %D{%b %d, %Y}- ${CLOCK_ICON}  %D{%L:%M:%S %p}]%{$reset_color%}'
+RPROMPT=$'%F{blue}\ufa1a:${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON}  %D{%b %d, %Y}- ${CLOCK_ICON}  %D{%L${blue}:%M${red}:%S %p}]%{$reset_color%}'
 
 # =============================================================================
 #    Reference: https://blog.carbonfive.com/writing-zsh-themes-a-quickref/

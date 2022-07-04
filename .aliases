@@ -620,18 +620,6 @@ function weather(){
   fi
   }
 
-#------------------------------------------------------------------------------
-#               Open PDF reader (ZATHURA), instance
-#------------------------------------------------------------------------------
-alias zathura="zathura & disown"
-function zathura_how_many_instances_to_make(){
-  n="$1"
-  for ((s = 1; s <= n; s++)); do zathura; done
-}
-alias zathura_how_many_instances_check="ps aux | grep zathura"
-function  zathura_kill_all(){
-  kill -9 $(ps aux | grep zathura| awk '{print $2}' | xargs sh -c 'echo $@' | xargs)
-  }
 
 #------------------------------------------------------------------------------
 #           Give me authentrication
@@ -676,7 +664,44 @@ alias mybattary='system_profiler SPPowerDataType | grep -A3 -B7 "Condition"'
 #------------------------------------------------------------------------------
 #                 Using exa as relpacement to ls
 #------------------------------------------------------------------------------
-alias exa="exa --color=always --group-directories-first --git --header --long --recurse --time-style=long-iso --tree  --icons"
+#alias myexa="exa --color=always --group-directories-first --git --header --long --recurse --time-style=long-iso --tree  --icons"
+alias myexa="exa -a -F -l -h --icons"
 #https://github.com/ogham/exa/blob/master/screenshots.png
 # ---------------------------------------------------
 alias refresh_term="exec zsh"
+# ---------------------------------------------------
+# ---------------------------------------------------
+#             Soccer CLI Commands
+# ---------------------------------------------------
+# soccer --standings --league=PL
+# ---------------------------------------------------
+
+# ---------------------------------------------------
+#             PDF reader Sioyek
+# ---------------------------------------------------
+function sioyek(){
+    RED="\e[31m"
+    GREEN="\e[32m"
+    LIGHT_YELLOW="\e[93m"
+    ENDCOLOR="\e[0m"
+# check if number of positional args is greater than 0
+    if [ $# -gt 0 ]; then
+      echo -ne "[${RED}\ue28a${ENDCOLOR} ] : Opening ${GREEN}$@${ENDCOLOR} in Sioyek\n"
+      open -a "Sioyek" "$@"
+    else
+      open -a "Sioyek"
+    fi
+  }
+
+#------------------------------------------------------------------------------
+#               Open PDF reader (ZATHURA), instance
+#------------------------------------------------------------------------------
+alias zathura="zathura & disown"
+function zathura_how_many_instances_to_make(){
+  n="$1"
+  for ((s = 1; s <= n; s++)); do zathura; done
+}
+alias zathura_how_many_instances_check="ps aux | grep zathura"
+function  zathura_kill_all(){
+  kill -9 $(ps aux | grep zathura| awk '{print $2}' | xargs sh -c 'echo $@' | xargs)
+  }
