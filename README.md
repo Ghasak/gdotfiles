@@ -34,4 +34,6 @@ Here I store the configurations that are hard to be configured by the command `s
 - [x] jupyterNotebook configurations
 - [x] Stow files structure for better restoration.
 - [x] Create bash script to automate installing the necessary libraries and packages.
+- [x] Added the integration to zathura with ranger
+- [x] Adding the Sioyek app configuration.
 
