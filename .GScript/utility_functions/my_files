@@ -1,0 +1,57 @@
+#!/usr/bin/env  zsh
+
+# swithc zsh to bash if you want to use bash script
+# echo -e '\\[\e[31m\\]\xe2\x88\xb4\\[\e[0m\\]\n\xe2\x86\x92 \xe2\x98\xbf \\~ \\[\e[31m\\]\xe2\x98\x85 $? \\[\e[0m\\]'
+# How to repeat a string quickly in bash
+#
+# for ((i=0; i<=10; i++));do echo -n "\uf6d7 "; done
+
+function line_separator(){
+  echo $(printf  '\uf6d7 %.0s' {1..$1}  )
+  return 0
+}
+
+filearray=()
+folderarray=()
+pdfarray=()
+pythonarray=()
+otherarray=()
+
+for item in $(ls -laG | awk '{print $9}');do
+
+  filename=$(basename -- "$item")
+  extension="${filename##*.}"
+  filename="${filename%.*}"
+
+  if [ -f $item ];then
+    if [ ${extension} = 'pdf' ]; then
+            pdfarray+=$item
+      elif [ ${extension} = 'py' ];then
+            pythonarray+=$item
+    else;
+            filearray+=$item
+    fi
+  elif [ -d $item ]; then
+    folderarray+=$item
+
+  fi;
+done
+
+#line_separator 10
+for item in $folderarray; do
+  echo -e -n '\e[33m'"   \uf74a" '\e[0m'; echo -e ' \e[33m'$item'\e[0m'
+done
+#line_separator 10
+for item in $filearray;do
+  echo -e -n '\e[34m'"   \uf713" '\e[0m'; echo -e ' \e[34m'$item'\e[0m'
+done
+#line_separator 10
+for item in $pdfarray;do
+            echo -e -n '\e[35m'"   \uf724" '\e[0m'; echo -e ' \e[35m'$item'\e[0m'
+done
+for item in $pythonarray;do
+            echo -e -n '\e[36m'"   \ue235" '\e[0m'; echo -e ' \e[36m'$item'\e[0m'
+done
+#line_separator 10
+#
+

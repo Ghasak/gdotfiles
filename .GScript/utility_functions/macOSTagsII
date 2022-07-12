@@ -1,0 +1,118 @@
+#!/usr/bin/env bash
+
+
+#     ░██████╗██╗░░██╗░█████╗░░██╗░░░░░░░██╗  ███████╗██╗██╗░░░░░███████╗  ████████╗░█████╗░░██████╗░░██████╗
+#     ██╔════╝██║░░██║██╔══██╗░██║░░██╗░░██║  ██╔════╝██║██║░░░░░██╔════╝  ╚══██╔══╝██╔══██╗██╔════╝░██╔════╝
+#     ╚█████╗░███████║██║░░██║░╚██╗████╗██╔╝  █████╗░░██║██║░░░░░█████╗░░  ░░░██║░░░███████║██║░░██╗░╚█████╗░
+#     ░╚═══██╗██╔══██║██║░░██║░░████╔═████║░  ██╔══╝░░██║██║░░░░░██╔══╝░░  ░░░██║░░░██╔══██║██║░░╚██╗░╚═══██╗
+#     ██████╔╝██║░░██║╚█████╔╝░░╚██╔╝░╚██╔╝░  ██║░░░░░██║███████╗███████╗  ░░░██║░░░██║░░██║╚██████╔╝██████╔╝
+#     ╚═════╝░╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░╚═╝░░  ╚═╝░░░░░╚═╝╚══════╝╚══════╝  ░░░╚═╝░░░╚═╝░░╚═╝░╚═════╝░╚═════╝░
+#                        Script to list all tags for each file at given directgory
+
+RED="\e[31m"
+GREEN="\e[32m"
+LIGHT_YELLOW="\e[93m"
+BLUE="\e[34m"
+PURPLE="\e[35m"
+ENDCOLOR="\e[0m"
+CYAN="\e[36m"
+STATS=0
+
+# macosTags read ./$1/* --verbose >./artifacts.txt
+# input="./artifacts.txt"
+
+usage() {
+    cat <<EOF
+usage: $0 options iprange
+
+OPTIONS:
+   -h, --help           show this help.
+   -d, --display        display all tags for list of files in a given directory.
+   -s, --searching      searching for a tag in a list of files in a given directory.
+   -e, --export         export all tags for list of files in a given directory.
+   -w, --write-tags     write all tags for list of files in a given directory.
+
+EOF
+}
+
+# Assume you already installed macosTags, and you have a directory with all your files-tags
+
+while [ "$1" != "" ]; do
+    macosTags read $2/* --verbose >./artifacts.txt
+    input="./artifacts.txt"
+
+    case $1 in
+
+    -d | --display)
+
+        FILE_COUNT=1
+        TAG_COUNT=1
+
+        while IFS= read -r line || [[ -f $line ]]; do
+            FILENAME=$(echo -e "$line" | awk -F "." '{print $2}' | awk -F "/" '{print $3}')
+            echo -e "${BLUE}[${LIGHT_YELLOW}$FILE_COUNT${BLUE}]${CYAN} \ue27c  ${PURPLE} $FILENAME${ENDCOLOR}"
+            tagsList=$(echo "$line" | awk -F "." '{print $3}')
+            for tag in $tagsList; do
+                if [[ $tag != "pdf" ]]; then
+                    echo -ne "   ${BLUE}[${LIGHT_YELLOW}$FILE_COUNT${ENDCOLOR}"${BLUE}-"${LIGHT_YELLOW}$TAG_COUNT${BLUE}]"...."${LIGHT_YELLOW} \uf02b: ${RED}${tag}${ENDCOLOR}\n"
+                    TAG_COUNT=$((TAG_COUNT + 1))
+                fi
+            done
+            FILE_COUNT=$((FILE_COUNT + 1))
+            TAG_COUNT=1
+
+        done <"$input"
+        notification_command="display notification \" Tag Extraction of directory\n ... $2\" with title \"macosTags\" "
+        osascript -e "$notification_command"
+        rm -rf ./artifacts.txt
+        exit 1
+
+        ;;
+    -s | --searching)
+        shift 2
+        SEARCHING_TAG=$1
+        cat ./artifacts.txt | grep -iF "$1" >./search.txt
+        input2="./search.txt"
+        while IFS= read -r line || [[ -f $line ]]; do
+            search_output=$(echo -e "$line" | grep -iF "$1" | awk -F "." '{print $3}')
+            echo -e "${BLUE}[${LIGHT_YELLOW}$SEARCHING_TAG${BLUE}]${CYAN} \ue27c  ${PURPLE} $line${ENDCOLOR}: ${LIGHT_YELLOW}$search_output${ENDCOLOR}"
+        done <"$input2"
+
+        exit 1
+        ;;
+    -h | --help)
+        usage
+        exit
+        ;;
+    -e | --export)
+        shift
+        macosTags read $1/* --verbose >./tags.tsv
+        exit 1
+        ;;
+
+    -w | --write-tags)
+        # For currently directory only you can write tags to all files, based on the exported tags.tsv in -e|--export
+        while IFS=$'\t' read -r -a FILETAGS; do
+            # debug
+            # echo "${FILETAGS}" "............." "${FILETAGS[@]:1}"
+            macostags write "${FILETAGS}" "${FILETAGS[@]:1}"
+            echo -e "${RED} Written tags to File :[${STATS}]\n\n${LIGHT_YELLOW} \ue27c::${GREEN}${FILETAGS}:\n"
+            STATS=$((STATS + 1))
+            for tag in ${FILETAGS[@]:1}; do
+                echo -e "${BLUE}\uf02b::${LIGHT_YELLOW} ${tag}"
+            done
+        done <./tags.tsv
+
+        echo -e "${PURPLE}****************"
+        echo -e "${CYAN}Total files tags written: ${PURPLE}${STATS}"
+        exit 1
+        ;;
+
+    *)
+        exit 1
+        ;;
+    esac
+done
+
+
+

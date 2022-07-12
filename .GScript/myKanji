@@ -1,0 +1,69 @@
+#!/usr/bin/env python
+import pykakasi
+import os
+import sys
+from rich import print as rprint
+import MeCab
+
+
+def show_hirigana_katakana_romanji(text: str):
+    '''
+    NOTE: if you use the loop (for) the API of Google cannot handle multi-session
+    fetching results with less time between each fetching result session.  Thefore,
+    we should avoid to use the `trans -b` in a looop. Otherwise, my IP
+    Address gets locked, also according to the reference I read about using trans
+    command, it seems there are an upper limit of 150 request (fetching results)self.
+
+        API-to translate and converate kanji ot hiragan and katakana,
+            base on:   https://github.com/miurahr/pykakasi
+    '''
+    kks = pykakasi.kakasi()
+    result = kks.convert(text)
+    rprint(50*"=")
+    for item in result:
+        rprint(20 *"-")
+        rprint("{}: kana '{}', hiragana '{}', romaji: '{}'".format(
+            item['orig'], item['kana'], item['hira'], item['hepburn']))
+        rprint(20 *"-")
+    rprint(50*"=")
+
+def translate_all_sentence(text: str):
+    text = str(text)
+    rprint("--------------------------------")
+    rprint(f'{text}', os.system(f'trans -b {text}'))
+    rprint("--------------------------------")
+
+
+def MeCabChecking(text: str):
+    CONFIG = {
+        'dict_path': '/usr/local/lib/mecab/mecab-ipadic-neologd',
+    }
+    rprint(CONFIG)
+    owakati = MeCab.Tagger(f"-Owakati")
+    items = owakati.parse(str(text)).split()
+    rprint(f"Check the results with MeCab Morphological Analysis")
+    for item in items:
+        if item not in ["['", "']"]:
+            kks = pykakasi.kakasi()
+            r = kks.convert(item)
+            rprint(f"{item}:{r}")
+            rprint(20 * "=")
+
+
+def artificats():
+    #owakati = MeCab.Tagger(f"-Owakati -d {CONFIG['dict_path']}")
+    # taggerのparseを使うことで、各々の機能を確認することができます。
+    #wakati = MeCab.Tagger("-Owakati -d /usr/local/lib/mecab/mecab-ipadic-neologd")
+    #wakati = MeCab.Tagger("-Owakati")
+    #rprint(os.system(mecab -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd))
+    #rprint(wakati.parse(f"{text}").split())
+    # Translate the whole setnence from Japanese to english
+    # You will need to install trans API check here:
+    # https://github.com/soimort/translate-shell
+    pass
+
+
+if __name__ == "__main__":
+    text = sys.argv[1]
+    show_hirigana_katakana_romanji(text=text)
+    translate_all_sentence(text=text)

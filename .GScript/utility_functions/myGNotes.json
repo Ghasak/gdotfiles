@@ -1,0 +1,24 @@
+{
+    "names": [
+        {
+            "surname": "Jim",
+            "age": 32
+        },
+        {
+            "surname": "Test",
+            "age": 32
+        },
+        {
+            "surname": "Bob",
+            "age": 28
+        },
+        {
+            "firstName": "Ghasaak",
+            "age": 39
+        },
+        {
+            "firstName": "Ghasak",
+            "age": 39
+        }
+    ]
+}

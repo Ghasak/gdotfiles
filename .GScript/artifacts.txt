@@ -1,0 +1,10 @@
+quotes/quotes:178:1:Wow.
+
+1 matches
+1 matched lines
+1 files contained matches
+59 files searched
+25 bytes printed
+577641 bytes searched
+0.061340 seconds spent searching
+0.027978 seconds

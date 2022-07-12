@@ -665,8 +665,9 @@ export PATH="$HOME/nextword/:$PATH"
 #       Autheticate all my scripts thata
 #       I developed in the shell
 ###################################################
-export PATH="$HOME/.GScript/:$PATH"
-export PATH="$HOME/.GScript/utility_functions:$PATH"
+# export PATH="$HOME/.GScript/:$PATH"
+# export PATH="$HOME/.GScript/utility_functions:$PATH"
+for d in $HOME/.GScript/*; do PATH="$PATH:$d"; done
 ###################################################
 #       Configurtion of Neovid
 #       https://github.com/Kethku/neovide
@@ -827,3 +828,20 @@ eval "$(mcfly init zsh)"
 #           will read form this location
 ###################################################
 export PATH="$PATH:/usr/local/"
+###################################################
+#          broot - Bash Root
+###################################################
+source /Users/gmbp/.config/broot/launcher/bash/br
+###################################################
+#          Go Lang - Go Language
+###################################################
+# export GOPATH=$HOME/go-workspace # don't forget to change your path correctly!
+# export GOROOT=/usr/local/opt/go/libexec
+# export PATH=$PATH:$GOPATH/bin
+# export PATH=$PATH:$GOROOT/bin
+export PATH="$PATH:/usr/local/go/bin/"
+###################################################
+#        Export autoformatter for bash script
+#        Source:https://github.com/mvdan/sh
+###################################################
+export PATH="$PATH:$HOME/go/bin/"
