@@ -92,7 +92,7 @@ pdfminer==20191125
 pexpect==4.8.0
 pickleshare==0.7.5
 pikepdf==5.0.1
-Pillow==8.2.0
+Pillow==9.0.1
 pmdarima==1.8.2
 prometheus-client==0.10.1
 prompt-toolkit==3.0.18
