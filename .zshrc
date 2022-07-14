@@ -667,7 +667,11 @@ export PATH="$HOME/nextword/:$PATH"
 ###################################################
 # export PATH="$HOME/.GScript/:$PATH"
 # export PATH="$HOME/.GScript/utility_functions:$PATH"
-for d in $HOME/.GScript/*; do PATH="$PATH:$d"; done
+# ----is will load Recursively all the files in the directory
+# for d in $HOME/.GScript/*; do PATH="$PATH:$d"; done
+export PATH="$HOME/.GScript/:$PATH"
+export PATH="$HOME/.GScript/myLatexDev/:$PATH"
+export PATH="$HOME/.GScript/utility_functions/:$PATH"
 ###################################################
 #       Configurtion of Neovid
 #       https://github.com/Kethku/neovide
@@ -677,8 +681,8 @@ export PATH="$HOME/neovide/target/release/:$PATH"
 ###################################################
 #       Confgurations for the yabai
 ###################################################
-export PATH="$HOME/.config/yabai/:$PATH"
-export PATH="$HOME/.config/skhd/:$PATH"
+#export PATH="$HOME/.config/yabai/:$PATH"
+#export PATH="$HOME/.config/skhd/:$PATH"
 
 ###################################################
 #       Google Driver for Seleinum
@@ -845,3 +849,14 @@ export PATH="$PATH:/usr/local/go/bin/"
 #        Source:https://github.com/mvdan/sh
 ###################################################
 export PATH="$PATH:$HOME/go/bin/"
+######################################################################
+#           SDKMAN - SDK Manager Package manager similar to brew
+######################################################################
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+######################################################################
+#           Current Java for ARM Mac - M1
+######################################################################
+export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
