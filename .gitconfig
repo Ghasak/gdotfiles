@@ -1,6 +1,6 @@
 [user]
-  email = mdotgh@gmail.com
-  name = Ghasak
+	email = mdotgh@gmail.com
+	name = Ghasak
 
 [includeIf "gitdir:~/Documents/myObsidianDoc/"]
     path = ~/Documents/myObsidianDoc/.gitconfig
@@ -61,7 +61,7 @@
   # Don't paginate output by default
   pager = cat
   # Global ignore file (not shared)
-  excludesfile = ~/.gitignore_global
+	excludesfile = /Users/gmbp/.gitignore_global
   # Global shared hooks directory
   # hooksPath = ~/.githooks
   #
@@ -194,3 +194,11 @@
 	required = true
 [init]
 	defaultBranch = master
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /private/var/folders/3j/p9vdk4jd065g5y416bvbj4fh0000gn/T/AppTranslocation/185428C6-955E-4FA7-87A3-B4BDD52F3DC5/d/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/gmbp/.stCommitMsg

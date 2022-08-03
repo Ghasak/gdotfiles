@@ -2,7 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+.GScript/nvimTimeMachine/
 # C extensions
 *.so
 

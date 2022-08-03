@@ -126,6 +126,8 @@ plugins=(git
     # syntax zsh-syntax-highlighting from here:
     # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
     zsh-syntax-highlighting
+    # Adding vim support to my current zsh:
+    vi-mode
   )
 
 source $ZSH/oh-my-zsh.sh
@@ -672,6 +674,7 @@ export PATH="$HOME/nextword/:$PATH"
 export PATH="$HOME/.GScript/:$PATH"
 export PATH="$HOME/.GScript/myLatexDev/:$PATH"
 export PATH="$HOME/.GScript/utility_functions/:$PATH"
+export PATH="$HOME/.GScript/nvimTimeMachine/:$PATH"
 ###################################################
 #       Configurtion of Neovid
 #       https://github.com/Kethku/neovide
@@ -858,5 +861,5 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 ######################################################################
 #           Current Java for ARM Mac - M1
-######################################################################
-export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
+#####################################################################
+#export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
