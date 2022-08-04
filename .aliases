@@ -312,7 +312,12 @@ alias stackOverflow="how2 -l"
 #                       the given repository
 #
 #------------------------------------------------------------------------------
-alias broot=broot
+###################################################
+#          broot - Bash Root
+#           Take so long time on zprof | head -n 10
+###################################################
+#source $HOME/.config/broot/launcher/bash/br
+#alias broot=broot
 
 #------------------------------------------------------------------------------
 #           Recorde your Terminal and export similar as a video

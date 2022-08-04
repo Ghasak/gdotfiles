@@ -25,7 +25,8 @@ ZSH_DISABLE_COMPFIX=true
 source $HOME/.zshrc_prompt
 source $HOME/.aliases
 source $HOME/zsh-git-prompt/zshrc.sh
-
+# Load the profiling the zsh
+zmodload zsh/zprof
 # Adding utf-8 for other langauges
 export LC_ALL=en_US.UTF-8
 LANG="en_US.UTF-8"
@@ -116,20 +117,49 @@ export ZSH="$HOME/.oh-my-zsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git
-    #zsh-autocomplete
-    # other plugins...
-    # Auto suggestions from here:
-    # https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
-    zsh-autosuggestions
-    # Auto jump from here:
-    autojump
-    # syntax zsh-syntax-highlighting from here:
-    # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-    zsh-syntax-highlighting
-    # Adding vim support to my current zsh:
-    vi-mode
+        # zsh-autocomplete
+        # other plugins...
+        # auto suggestions from here:
+        # https://github.com/zsh-users/zsh-autosuggestions/blob/master/install.md
+        zsh-autosuggestions
+        # auto jump from here:
+        autojump
+        # syntax zsh-syntax-highlighting from here:
+        # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/install.md
+        zsh-syntax-highlighting
+        # adding vim support to my current zsh:
+        # vi-mode
+        # https://github.com/jeffreytse/zsh-vi-mode
+        zsh-vi-mode
+        # replace zsh's default completion selection menu with fzf!
+        # https://github.com/aloxaf/fzf-tab
+        fzf-tab
   )
+# **************************************************************************
+# Configurations for fzf-tab
+# **************************************************************************
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
 
+# **************************************************************************
+# Configurations for fzf-vi-mode
+# **************************************************************************
+function zvm_config() {
+  # ZVM_LINE_INIT_MODE=$ZVM_MODE_NORMAL
+  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+  ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+}
+# **************************************************************************
+# Souce all the plugins
+# **************************************************************************
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -179,28 +209,6 @@ then
   autoload -Uz compinit
   compinit
 fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #*************************************************************************
 #  __________________
@@ -789,19 +797,20 @@ export LC_CTYPE="en_US.UTF-8"
 ###################################################
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/gmbp/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/gmbp/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/gmbp/opt/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/gmbp/opt/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+# __conda_setup="$('/Users/gmbp/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/Users/gmbp/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/Users/gmbp/opt/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/Users/gmbp/opt/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<
 
+export PATH="$HOME/opt/anaconda3/bin:$PATH"
 ###################################################
 #          Local Postgresql
 #                 v.14
@@ -828,17 +837,13 @@ export PATH="$HOME/opt/homebrew/bin/:$PATH"
 #   MacOS terminal command History checking
 ###################################################
 # checking the history using mcfly
-eval "$(mcfly init zsh)"
+#eval "$(mcfly init zsh)"
 # checking the history using hstr
 ###################################################
 #           Zathura -pdf reader
 #           will read form this location
 ###################################################
 export PATH="$PATH:/usr/local/"
-###################################################
-#          broot - Bash Root
-###################################################
-source /Users/gmbp/.config/broot/launcher/bash/br
 ###################################################
 #          Go Lang - Go Language
 ###################################################
@@ -863,3 +868,4 @@ export SDKMAN_DIR="$HOME/.sdkman"
 #           Current Java for ARM Mac - M1
 #####################################################################
 #export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
+set editing-mode vi
