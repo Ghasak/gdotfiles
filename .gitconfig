@@ -3,7 +3,7 @@
 	name = Ghasak
 
 [includeIf "gitdir:~/Documents/myObsidianDoc/"]
-    path = ~/Documents/myObsidianDoc/.gitconfig
+  path = ~/Documents/myObsidianDoc/.gitconfig
 
 [color]
   # Enable colors in color-supporting terminals
@@ -196,9 +196,17 @@
 	defaultBranch = master
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /private/var/folders/3j/p9vdk4jd065g5y416bvbj4fh0000gn/T/AppTranslocation/185428C6-955E-4FA7-87A3-B4BDD52F3DC5/d/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [commit]
-	template = /Users/gmbp/.stCommitMsg
+  template = /Users/gmbp/.stCommitMsg
+
+# This will add the functionality of delta to git but will break glo and forgit::diff
+# Install delta from https://github.com/dandavison/delta
+# Read more about configuration specific directory here:
+# https://stackoverflow.com/questions/14754762/can-gitconfig-options-be-set-conditionally
+
+[includeIf "gitdir:~/.dotfiles2022/"]
+  path = ~/.gitconfig_delta_config

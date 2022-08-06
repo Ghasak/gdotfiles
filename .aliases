@@ -29,6 +29,10 @@ else # OS X `ls`
 	colorflag="-G"
 fi
 
+function MY_ANSI_COLOR_PALLATE(){
+    for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
+  }
+
 #------------------------------------------------------------------------------
 #           Show all the color that I have in my Terminal
 #------------------------------------------------------------------------------
@@ -112,7 +116,57 @@ alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 # !.mp3$: Inverse-suffix-exact-match, return items that do not end with .mp3.
 
 alias fzf="fzf --preview '([[ -f {} ]] && (bat --style=numbers --color=always\
-     {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
+     {} || bat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
+# export FZF_DEFAULT_OPTS="
+# --info=inline
+# --height=80%
+# --multi
+# --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+# --color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
+# --prompt='∼ ' --pointer='▶' --marker='✓'
+# --bind '?:toggle-preview'
+# --bind 'ctrl-a:select-all'
+# --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
+# --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
+# --bind 'ctrl-v:execute(code {+})'
+# "
+
+function myfzf(){
+  if [[ $1 == "--help" || $1 == "-h" ]]; then
+    RED="\e[31m"
+    MAGENTA="\e[35m"
+    LIGHT_GREEN="\e[36m"
+    GRAY="\e[37m"
+    BLUE="\e[34m"
+    GREEN="\e[32m"
+    LIGHT_YELLOW="\e[93m"
+    ENDCOLOR="\e[0m"
+        echo -ne "
+         ${GRAY}****************************${ENDCOLOR}
+         ${GREEN}     Search syntax:${ENDCOLOR}
+         ${GRAY}****************************${ENDCOLOR}
+         ${GRAY}Besides the already discussed fuzzy search, fzf supports special tokens that change the way search terms are processed:
+         ${LIGHT_YELLOW}'wild${ENDCOLOR}    : ${GRAY}Exact match, return items that include wild.
+         ${LIGHT_YELLOW}^music${ENDCOLOR}   : ${GRAY}Prefix-exact-match, return items that start with music.
+         ${LIGHT_YELLOW}.mp3\$${ENDCOLOR}    : ${GRAY}Suffix-exact-match, return items that end with .mp3.
+         ${LIGHT_YELLOW}\!fire${ENDCOLOR}   : ${GRAY}Inverse-exact-match, return items that do not include fire.
+         ${LIGHT_YELLOW}\!^music${ENDCOLOR} : ${GRAY}Inverse-prefix-exact-match, return items that do not start with music.
+         ${LIGHT_YELLOW}\!.mp3\$${ENDCOLOR}  : ${GRAY}Inverse-suffix-exact-match, return items that do not end with .mp3.
+
+         ${GRAY}****************************${ENDCOLOR}
+         ${RED} Note${ENDCOLOR}
+         ${GRAY}****************************${ENDCOLOR}
+         ${GRAY}that SPACE acts as an AND operator and | as an OR. For example, a
+         ${GRAY}query that matches entries that start with music and end with either
+         ${GRAY}mp3, wav, or flac would look like this:
+         ${LIGHT_YELLOW}^music mp3$ | wav$ | flac$ ${ENDCOLOR}
+         ${GRAY}LINK: ${BLUE}https://betterprogramming.pub/boost-your-command-line-productivity-with-fuzzy-finder-985aa162ba5d#c4fb${ENDCOLOR}
+        "
+    else
+     /opt/homebrew/bin/fzf --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+  fi
+  }
+
 
 #export FZF_DEFAULT_OPTS='--height 96% --reverse --preview  "cat {}"'
 # This is very important to exclude some directory in your serach
