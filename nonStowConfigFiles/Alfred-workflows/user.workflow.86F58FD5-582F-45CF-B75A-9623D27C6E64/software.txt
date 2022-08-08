@@ -1,0 +1,14 @@
+Software:
+
+    System Software Overview:
+
+      System Version: macOS 10.15.2 (19C57)
+      Kernel Version: Darwin 19.2.0
+      Boot Volume: Macintosh HD
+      Boot Mode: Normal
+      Computer Name: Ghasak’s MacBook Pro
+      User Name: Ghasak Mothafer (ghasak)
+      Secure Virtual Memory: Enabled
+      System Integrity Protection: Enabled
+      Time since boot: 8:14
+

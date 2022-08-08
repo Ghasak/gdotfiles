@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string></string>
+	<key>connections</key>
+	<dict>
+		<key>77269867-DF3F-43FA-AD1A-893B32E5B492</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>73E87ABC-1BF7-4944-8827-96BDE58301F7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Ghasak Ibrahim</string>
+	<key>description</key>
+	<string>Learn how to connect a keyword to different actions and outputs</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Google any Keywords</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>google</string>
+				<key>subtext</key>
+				<string>From the Getting Started - Keywords guide</string>
+				<key>text</key>
+				<string>Launch Safari and my Downloads folder</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>77269867-DF3F-43FA-AD1A-893B32E5B492</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>query=$1
+
+echo -n $query
+
+osascript -e "tell application \"Safari\"
+    make new document
+    set URL of document 1 to \"http://www.google.com/search?q=${query}\"
+    set bounds of window 1 to {0, 0, 2560, 1080}
+
+end tell"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>73E87ABC-1BF7-4944-8827-96BDE58301F7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Keywords are one of Alfred's most commonly used and most useful ways of launching actions. Set a keyword and connect it to the action(s) you want to perform.
+
+Type your keyword into Alfred, followed by your input text if needed, and you'll be on your way to boosting your productivity!</string>
+	<key>uidata</key>
+	<dict>
+		<key>73E87ABC-1BF7-4944-8827-96BDE58301F7</key>
+		<dict>
+			<key>xpos</key>
+			<integer>345</integer>
+			<key>ypos</key>
+			<integer>140</integer>
+		</dict>
+		<key>77269867-DF3F-43FA-AD1A-893B32E5B492</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>1. This keyword is set to not require additional input text, so that you can type "gettingstarted" and press return to launch the two attached actions at once.</string>
+			<key>xpos</key>
+			<integer>90</integer>
+			<key>ypos</key>
+			<integer>140</integer>
+		</dict>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>https://www.alfredapp.com</string>
+</dict>
+</plist>

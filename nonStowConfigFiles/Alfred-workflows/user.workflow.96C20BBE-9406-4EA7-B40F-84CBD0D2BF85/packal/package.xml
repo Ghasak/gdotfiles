@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<workflow>
+  <name>LibGen</name>
+  <version>1.1</version>
+  <bundle>com.hackademic.libgen</bundle>
+  <updated>1414857195</updated>
+  <file>libgen.alfredworkflow</file>
+</workflow>

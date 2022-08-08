@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string></string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>215F67AB-850D-41D6-8A21-307F7DF9565E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>576D74F3-0C6C-46EC-B92E-0B1F2BA9D483</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>576D74F3-0C6C-46EC-B92E-0B1F2BA9D483</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1FC8D2BB-7E6A-472F-90A2-B2CAD1FE886B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3A8DDA5C-0657-478C-A066-4242E3C3EE89</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D9EAE474-AD1C-495F-921F-9D6B25104D7A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>537A9764-F1AB-4987-B95F-5FB3A2C31267</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D8F3293B-5830-44D6-9A75-74820363412D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>77269867-DF3F-43FA-AD1A-893B32E5B492</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>215F67AB-850D-41D6-8A21-307F7DF9565E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Ghasak Ibrahim</string>
+	<key>description</key>
+	<string>Connecting to Azer Repo</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>AzureDevOp</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>ado</string>
+				<key>subtext</key>
+				<string>From the Getting Started - Keywords guide</string>
+				<key>text</key>
+				<string>Launch Safari at Azure DevOps</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>77269867-DF3F-43FA-AD1A-893B32E5B492</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Your requested windows are activiated</string>
+				<key>title</key>
+				<string>Developlement Activited</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>1FC8D2BB-7E6A-472F-90A2-B2CAD1FE886B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://dev.azure.com/GhasakIbrahim</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3A8DDA5C-0657-478C-A066-4242E3C3EE89</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>query=$1
+
+echo -n $query
+
+osascript -e "tell application \"Safari\"
+    make new document
+    set URL of document 1 to \"http://www.google.com/search?q=${query}\"
+    	activate
+	make new document
+	set URL of document 1 to \"https://dev.azure.com/GhasakIbrahim"
+	make new tab of window 1
+	set URL of document 2 to \"https://github.com/Ghasakv"
+	set bounds of window 1 to {0, 0, 2560, 1080}
+
+end tell"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>215F67AB-850D-41D6-8A21-307F7DF9565E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>seconds</key>
+				<string>1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>576D74F3-0C6C-46EC-B92E-0B1F2BA9D483</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://github.com/Ghasak</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>D9EAE474-AD1C-495F-921F-9D6B25104D7A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>soundname</key>
+				<string>Basso</string>
+				<key>systemsound</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.playsound</string>
+			<key>uid</key>
+			<string>537A9764-F1AB-4987-B95F-5FB3A2C31267</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+  tell application "Safari"
+    if "http:" is in q or "www." is in q or ".com" is in q or ".de" is in q or ".edu" is in q or ".net" is in q or ".org" is in q then
+      if q starts with "http://" or q starts with "https://" then
+        make new document with properties {URL:q}
+      else
+        make new document with properties {URL:"http://"&amp;q}
+      end if
+    else
+      make new document with properties {URL:"http://www.google.com/search?q="&amp;q}
+    end if
+    activate
+  end tell
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>64B06290-B9E2-4A07-A225-B0EF8DCE9ED9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+	tell application "iTerm.app"
+		activate
+		tell application "System Events" to tell process "iTerm.app" to keystroke "t" using command down
+		delay 1 
+		do script q in front window
+	end tell
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>D8F3293B-5830-44D6-9A75-74820363412D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Keywords are one of Alfred's most commonly used and most useful ways of launching actions. Set a keyword and connect it to the action(s) you want to perform.
+
+Type your keyword into Alfred, followed by your input text if needed, and you'll be on your way to boosting your productivity!</string>
+	<key>uidata</key>
+	<dict>
+		<key>1FC8D2BB-7E6A-472F-90A2-B2CAD1FE886B</key>
+		<dict>
+			<key>xpos</key>
+			<integer>280</integer>
+			<key>ypos</key>
+			<integer>125</integer>
+		</dict>
+		<key>215F67AB-850D-41D6-8A21-307F7DF9565E</key>
+		<dict>
+			<key>xpos</key>
+			<integer>175</integer>
+			<key>ypos</key>
+			<integer>335</integer>
+		</dict>
+		<key>3A8DDA5C-0657-478C-A066-4242E3C3EE89</key>
+		<dict>
+			<key>xpos</key>
+			<integer>495</integer>
+			<key>ypos</key>
+			<integer>185</integer>
+		</dict>
+		<key>537A9764-F1AB-4987-B95F-5FB3A2C31267</key>
+		<dict>
+			<key>xpos</key>
+			<integer>205</integer>
+			<key>ypos</key>
+			<integer>560</integer>
+		</dict>
+		<key>576D74F3-0C6C-46EC-B92E-0B1F2BA9D483</key>
+		<dict>
+			<key>xpos</key>
+			<integer>315</integer>
+			<key>ypos</key>
+			<integer>365</integer>
+		</dict>
+		<key>64B06290-B9E2-4A07-A225-B0EF8DCE9ED9</key>
+		<dict>
+			<key>xpos</key>
+			<integer>505</integer>
+			<key>ypos</key>
+			<integer>635</integer>
+		</dict>
+		<key>77269867-DF3F-43FA-AD1A-893B32E5B492</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>1. This keyword is set to not require additional input text, so that you can type "gettingstarted" and press return to launch the two attached actions at once.</string>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>45</integer>
+		</dict>
+		<key>D8F3293B-5830-44D6-9A75-74820363412D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>365</integer>
+			<key>ypos</key>
+			<integer>770</integer>
+		</dict>
+		<key>D9EAE474-AD1C-495F-921F-9D6B25104D7A</key>
+		<dict>
+			<key>xpos</key>
+			<integer>500</integer>
+			<key>ypos</key>
+			<integer>370</integer>
+		</dict>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>https://www.alfredapp.com</string>
+</dict>
+</plist>

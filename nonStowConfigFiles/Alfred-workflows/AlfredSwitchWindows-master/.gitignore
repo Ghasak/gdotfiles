@@ -1,0 +1,5 @@
+EnumWindows.xcodeproj/xcuserdata/
+*.swp
+*.un~
+EnumWindows/EnumWindows
+xcuserdata/

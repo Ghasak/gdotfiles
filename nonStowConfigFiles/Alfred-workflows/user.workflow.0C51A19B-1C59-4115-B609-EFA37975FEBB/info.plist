@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.islandSprite.toggleTheme</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>1F9D6063-5CFC-41E5-B819-3F3056D514CA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>705DB5F0-E0CE-408F-844B-A1FC99BC58C3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>705DB5F0-E0CE-408F-844B-A1FC99BC58C3</key>
+		<array/>
+		<key>71122396-EB47-4DB6-9720-153CDE7A00BB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>705DB5F0-E0CE-408F-844B-A1FC99BC58C3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7E8B6696-A3D3-48D9-A95F-614011475EFD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>705DB5F0-E0CE-408F-844B-A1FC99BC58C3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>970386E1-11B1-464C-8972-F552AFCA7AF1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>705DB5F0-E0CE-408F-844B-A1FC99BC58C3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FF203DAF-C10E-4B74-A5D9-CE75ABA60765</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>705DB5F0-E0CE-408F-844B-A1FC99BC58C3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Cameron Holiman</string>
+	<key>description</key>
+	<string>Change the theme of macOS</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Toggle Theme</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>toggle</string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>7E8B6696-A3D3-48D9-A95F-614011475EFD</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>function run(args) {
+	args = args ? args : []
+	var systemEvents = Application("System Events")
+	var theme;
+	
+	if (args &amp;&amp; args == 'dark') {
+		systemEvents.appearancePreferences.darkMode = true
+		theme = 'dark'
+	} else if (args &amp;&amp; args == 'light') {
+		systemEvents.appearancePreferences.darkMode = false
+		theme = 'light'
+	} else {
+		systemEvents.appearancePreferences.darkMode = !systemEvents.appearancePreferences.darkMode()
+		theme = systemEvents.appearancePreferences.darkMode() ? 'dark' : 'light'
+	}
+
+	return theme
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>705DB5F0-E0CE-408F-844B-A1FC99BC58C3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>var alfredLightTheme = "Alfred"
+var alfredDarkTheme = "Alfred Dark"
+
+function run(args) {
+	args = args ? args : []
+	var systemEvents = Application("System Events")
+	var alfred = Application("Alfred 4")
+	var theme;
+	
+	if (args &amp;&amp; args == 'dark') {
+		alfred.setTheme(alfredDarkTheme)
+		theme = 'dark'
+	} else if (args &amp;&amp; args == 'light') {
+		alfred.setTheme(alfredLightTheme)
+		theme = 'light'
+	} else {
+		alfred.setTheme(systemEvents.appearancePreferences.darkMode() ? alfredDarkTheme : alfredLightTheme)
+		theme = systemEvents.appearancePreferences.darkMode() ? 'dark' : 'light'
+	}
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>7</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CA8C1034-E7CA-4671-8956-A9DD2228487F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<true/>
+				<key>items</key>
+				<string>[{"imagefile":"c1fcaf657f2caafbd5109d4933559b49923513ad.png","title":"Toggle","subtitle":"Change it to the other one"},{"imagefile":"e2373df51e30b6f3a3f6a91ba3146fda8a36bd92.png","title":"Dark","arg":"dark","subtitle":"Change Appearance to Dark"},{"imagefile":"a3cdb53a828555f90b8afd77d501f74b5f19aa2d.png","title":"Light","arg":"light","subtitle":"Change Appearance to Light"}]</string>
+				<key>keyword</key>
+				<string>theme</string>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Change macOS Theme</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>1F9D6063-5CFC-41E5-B819-3F3056D514CA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<true/>
+				<key>items</key>
+				<string>[{"imagefile":"c1fcaf657f2caafbd5109d4933559b49923513ad.png","title":"Toggle","subtitle":"Change it to the other one"},{"imagefile":"e2373df51e30b6f3a3f6a91ba3146fda8a36bd92.png","title":"Dark","arg":"dark","subtitle":"Change Appearance to Dark"},{"imagefile":"a3cdb53a828555f90b8afd77d501f74b5f19aa2d.png","title":"Light","arg":"light","subtitle":"Change Appearance to Light"}]</string>
+				<key>keyword</key>
+				<string>toggle</string>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Change macOS Theme</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>71122396-EB47-4DB6-9720-153CDE7A00BB</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on run argv	if (argv as text) contains "light" then		set theme to "Light"	else		set theme to "Dark"	end if		if application "SourceTree" is running then				tell application "System Events"			set activeApp to name of first application process whose frontmost is true		end tell				tell application "SourceTree" to activate				tell application "System Events"			click menu item ¬				theme of menu 1 of menu item ¬				"Theme" of menu 1 of menu bar item ¬				"View" of menu bar 1 of application process "Sourcetree"		end tell				tell application activeApp to activate	end ifend run</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>FCF8F2EF-EDCC-4E58-B131-7AA615895A1C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<true/>
+				<key>items</key>
+				<string>[{"imagefile":"e2373df51e30b6f3a3f6a91ba3146fda8a36bd92.png","title":"Dark","arg":"dark","subtitle":"Change Appearance to Dark"}]</string>
+				<key>keyword</key>
+				<string>dark</string>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Change macOS Theme</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>970386E1-11B1-464C-8972-F552AFCA7AF1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<true/>
+				<key>items</key>
+				<string>[{"imagefile":"a3cdb53a828555f90b8afd77d501f74b5f19aa2d.png","title":"Light","arg":"light","subtitle":"Change Appearance to Light"}]</string>
+				<key>keyword</key>
+				<string>light</string>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Change macOS Theme</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>FF203DAF-C10E-4B74-A5D9-CE75ABA60765</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>An Alfred 4 Workflow that toggles between Light and Dark macOS Appearances.</string>
+	<key>uidata</key>
+	<dict>
+		<key>1F9D6063-5CFC-41E5-B819-3F3056D514CA</key>
+		<dict>
+			<key>xpos</key>
+			<integer>150</integer>
+			<key>ypos</key>
+			<integer>205</integer>
+		</dict>
+		<key>705DB5F0-E0CE-408F-844B-A1FC99BC58C3</key>
+		<dict>
+			<key>note</key>
+			<string>Toggle MacOS Dark Mode
+
+Connect the output of this script to the input of any of the blue scripts that you also want to toggle</string>
+			<key>xpos</key>
+			<integer>410</integer>
+			<key>ypos</key>
+			<integer>180</integer>
+		</dict>
+		<key>71122396-EB47-4DB6-9720-153CDE7A00BB</key>
+		<dict>
+			<key>xpos</key>
+			<integer>150</integer>
+			<key>ypos</key>
+			<integer>320</integer>
+		</dict>
+		<key>7E8B6696-A3D3-48D9-A95F-614011475EFD</key>
+		<dict>
+			<key>xpos</key>
+			<integer>150</integer>
+			<key>ypos</key>
+			<integer>90</integer>
+		</dict>
+		<key>970386E1-11B1-464C-8972-F552AFCA7AF1</key>
+		<dict>
+			<key>xpos</key>
+			<integer>150</integer>
+			<key>ypos</key>
+			<integer>435</integer>
+		</dict>
+		<key>CA8C1034-E7CA-4671-8956-A9DD2228487F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>Toggle Alfred
+
+Edit to configure the themes to toggle between</string>
+			<key>xpos</key>
+			<integer>620</integer>
+			<key>ypos</key>
+			<integer>180</integer>
+		</dict>
+		<key>FCF8F2EF-EDCC-4E58-B131-7AA615895A1C</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>note</key>
+			<string>Toggle SourceTree
+
+Only works while Sourcetree is running</string>
+			<key>xpos</key>
+			<integer>620</integer>
+			<key>ypos</key>
+			<integer>380</integer>
+		</dict>
+		<key>FF203DAF-C10E-4B74-A5D9-CE75ABA60765</key>
+		<dict>
+			<key>xpos</key>
+			<integer>150</integer>
+			<key>ypos</key>
+			<integer>555</integer>
+		</dict>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0.2</string>
+	<key>webaddress</key>
+	<string>https://github.com/mermaid</string>
+</dict>
+</plist>

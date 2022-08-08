@@ -1,0 +1,19 @@
+Hardware:
+
+    Hardware Overview:
+
+      Model Name: MacBook Pro
+      Model Identifier: MacBookPro16,1
+      Processor Name: 8-Core Intel Core i9
+      Processor Speed: 2.3 GHz
+      Number of Processors: 1
+      Total Number of Cores: 8
+      L2 Cache (per Core): 256 KB
+      L3 Cache: 16 MB
+      Hyper-Threading Technology: Enabled
+      Memory: 32 GB
+      Boot ROM Version: 1037.60.58.0.0 (iBridge: 17.16.12551.0.0,0)
+      Serial Number (system): C02ZT0KRMD6W
+      Hardware UUID: 1C96E2CF-D912-581F-AAD8-D9A036BEB30A
+      Activation Lock Status: Enabled
+
