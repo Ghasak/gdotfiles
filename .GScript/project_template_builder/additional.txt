@@ -1,6 +1,0 @@
-pip install bpython
-pip install pynvim
-pip install python-language-server
-pip install alive-progress
-
-
