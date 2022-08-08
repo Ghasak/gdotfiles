@@ -642,3 +642,7 @@ export PATH="$PATH:$HOME/.GScript/.markdownLanguageServer/"
 ##################################################
 export PATH="$PATH:$HOME/go/bin/"
 export PATH="/usr/local/sbin:$PATH"
+
+source /usr/local/opt/gitstatus/gitstatus.prompt.zsh
+source /usr/local/opt/gitstatus/gitstatus.prompt.zsh
+source ~/gitstatus/gitstatus.prompt.zsh

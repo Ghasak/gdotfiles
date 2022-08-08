@@ -1,6 +1,8 @@
 # .dotfiles2022 Configuration farm files
 My custom .dot files for my machine MBP 14 stored and restored using stow.
 
+## Current dot files
+Current file system adding to main
 
 # Gnu-Stow restore my dot-files configuration and setup (for MACBOOK Setups):
 
