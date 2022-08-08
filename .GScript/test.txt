@@ -1,0 +1,54 @@
+project_template_builder/Makefile:22:24:	@echo "with necessary python libraries ... "
+project_template_builder/Makefile:23:11:	pipenv --python 3.8.8
+project_template_builder/basicPackages.txt:27:2:ipython==7.23.1
+project_template_builder/basicPackages.txt:28:2:ipython-genutils==0.2.0
+project_template_builder/basicPackages.txt:90:1:python-dateutil==2.8.1
+project_template_builder/constructProject.sh:32:20:  # - [X] Check if python3 installed.
+project_template_builder/constructProject.sh:167:13:  # Install python3
+project_template_builder/constructProject.sh:233:14:echo "export PYTHONPATH=\$PYTHONPATH:\$(pwd):\$(pwd)/develop/:\$(pwd)/develop/src:\$(pwd)/services/:\$(pwd)/services/src:" > .env
+project_template_builder/constructProject.sh:237:14:# pipenv run python -c "import os ; print(os.environ['SECRET_KEY'])"
+codiScript.sh:3:23:   local syntax="${1:-python}"
+utility_functions/my_files:17:1:pythonarray=()
+utility_functions/my_files:30:13:            pythonarray+=$item
+utility_functions/my_files:52:14:for item in $pythonarray;do
+utility_functions/myReader.py:1:16:#!/usr/bin/env python3
+utility_functions/memoryReport_python_script_doesnt_work:1:12:#!/usr/bin/python
+myKanji:1:16:#!/usr/bin/env python
+bashCheatSheet/The_Ultimate_Programmer_Guide.pdf:1961:44:Page 32: Enter your programming languages: python js rust
+bashCheatSheet/The_Ultimate_Programmer_Guide.pdf:1963:10:Page 32: python
+
+19 matches
+18 matched lines
+9 files contained matches
+60 files searched
+1403 bytes printed
+577826 bytes searched
+0.106975 seconds spent searching
+0.051398 seconds
+project_template_builder/basicPackages.txt:27:2:ipython==7.23.1
+project_template_builder/basicPackages.txt:28:2:ipython-genutils==0.2.0
+project_template_builder/basicPackages.txt:90:1:python-dateutil==2.8.1
+project_template_builder/Makefile:22:24:	@echo "with necessary python libraries ... "
+project_template_builder/Makefile:23:11:	pipenv --python 3.8.8
+project_template_builder/constructProject.sh:32:20:  # - [X] Check if python3 installed.
+project_template_builder/constructProject.sh:167:13:  # Install python3
+project_template_builder/constructProject.sh:233:14:echo "export PYTHONPATH=\$PYTHONPATH:\$(pwd):\$(pwd)/develop/:\$(pwd)/develop/src:\$(pwd)/services/:\$(pwd)/services/src:" > .env
+project_template_builder/constructProject.sh:237:14:# pipenv run python -c "import os ; print(os.environ['SECRET_KEY'])"
+codiScript.sh:3:23:   local syntax="${1:-python}"
+utility_functions/myReader.py:1:16:#!/usr/bin/env python3
+utility_functions/my_files:17:1:pythonarray=()
+utility_functions/my_files:30:13:            pythonarray+=$item
+utility_functions/my_files:52:14:for item in $pythonarray;do
+utility_functions/memoryReport_python_script_doesnt_work:1:12:#!/usr/bin/python
+myKanji:1:16:#!/usr/bin/env python
+bashCheatSheet/The_Ultimate_Programmer_Guide.pdf:1961:44:Page 32: Enter your programming languages: python js rust
+bashCheatSheet/The_Ultimate_Programmer_Guide.pdf:1963:10:Page 32: python
+
+19 matches
+18 matched lines
+9 files contained matches
+60 files searched
+1403 bytes printed
+577826 bytes searched
+0.054075 seconds spent searching
+0.024771 seconds

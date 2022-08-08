@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>cliclick 5.0</title>
+<meta name="publisher" content="Carsten Blüm">
+<style>
+
+body {
+    color: #1d5369;
+    font-family: Arial, sans-serif;
+    font-size: 100%;
+    line-height: 1.6;
+    background: #fff;
+    margin: 0 1rem;
+    padding: 0;
+}
+
+main {
+    font-size: calc(0.82rem + 0.2vw);
+    max-width: 50em;
+    margin: 4vh auto;
+}
+
+h1 {
+    font-size: 2.2em;
+    margin: 0.8em 0 0.2em 0;
+}
+
+h2 {
+    margin-bottom: 0.25em;
+}
+
+p {
+    margin: 0 0 0.8em 0;
+}
+
+li {
+    margin: 0.5em 0;
+}
+
+a {
+    text-decoration: none;
+    color: #73c0e9;
+}
+
+</style>
+</head>
+<body>
+
+<main>
+
+<h1>cliclick 5.0</h1>
+
+<h2>What is cliclick?</h2>
+<p>Cliclick is a Terminal/shell application that emulates keyboard and/or mouse events. This can include moving the mouse, clicking, double-clicking, command-clicking, dragging, pressing Escape, typing texts and so on. Hence, it is a tool that can help in automating/scripting things that otherwise are more or less unscriptable.</p>
+
+<h2>How to use</h2>
+<p>Invoke cliclick with switch <code>-h</code> (i.e.: <code>cliclick -h</code>) to see usage information and examples.</p>
+<p>But to just give you an idea of how it works, here is a simple demonstration:<br>
+<code>cliclick c:28,11 w:500 m:+0,+24 w:1000 kd:alt w:1000 c:. ku:alt</code></p>
+<p>This code will execute the following commands:</p>
+<ul>
+<li><code>c:28,11</code> Click at position 28/11 (open the Apple menu)</li>
+<li><code>w:500</code> Wait 500 milliseconds</li>
+<li><code>m:+0,+24</code> Move the mouse 24 pixels down (resulting in 28/35, which is the first menu item, i.e.: “About this Mac”)</li>
+<li><code>w:1000</code> Wait 1000 milliseconds (so you have time to notice that the item is hilited)</li>
+<li><code>kd:alt</code> Press the “alt” modifier key</li>
+<li><code>w:1000</code> Wait 1000 milliseconds (to give you the time to notice that “About this Mac” changed to “Open System Profiler”)</li>
+<li><code>c:.</code> Click at the current position (“.” is the current mouse position, just as in Terminal, “.” is the current directory. You could also write <code>c:+0,+0</code>)</li>
+<li><code>ku:alt</code> Finally: release the “alt” key</li>
+</ul>
+
+<p>When running this example, you will have to prefix it with the full path (should be <code>/Volumes/cliclick</code>), if you have not installed cliclick yet.</p>
+
+<h2>Installation</h2>
+<p>Put cliclick anywhere you like. In my eyes the best (i.e.: most common) place would be <code>/usr/local/bin</code>. Additionally, you will want to make sure that this path is in your <code>$PATH</code> environment variable, so that you can use cliclick without specifying the full path. (If you have no idea what <code>$PATH</code> is, you should probably familiarize yourself with shell basics. A web search for something like “bash profile path mac” should be sufficient to find plenty of resources.)</p>
+<p>In addition, cliclick can be installed through Homebrew or MacPorts.</p>
+
+<h2>What is new in version 5.0?</h2>
+<ul>
+<li>New command: <code>dm</code> (“drag move”). Using this command in combination with <code>dd</code> (“drag down”) and <code>du</code> (“drag up”), it is – for example – possible to “draw” using cliclick.</li>
+<li>Cliclick is now a universal binary which runs natively on Intel x86 and ARM (“Apple Silicon”) CPUs. This change made it necessary to increase the minimum system version to macOS 10.15, which is the reason for the major version number bump, as this is a backward incompatible change. The previous version 4.0.1, which runs on 10.9 or newer, <a href="https://www.bluem.net/files/cliclick-4.0.1.zip">is still available for download</a>.</li>
+</ul>
+<p>cliclick 5.0 was released on 2021-02-27.<br>
+Release notes for previous versions can be found  <a href="https://www.bluem.net/jump/cliclick-versions/" target="_blank">on the website</a>.</p>
+
+<h2>Price</h2>
+<p>Cliclick is free (and <a href="https://github.com/BlueM/cliclick" target="_blank">Open Source Software</a>). However, if you appreciate it and would like to send a “Thank you”, there are a number of ways to do that. <a href="https://www.bluem.net/jump/donations/" target="_blank">Please take a look at my website for more information</a> or simply invoke <code>cliclick -n</code> at the shell.</p>
+
+<h2>Contact / Feedback</h2>
+<p>Carsten Blüm, <a href="mailto:carsten@bluem.net?Subject=cliclick%205.0">carsten@bluem.net</a> / <a href="https://www.bluem.net/" target="_blank">www.bluem.net</a><br>
+<a href="https://www.bluem.net/jump/cliclick/" target="_blank">cliclick Homepage</a><br>
+<a href="https://github.com/BlueM/cliclick" target="_blank">cliclick project at GitHub</a>
+</p>
+
+<h2>Disclaimer</h2>
+<p>This application is provided as-is. Support is not included. Use this software at your own risk. If for some obscure reason any damage or data loss may arise from using it (which in my opinion is nearly impossible), it is nobody else’s problem than yours.</p>
+
+</main>
+
+</body>
+</html>

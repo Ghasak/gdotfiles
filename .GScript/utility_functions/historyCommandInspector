@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# In linux use date -d @$line , while in mac use date -r $line
+
+bat ~/.zsh_history | awk -F ';' '{print $1}' | awk -F ':' '{print $2}' | awk '{print $1}' >~/Desktop/epochTime.txt && while read line; do if [ "$line" != "" ]; then date -r $line; fi; done <epochTime.txt
+
+# You can use sed to replace the text using
+# echo 12687278 | sed "s/\([0-9]\{8,\}\)/ $(date -r \1)/g"  <= Notice that sed operate on the number only as we use the regular expeerssion of 0-9  that occured 8 times
+# Piping new lines to teh given
+# echo $textline  | awk -F ':' '{print $2}' |  sed "s/\([0-9]\{8,\}\)/$(date -r \1)/g"
+
+
