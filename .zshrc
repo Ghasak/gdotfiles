@@ -34,8 +34,6 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 [ -f ~/.forgit/forgit.plugin.zsh ] && source ~/.forgit/forgit.plugin.zsh
-source $HOME/.zshrc_prompt
-source $HOME/.aliases
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -137,7 +135,8 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
-
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:complete:<command in denylist>:*' disabled-on any
 ## *************************************************************************
 ## *                 Configurations for zsh-vi-mode
 ## *************************************************************************
@@ -150,7 +149,8 @@ function zvm_config() {
 # *                  Soruce all Plugins                                   *
 # *************************************************************************
 source $ZSH/oh-my-zsh.sh
-
+source $HOME/.zshrc_prompt # Need zsh-vi-mode to be loaded first
+source $HOME/.aliases
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -643,6 +643,3 @@ export PATH="$PATH:$HOME/.GScript/.markdownLanguageServer/"
 export PATH="$PATH:$HOME/go/bin/"
 export PATH="/usr/local/sbin:$PATH"
 
-source /usr/local/opt/gitstatus/gitstatus.prompt.zsh
-source /usr/local/opt/gitstatus/gitstatus.prompt.zsh
-source ~/gitstatus/gitstatus.prompt.zsh

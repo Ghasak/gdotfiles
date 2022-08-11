@@ -503,7 +503,7 @@ function virtualenv_info {
 #\u2570
 # PROMPT=$'\n'
 #PROMPT=$'\n%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE}  ${MAC_ICON}  %F{226}%m%  on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf11e.\uf071)  $(Iam_at_home)  '
-PROMPT=$'\n%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE}  ${MAC_ICON}  %F{226}%m%  on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(Iam_at_home)  '
+PROMPT=$'\n%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE}  ${MAC_ICON} %F{226}%m% on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(Iam_at_home)  '
 #PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}%f%F{120}%F{180}\uf9c4 %F{white}% \u2B82 $(CPU_USAGE) %F{red}${MEMEORY} %F{cyan}$(memory_uasge) %F{blue}\ufa1a${prompt_elapsed_time} %F{yellow}%1v%{$reset_color%} $(git_time_since_commit)$(Modified_git_status) '
 #PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}%4v%f%F{120} %2v%F{180} %3v \uf0e4 %F{white} %5v %% \u2B82  %6v'
 ColoredIcon=$'\u'
