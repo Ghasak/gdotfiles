@@ -38,7 +38,7 @@ function MY_ANSI_COLOR_PALLATE(){
   }
 
 # To choose the color you want, you can first use this function to print the palette:
-
+# https://github.com/Aloxaf/fzf-tab/wiki/Configuration
 # Usage: palette
 function palette() {
     local -a colors

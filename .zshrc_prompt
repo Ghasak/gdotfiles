@@ -1,12 +1,14 @@
-# =============================================================================
+# ============================================================================================
 #
-# ▒█▀▀▀█ ▒█▀▀▀█ ▒█░▒█ ▒█▀▀█ ▒█▀▀█       ░░ ▒█▀▀█ █▀▀█ █▀▀█ █▀▄▀█ █▀▀█ █▀▀█ ▀▀█▀▀
-# ░▄▄▄▀▀ ░▀▀▀▄▄ ▒█▀▀█ ▒█▄▄▀ ▒█    ░░░   ▀▀ ▒█▄▄█ █▄▄▀ █░░█ █░▀░█ █░░█ █░░█ ░░█░░
-# ▒█▄▄▄█ ▒█▄▄▄█ ▒█░▒█ ▒█░▒█ ▒█▄▄█       ░░ ▒█░░░ ▀░▀▀ ▀▀▀▀ ▀░░░▀ █▀▀▀ ▀▀▀▀ ░░▀░░
+#         ███████╗░██████╗██╗░░██╗░░░░░░██████╗░██████╗░░█████╗░███╗░░░███╗██████╗░████████╗
+#         ╚════██║██╔════╝██║░░██║░░░░░░██╔══██╗██╔══██╗██╔══██╗████╗░████║██╔══██╗╚══██╔══╝
+#         ░░███╔═╝╚█████╗░███████║█████╗██████╔╝██████╔╝██║░░██║██╔████╔██║██████╔╝░░░██║░░░
+#         ██╔══╝░░░╚═══██╗██╔══██║╚════╝██╔═══╝░██╔══██╗██║░░██║██║╚██╔╝██║██╔═══╝░░░░██║░░░
+#         ███████╗██████╔╝██║░░██║░░░░░░██║░░░░░██║░░██║╚█████╔╝██║░╚═╝░██║██║░░░░░░░░██║░░░
+#         ╚══════╝╚═════╝░╚═╝░░╚═╝░░░░░░╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚═╝░░░░░╚═╝╚═╝░░░░░░░░╚═╝░░░
 #
-# =============================================================================
-#
-# - [] How man files have been added since you start committing (github)
+# ============================================================================================
+
 autoload -U colors && colors
 autoload -Uz vcs_info
 #precmd() { vcs_info }
@@ -16,11 +18,15 @@ OS_ICON=
 OS_ICON=$'\uf179'
 MAC_ICON=$'\uf6c3'
 ARROW=$'\uf641' #  
+ARROW=$'\ufb00'
+ARROW=$'\uf101'
+ARROW=$'\uf101'
+ARROW=$'\uf054'
+CIRCEL=$'\uf7b0'
 #DIR_ICON=
 #MAC_FINDER_ICON=$'\uf535'
 MAC_FINDER_ICON=$'\uff115'
 CLOCK_ICON=$'\uf64f'
-AT_SYMPOLE=$'\uf1fa'
 ROBIN_HOOD_ICON=$'\uf2ae'
 SINGEL_GEAR_ICON=$'\uf013'
 IRON_MAN_ICON=$'\uf1d1'
@@ -72,13 +78,27 @@ LEFT_SEGMENT_SEPARATOR=$'\u2B80'                # ⮀
 RIGHT_SEGMENT_SEPARATOR=$'\u2B82'               # ⮂
 MEMEORY=$'\uf85a'
 GIT_BRANCH_ICON=$'\ue0a0' #  => \uf418
-
-# =============================================================================
-# Load version control information
-# Set up the prompt (with git branch name)
-setopt PROMPT_SUBST
-#PROMPT='%n in ${PWD/#$HOME/~} ${} > '
-#PROMPT='%n in ${PWD/#$HOME/~} ${} > '
+AT_SYMPOLE=$'\uf564'
+AT_SYMPOLE=$'\uf1fa'
+left_half_circle_thick=$'\ue0b6'                #
+rigth_circle_thick=$'\ue0b4'                    #
+RULER_CHAR=$'\u2500'                             # ─
+# as POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_FOREGROUND below.
+typeset -g LCU='%244F╭─'
+typeset -g LCM='%244F├─'
+typeset -g LCL='%244F╰─'
+#Connect right prompt lines with these symbols.
+typeset -g RCU='%244F─╮'
+typeset -g RCM='%244F─┤'
+typeset -g RCL='%244F─╯'
+typeset -g RCU2='╭─'
+typeset -g RCU2='╰'
+typeset -g POINTING_ARROW='─➤'
+  # PR_HBAR="─"
+  # PR_ULCORNER="┌"
+  # PR_LLCORNER="└"
+  # PR_LRCORNER="┘"
+  # PR_URCORNER="┐"
 ######
 # Using A Splash of Colors
 ######
@@ -89,121 +109,147 @@ if [[ $terminfo[colors] -ge 256 ]]; then
     purple="%F{135}"
     hotpink="%F{161}"
     limegreen="%F{118}"
+    darkblue="%F{30}"
 else
     turquoise="%F{cyan}"
     orange="%F{yellow}"
     purple="%F{magenta}"
     hotpink="%F{red}"
     limegreen="%F{green}"
+    darkblue="%F{blue}"
 fi
+
 
 COLOR_ARRY=(red blue yellow green)
 RANDOM_COLOR=$((1 + RANDOM % ${#COLOR_ARRY[@]}))
 SELECTED_COLOR=$(echo "${COLOR_ARRY[$RANDOM_COLOR]}")
-#SELECTED_DICE=$(echo ${DICE_ARRAY[RANDOM_DICE]})
-######
-ZSH_THEME_GIT_PROMPT_PREFIX="$FG[075]($FG[078]"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-#ZSH_THEME_GIT_PROMPT_DIRTY="$my_orange*%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[cyan]%} ✈"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%} ✭"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%} ✗"
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[blue]%} ➦"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[magenta]%} ✂"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[grey]%} ✱"
-#adding here some
-
-#PROMPT='%{$fg[$NCOLOR]%}%c ➤ %{$reset_color%}'
-# Adding color to my zsh
-#PS1+="%{$fg[red]%}%n%{$reset_color%} at %{$fg[blue]%}%m %F{226}%~%f  %{$reset_color%}% "
-# =============================================================================
-# Customization of the Git in the righ prompt
-# Format the vcs_info_msg_0_ variable
-#zstyle ':vcs_info:git:*' formats "%B%F{#9370DB} => ${GIT_ICON} branch:%B%F{#E066FF}[${GIT_BRANCH_ICON} %b] "
-#zstyle ':vcs_info:git:*' formats"%B %u %c ${GIT_ICON}branch:%B[${GIT_BRANCH_ICON} %b] "
-#RPROMPT='%{$fg[$NCOLOR]%} $(git_prompt_info)%{$reset_color%}'
-
-# Customization of the Git in the righ prompt
-#PS1+=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f${AT_SYMPOLE} ${MAC_ICON}  %F{226}%m%  on %F{30}%~%f %F{208}${FOLDER_ICON} %{$reset_color%} '
-#$(git_prompt_behind)${git_prompt_info}'
-#
-# =============================================================================
-#
+# See if we can use colors.
+autoload zsh/terminfo
+for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE GREY; do
+  typeset -g PR_$color="%{$terminfo[bold]$fg[${(L)color}]%}"
+  typeset -g PR_LIGHT_$color="%{$fg[${(L)color}]%}"
+done
+PR_NO_COLOUR="%{$terminfo[sgr0]%}"
 
 # =============================================================================
-#                     Inside or outside a repo
-# =============================================================================
-# FOLDER_ICON=$'\uf07c'
-# GIT_DIR=$'\uf408'
-# #SERVER_HUB_ICONT=''
-# function prompt_char {
-#   git branch >/dev/null 2>/dev/null && echo "%F{yellow}$GIT_DIR  ± %{$reset_color%}" && return
-#     hg root >/dev/null 2>/dev/null && echo "$FOLDER_ICON ☿" && return
-#     echo "○  %F{208}${FOLDER_ICON} %{$reset_color%} "
-# }
 #
-# # =============================================================================
-# #
-# # =============================================================================
-#
-# # =============================================================================
-#
-# #PS1=$'\n'
-# #PS1+=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f${AT_SYMPOLE} ${MAC_ICON}  %F{226}%m%  on %F{30}%~%f $(prompt_char) ${BATTARY_VARIABLE} '
-# #PS1+=$'\n%F{blue}\u2570\U2500%F{blue}\u2192%{$reset_color%} '
-#
-# #RPROMPT=$'%F{$SELECTED_COLOR}${SELECTED_DICE} %{$reset_color%} $(git_time_since_commit)$(check_git_prompt_info) %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON}  %D{%b %d, %Y} - ${CLOCK_ICON}  %T]%{$reset_color%}'
-# # =============================================================================
-# #                   Dont change anything under this
-# # =============================================================================
-# #PROMPT='%{$fg[blue]%}%n%{$reset_color%} on %{$fg[red]%}%M%{$reset_color%} in %{$fg[blue]%}%~%b%{$reset_color%}$(git_time_since_commit)$(check_git_prompt_info)
-#$ '
-# ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[white]%}"
-# ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%})"
-# # Text to display if the branch is dirty
-# ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}*%{$reset_color%}"
-# # Text to display if the branch is clean
-# ZSH_THEME_GIT_PROMPT_CLEAN=""
-# # Colors vary depending on time lapsed.
-# ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%{$fg[green]%}"
-# ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%{$fg[yellow]%}"
-# ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%{$fg[red]%}"
-# ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$fg[cyan]%}"
-#
-# # Modify Git prompt
-# ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[green]%}"
-# ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-# ZSH_THEME_GIT_PROMPT_DIRTY=""
-# ZSH_THEME_GIT_PROMPT_CLEAN=""
-#
-# ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%} ✚"
-# ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%} ✹"
-# ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%} ✖"
-# ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%} ➜"
-# ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%} ═"
-# ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ✭"
+#             █▀▀ █ ▀█▀ █▀ ▀█▀ ▄▀█ ▀█▀ █░█ █▀   █▀█ █░░ █░█ █▀▀ █ █▄░█
+#             █▄█ █ ░█░ ▄█ ░█░ █▀█ ░█░ █▄█ ▄█   █▀▀ █▄▄ █▄█ █▄█ █ █░▀█
+#             Simple Zsh prompt with Git status.
 
-# Git sometimes goes into a detached head state. git_prompt_info doesn't
-# return anything in this case. So wrap it in another function and check
-# for an empty string.
-function check_git_prompt_info() {
-    if git rev-parse --git-dir >/dev/null 2>&1; then
-        if [[ -z $(git_prompt_info) ]]; then
-            echo "%{$fg[magenta]%}detached-head%{$reset_color%})"
-        else
-            #echo "\ue725 $(git_prompt_info)"
-            #echo "\ue725 $(git_prompt_info)" | awk '{print $2}' | awk -F ':' '{print $2}'
-            # This variable will bring us (main*)
-            #temp_var=$(echo $(git_prompt_info) | awk -F ':' '{print $2}')
-            # This variable will bring us (main with uni-code of git commit icon [\uf417])
-            temp_var=$(echo $(git_prompt_info) | awk '{print $1}' | awk -F ':' '{print $2}' | sed $'s/*/ \uf417 /g')
-            #echo $(git_prompt_info) | awk '{print $1}' | awk -F ':' '{print $2}' | lolcat
-            echo "%F{blue}\ue725 %{$fg[cyan]%}$temp_var%{$reset_color%}"
-        fi
-    fi
+# =============================================================================
+# Source gitstatus.plugin.zsh from $GITSTATUS_DIR or from the same directory
+# in which the current script resides if the variable isn't set.
+if [[ -f $HOME/gitstatus/gitstatus.plugin.zsh ]]; then
+  source $HOME/gitstatus/gitstatus.plugin.zsh
+else
+  git clone --depth=1 https://github.com/romkatv/gitstatus.git $HOME/gitstatus
+fi
+
+
+#source "${GITSTATUS_DIR:-${${(%):-%x}:h}}/gitstatus.plugin.zsh" || return
+
+# Sets GITSTATUS_PROMPT to reflect the state of the current git repository. Empty if not
+# in a git repository. In addition, sets GITSTATUS_PROMPT_LEN to the number of columns
+# $GITSTATUS_PROMPT will occupy when printed.
+#
+# Example:
+#
+#   GITSTATUS_PROMPT='master ⇣42⇡42 ⇠42⇢42 *42 merge ~42 +42 !42 ?42'
+#   GITSTATUS_PROMPT_LEN=39
+#
+#   master  current branch
+#      ⇣42  local branch is 42 commits behind the remote
+#      ⇡42  local branch is 42 commits ahead of the remote
+#      ⇠42  local branch is 42 commits behind the push remote
+#      ⇢42  local branch is 42 commits ahead of the push remote
+#      *42  42 stashes
+#    merge  merge in progress
+#      ~42  42 merge conflicts
+#      +42  42 staged changes
+#      !42  42 unstaged changes
+#      ?42  42 untracked files
+function gitstatus_prompt_update() {
+  emulate -L zsh
+  typeset -g  GITSTATUS_PROMPT=''
+  typeset -gi GITSTATUS_PROMPT_LEN=0
+
+  # Call gitstatus_query synchronously. Note that gitstatus_query can also be called
+  # asynchronously; see documentation in gitstatus.plugin.zsh.
+  gitstatus_query 'MY'                  || return 1  # error
+  [[ $VCS_STATUS_RESULT == 'ok-sync' ]] || return 0  # not a git repo
+
+  local      clean='%217F'  # green foreground
+  local   modified='%178F'  # yellow foreground
+  local  untracked='%39F'   # blue foreground
+  local conflicted='%196F'  # red foreground
+
+  local p
+
+  local where  # branch name, tag or commit
+  if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
+    where=$VCS_STATUS_LOCAL_BRANCH
+  elif [[ -n $VCS_STATUS_TAG ]]; then
+    p+='%f#'
+    where=$VCS_STATUS_TAG
+  else
+    p+='%f@'
+    where=${VCS_STATUS_COMMIT[1,8]}
+  fi
+
+  (( $#where > 32 )) && where[13,-13]="…"  # truncate long branch names and tags
+  p+="${clean}${where//\%/%%}"             # escape %
+
+  # ⇣42 if behind the remote.
+  (( VCS_STATUS_COMMITS_BEHIND )) && p+=" ${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
+  # ⇡42 if ahead of the remote; no leading space if also behind the remote: ⇣42⇡42.
+  (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && p+=" "
+  (( VCS_STATUS_COMMITS_AHEAD  )) && p+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
+  # ⇠42 if behind the push remote.
+  (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && p+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
+  (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && p+=" "
+  # ⇢42 if ahead of the push remote; no leading space if also behind: ⇠42⇢42.
+  (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && p+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
+  # *42 if have stashes.
+  (( VCS_STATUS_STASHES        )) && p+=" ${clean}*${VCS_STATUS_STASHES}"
+  # 'merge' if the repo is in an unusual state.
+  [[ -n $VCS_STATUS_ACTION     ]] && p+=" ${conflicted}${VCS_STATUS_ACTION}"
+  # ~42 if have merge conflicts.
+  (( VCS_STATUS_NUM_CONFLICTED )) && p+=" ${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
+  # +42 if have staged changes.
+  (( VCS_STATUS_NUM_STAGED     )) && p+=" ${modified}+${VCS_STATUS_NUM_STAGED}"
+  # !42 if have unstaged changes.
+  (( VCS_STATUS_NUM_UNSTAGED   )) && p+=" ${modified}!${VCS_STATUS_NUM_UNSTAGED}"
+  # ?42 if have untracked files. It's really a question mark, your font isn't broken.
+  (( VCS_STATUS_NUM_UNTRACKED  )) && p+=" ${untracked}?${VCS_STATUS_NUM_UNTRACKED}"
+
+  GITSTATUS_PROMPT="${p}%f"
+
+  # The length of GITSTATUS_PROMPT after removing %f and %F.
+  GITSTATUS_PROMPT_LEN="${(m)#${${GITSTATUS_PROMPT//\%\%/x}//\%(f|<->F)}}"
 }
 
+# Start gitstatusd instance with name "MY". The same name is passed to
+# gitstatus_query in gitstatus_prompt_update. The flags with -1 as values
+# enable staged, unstaged, conflicted and untracked counters.
+gitstatus_stop 'MY' && gitstatus_start -s -1 -u -1 -c -1 -d -1 'MY'
+
+# On every prompt, fetch git status and set GITSTATUS_PROMPT.
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd gitstatus_prompt_update
+
+# Enable/disable the right prompt options.
+setopt no_prompt_bang prompt_percent prompt_subst
+
+# Customize prompt. Put $GITSTATUS_PROMPT in it to reflect git status.
+#
+# Example:
+#
+#   user@host ~/projects/skynet master ⇡42
+#   % █
+# =============================================================================
+#               Plugins Setup - git_time_since_commit()
+# =============================================================================
 # Determine if we are using a gemset.
 function rvm_gemset() {
     if hash rvm 2>/dev/null; then
@@ -213,10 +259,10 @@ function rvm_gemset() {
         fi
     fi
 }
-
 # Determine the time since last commit. If branch is clean,
 # use a neutral color, otherwise colors will vary according to time.
 function git_time_since_commit() {
+    GIT_TIME_SINCE_COMMIT_LEN=0
     if git rev-parse --git-dir >/dev/null 2>&1; then
         # Only proceed if there is actually a commit.
         if [[ $(git log 2>&1 >/dev/null | grep -c "^fatal: bad default revision") == 0 ]]; then
@@ -247,69 +293,32 @@ function git_time_since_commit() {
             fi
 
             if [ "$HOURS" -gt 24 ]; then
-                echo "($(rvm_gemset)$COLOR${DAYS}d${SUB_HOURS}h${SUB_MINUTES}m%{$reset_color%}|"
+                echo "$(rvm_gemset)$COLOR${DAYS}d${SUB_HOURS}h${SUB_MINUTES}m%{$reset_color%}|"
+                # The length of GITSTATUS_PROMPT after removing %f and %F.
+                #GIT_TIME_SINCE_COMMIT_LEN=
             elif [ "$MINUTES" -gt 60 ]; then
-                echo "($(rvm_gemset)$COLOR${HOURS}h${SUB_MINUTES}m%{$reset_color%}|"
+                echo "$(rvm_gemset)$COLOR${HOURS}h${SUB_MINUTES}m%{$reset_color%}|"
+               # GIT_TIME_SINCE_COMMIT_LEN="${(m)#%{${HOURS}h${SUB_MINUTES}m}"
+                # The length of GITSTATUS_PROMPT after removing %f and %F.
+                #GITSTATUS_PROMPT_LEN="${(m)#${${GITSTATUS_PROMPT//\%\%/x}//\%(f|<->F)}}"
             else
-                echo "($(rvm_gemset)$COLOR${MINUTES}m%{$reset_color%}|"
+                echo "$(rvm_gemset)$COLOR${MINUTES}m%{$reset_color%}|"
+               # GIT_TIME_SINCE_COMMIT_LEN=$("($(rvm_gemset)$COLOR${MINUTES}m%{$reset_color%}|" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g")
+               # GIT_TIME_SINCE_COMMIT_LEN="${(m)#%{${MINUTES}m}"
             fi
         else
             COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL"
-            echo "($(rvm_gemset)$COLOR~| "
+            echo "$(rvm_gemset)$COLOR~| "
+                GIT_TIME_SINCE_COMMIT_LEN=1
+           # GIT_TIME_SINCE_COMMIT_LEN=$("($(rvm_gemset)$COLOR~| "  | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g")
         fi
     fi
 }
 
-#secs_to_human() {
-#    if [[ -z ${1} || ${1} -lt 60 ]] ;then
-#        min=0 ; secs="${1}"
-#    else
-#        time_mins=$(echo "scale=2; ${1}/60" | bc)
-#        min=$(echo ${time_mins} | cut -d'.' -f1)
-#        secs="0.$(echo ${time_mins} | cut -d'.' -f2)"
-#        secs=$(echo ${secs}*60|bc|awk '{print int($1+0.5)}')
-#    fi
-#    echo "Time Elapsed : ${min} minutes and ${secs} seconds."
-#}
-
-# =============================================================================
-# Time at the session started
-# =============================================================================
-#typeset -g date1=$(date +"%s")
-
-# =============================================================================
-# =============================================================================
-#CHECKER=$(if [ $? = "0" ]; then echo ""; else echo "\u263F"; fi)
-# =============================================================================
-# =============================================================================
-#RANDOM_DICE=$((1 + RANDOM % 6));
-#SELECTED_DICE=$(echo ${DICE_ARRAY[RANDOM_DICE]})
-#RPROMPT='[%D{%L:%M:%S %p}]'
-#typeset -g date2=$(date +"%s")
-#typeset -g DIFF=$(($date2-$date1))
-#typeset -g ELLAPS_TIME=$(echo "%F{150}\ufa1a$(($DIFF / 3600 ))h:$((($DIFF % 3600) / 60))m:$(($DIFF % 60))s %{$reset_color%}")
-
-# =============================================================================
-# =============================================================================
-#TMOUT=1
-#TRAPALRM() {
-#  zle reset-prompt
-#  }
-# =============================================================================
-#parse_git_branch() {
-#  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
-#}
-#print_epoch() { date  '+%s' }
-#print_epoch() { date  '+%s' }
-
-#setopt PROMPT_SUBST
-#autoload -U colors && colors
-#export PROMPT='%n %~ %F{blue}🌿$(parse_git_branch)%f > '
-
 # =============================================================================
 #                       Checking directry and flip the icon
 # =============================================================================
-function Iam_at_home() {
+function GPS() {
     local temp_var=$(echo $(git branch 2>/dev/null)) # Send the error message to not be printed.
 
     if [ "$PWD" = "$HOME" ]; then
@@ -371,7 +380,7 @@ setopt nopromptbang prompt{cr,percent,sp,subst}
 autoload -Uz add-zsh-hook
 add-zsh-hook preexec prompt_preexec
 add-zsh-hook precmd prompt_precmd
-#RPS1='%F{cyan}${prompt_elapsed_time}%F{none}'
+
 # =============================================================================
 
 function dice() {
@@ -382,20 +391,16 @@ function dice() {
     DICE_ARRAY[5]=$'\uf6cd'
     DICE_ARRAY[6]=$'\uf6ce'
     nb=$(($RANDOM % 6 + 1))
-    #RPROMPT="${DICE_ARRAY[$nb]}";
     TEMP_DIC="${DICE_ARRAY[$nb]}"
     psvar[1]=${TEMP_DIC}
 }
 # =============================================================================
-# We adding here the zsh hook that specified as function type, we can pass variables using %v, if you want to use other variable use %2v %3v
-# See more here: https://stackoverflow.com/questions/36192523/zsh-prompt-customization
+# We adding here the zsh hook that specified as function type, we can pass
+# variables using %v, if you want to use other variable use %2v %3v See more
+# here: https://stackoverflow.com/questions/36192523/zsh-prompt-customization
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd dice
-#setopt promptsubst
-#PROMPT=$'\n'
-#PROMPT=$'\n%F{%(0?.green.red)} $(Iam_at_home) $(running_docker)%f'
-#PROMPT+=$'\n => '
-#RPROMPT=$'%F{cyan}\ufa1a${prompt_elapsed_time} %F{16}$(date "+%F %T %z")%F{none} %v'
+
 # =============================================================================
 #                      Battery checking status
 # =============================================================================
@@ -418,21 +423,6 @@ function battary_charge_percentage() {
 
 #autoload -Uz add-zsh-hook
 #add-zsh-hook precmd battary_charge_percentage
-
-# =============================================================================
-#                       GIT SUPER STATUS (FAST)
-# =============================================================================
-#
-PATH=$PATH:/$HOME/zsh-git-prompt/src/.bin
-# I notice this slow down the zshrc startup (run zprof | head -n50)
-GIT_PROMPT_EXECUTABLE="haskell"
-
-source ${HOME}/zsh-git-prompt/zshrc.sh
-function Modified_git_status() {
-    temp_var1=$(echo $(git_super_status) | awk -F ':' '{print $2}')
-    #temp_var1=$(echo $(git_super_status) | awk -F ':' '{print $2}')
-    echo "$temp_var1"
-}
 
 # =============================================================================
 #                       DOCKER CONTAINER FUNCTION
@@ -463,6 +453,7 @@ function running_docker() {
 #autoload -Uz add-zsh-hook
 #add-zsh-hook precmd running_docker
 #add-zsh-hook preexec running_docker
+
 # =============================================================================
 #                       CPU USAGE
 # =============================================================================
@@ -476,6 +467,7 @@ function CPU_USAGE() {
 }
 #autoload -Uz add-zsh-hook
 #add-zsh-hook precmd  CPU_USAGE
+
 # =============================================================================
 #                            Memory usage
 # =============================================================================
@@ -495,26 +487,126 @@ function virtualenv_info {
 # \uf233 =>
 #  RED="\e[31m"
 #       echo -n -e  "=> ${LIGHT_YELLOW}\uf128  ${ENDCOLOR} "  && echo  "${file}"
+# The plugin will auto execute this `zvm_after_select_vi_mode` function
 # =============================================================================
 #                            Configruations
 #                   zsh-bar of the right/left prompt
 # =============================================================================
-#
-#\u2570
-# PROMPT=$'\n'
-#PROMPT=$'\n%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE}  ${MAC_ICON}  %F{226}%m%  on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf11e.\uf071)  $(Iam_at_home)  '
-PROMPT=$'\n%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE}  ${MAC_ICON} %F{226}%m% on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(Iam_at_home)  '
-#PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}%f%F{120}%F{180}\uf9c4 %F{white}% \u2B82 $(CPU_USAGE) %F{red}${MEMEORY} %F{cyan}$(memory_uasge) %F{blue}\ufa1a${prompt_elapsed_time} %F{yellow}%1v%{$reset_color%} $(git_time_since_commit)$(Modified_git_status) '
-#PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}%4v%f%F{120} %2v%F{180} %3v \uf0e4 %F{white} %5v %% \u2B82  %6v'
-ColoredIcon=$'\u'
-#PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7%4v%f%F{120}%F{180}%F{blue}%{$reset_color%}  %F{yellow}%1v  $(git_time_since_commit)$(Modified_git_status) %F{blue}\ufa81 %F{yellow}\ufa81 %F{red}\ufa81 %F{blue}\ufa81 %F{yellow}\ufa81 %F{red}\ufa81%{$reset_color%}'
-PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7%4v%f%F{120}%F{180}%F{blue}%{$reset_color%}  %F{yellow}%1v%{$reset_color%}  $(git_time_since_commit)$(Modified_git_status)%{$reset_color%} $(virtualenv_info)'
-#PS1+=$'\n%F{blue}\u2570\uf93d\ufa21\uf7c6%F{blue}%{$reset_color%}  ' #
-PS1+=$'\n%F{blue}\u2570%F{blue}${ARROW}%F{yellow}${ARROW}%F{red}${ARROW}%F{blue}%{$reset_color%} ' #
-#PS1+=$'\n%F{blue}\u2570\U2500%F{blue}\uf1ce%{$reset_color%}  '
-#RPROMPT=$'%F{blue}\ufa1a${prompt_elapsed_time} %F{yellow}%1v%{$reset_color%} $(git_time_since_commit)$(Modified_git_status) %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON}  %D{%b %d, %Y}- ${CLOCK_ICON}  %D{%L:%M:%S %p}]%{$reset_color%}'
-RPROMPT=$'%F{blue}\ufa1a:${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON}  %D{%b %d, %Y}- ${CLOCK_ICON}  %D{%L${blue}:%M${red}:%S %p}]%{$reset_color%}'
 
+# This will function with the zsh-vi-mode
+function zvm_after_select_vi_mode() {
+  case $ZVM_MODE in
+    $ZVM_MODE_NORMAL)
+      # Something you want to do...
+      PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
+      #PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 [%{$bg[magenta]%}%F{PR_YELLOW}NORMAL%{$reset_color%}]%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} $(git_time_since_commit)${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+      PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{121}NORMAL%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} $(git_time_since_commit)${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+      #PS1+=$'\n%F{blue}\u2570%F{blue}${ARROW}%F{yellow}${ARROW}%F{red}${ARROW}%F{blue}%{$reset_color%}' #
+      PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
+      ;;
+    $ZVM_MODE_INSERT)
+      # Something you want to do...
+      PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
+      PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{209}INSERT%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} $(git_time_since_commit)${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+      #PS1+=$'\n%F{blue}\u2570%F{blue}${ARROW}%F{yellow}${ARROW}%F{red}${ARROW}%F{blue}%{$reset_color%}' #
+      PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
+      ;;
+    $ZVM_MODE_VISUAL)
+      # Something you want to do...
+      PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
+      PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{215}VISUAL%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} $(git_time_since_commit)${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+      #PS1+=$'\n%F{blue}\u2570%F{blue}${ARROW}%F{yellow}${ARROW}%F{red}${ARROW}%F{blue}%{$reset_color%}' #
+      PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
+      ;;
+    $ZVM_MODE_VISUAL_LINE)
+      # Something you want to do...
+      PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
+      PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{212}VISUAL*%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} $(git_time_since_commit)${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+      #PS1+=$'\n%F{blue}\u2570%F{blue}${ARROW}%F{yellow}${ARROW}%F{red}${ARROW}%F{blue}%{$reset_color%}' #
+      PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
+      ;;
+  esac
+}
+
+RPROMPT=$'%F{blue}\ufa1a:${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON} %F{110} %D{%b %d, %Y}${PR_NO_COLOUR} - %{$fg[magenta]%}${CLOCK_ICON}%F{180} %D{%L:%M:%S %p}%{$fg[magenta]%} ] %{$reset_color%}'
 # =============================================================================
 #    Reference: https://blog.carbonfive.com/writing-zsh-themes-a-quickref/
 # =============================================================================
+
+# =============================================================================
+#
+#        ██████╗░██╗░██████╗██████╗░██╗░░░░░░█████╗░██╗░░░██╗
+#        ██╔══██╗██║██╔════╝██╔══██╗██║░░░░░██╔══██╗╚██╗░██╔╝
+#        ██║░░██║██║╚█████╗░██████╔╝██║░░░░░███████║░╚████╔╝░
+#        ██║░░██║██║░╚═══██╗██╔═══╝░██║░░░░░██╔══██║░░╚██╔╝░░
+#        ██████╔╝██║██████╔╝██║░░░░░███████╗██║░░██║░░░██║░░░
+#        ╚═════╝░╚═╝╚═════╝░╚═╝░░░░░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░
+# The current directory gets truncated from the left if the whole prompt doesn't fit on the line.
+# =============================================================================
+# PROMPT='%70F%n@%m%f '                                  # green user@host
+# PROMPT+='%39F%$((-GITSTATUS_PROMPT_LEN-1))<…<%~%<<%f'  # blue current working directory
+# PROMPT+='${GITSTATUS_PROMPT:+ $GITSTATUS_PROMPT}'      # git status
+# PROMPT+=$'\n'                                          # new line
+# PROMPT+='%F{%(?.76.196)}%#%f '                         # %/# (normal/root); green/red (ok/error)
+#PROMPT='${OS_ICON} %F{208}%n%f ${AT_SYMPOLE}  ${MAC_ICON}  %F{226}%m% on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(Iam_at_home)  '
+#PROMPT=$'\n%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE}  ${MAC_ICON}  %F{226}%m%  on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(Iam_at_home)  '
+#PROMPT+=$'\n'
+
+
+
+#$'%{\e]0;%(!.-=*[ROOT]*=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} | %y\a%}'
+# Symbols
+# if [[ "${langinfo[CODESET]}" = UTF-8 ]]; then
+#   PR_SET_CHARSET=""
+#   PR_HBAR="─"
+#   PR_ULCORNER="┌"
+#   PR_LLCORNER="└"
+#   PR_LRCORNER="┘"
+#   PR_URCORNER="┐"
+# fi
+
+# Need this so the prompt will work.
+#setopt prompt_subst
+
+#function theme_precmd {
+#        DISP=""
+#        PR_FILLBAR=""
+#        PR_PWDLEN=""
+#        local TERMWIDTH=$(( COLUMNS - ${ZLE_RPROMPT_INDENT:-1} ))
+#        local myString=$'\n\u256D\U2500${OS_ICON}%n${AT_SYMPOLE} ${MAC_ICON} %m  on   $(Iam_at_home)  '
+#        local promptsize=${#myString}
+#        local pwdsize=${#${(%):-%~}}
+#        local FILECOUNT=$' ' # How many icons you are using in your PROMPT
+#        local filesize=${#${(%):-$FILECOUNT}}
+#        typeset -g BUFFERLENGTH=9
+#        # if [[ $GITSTATUS_PROMPT_LEN = 0 ]];then
+#        #     BUFFERLENGTH=17
+#        # else
+#        #     BUFFERLENGTH=17
+#        # fi
+
+#        PR_HBAR=""
+#        PR_FILLBAR="\${(l:$(( TERMWIDTH - (promptsize + pwdsize + GITSTATUS_PROMPT_LEN + (2*GIT_TIME_SINCE_COMMIT_LEN) - (BUFFERLENGTH * filesize)) ))::${PR_HBAR}:)}"
+#        #psvar[2]=${DISP}
+
+
+#}
+#autoload -U add-zsh-hook
+#add-zsh-hook precmd theme_precmd
+
+
+## See if we can use colors.
+#autoload zsh/terminfo
+#for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE GREY; do
+#  typeset -g PR_$color="%{$terminfo[bold]$fg[${(L)color}]%}"
+#  typeset -g PR_LIGHT_$color="%{$fg[${(L)color}]%}"
+#done
+#PR_NO_COLOUR="%{$terminfo[sgr0]%}"
+
+
+#PROMPT=$'\n${PR_BLUE}${LCU}${OS_ICON}${PR_YELLOW} %n${PR_NO_COLOUR} ${AT_SYMPOLE} ${MAC_ICON} ${PR_MAGENTA}%m% ${PR_NO_COLOUR} on ${darkblue}%~%F{%(0?.green.red)} %(0?.\uf08b.\uf071) ${PR_GREY}$(git_time_since_commit)${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} ${(e)PR_FILLBAR}${PR_GREY}$(GPS)${PR_NO_COLOUR} ${RCU}'
+#PROMPT+=$'\n'
+##PROMPT+=$'${LCL}'
+##PS1+=$'${LCL}%F{blue}${ARROW}%F{yellow}${ARROW}%F{red}${ARROW}%F{blue}%{$reset_color%} ' #
+#PS1+=$'${LCL}%F{blue}%F{yellow}${ARROW}%F{blue}%{$reset_color%} ' #
+#RPROMPT=$'%F{blue}\ufa1a:${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON}  %D{%b %d, %Y}- ${CLOCK_ICON}  %D{%L${blue}:%M${red}:%S %p}]%{$reset_color%} ${PR_YELLOW}%1v ${RCL}'
