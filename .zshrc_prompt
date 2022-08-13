@@ -81,7 +81,7 @@ GIT_BRANCH_ICON=$'\ue0a0' #  => \uf418
 AT_SYMPOLE=$'\uf564'
 AT_SYMPOLE=$'\uf1fa'
 left_half_circle_thick=$'\ue0b6'                #
-rigth_circle_thick=$'\ue0b4'                    #
+right_half_circle_thick=$'\ue0b4'                    #
 RULER_CHAR=$'\u2500'                             # ─
 # as POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_FOREGROUND below.
 typeset -g LCU='%244F╭─'
@@ -492,43 +492,61 @@ function virtualenv_info {
 #                            Configruations
 #                   zsh-bar of the right/left prompt
 # =============================================================================
+# zvm_before_init_commands=()
+# zvm_after_init_commands=()
+# zvm_before_select_vi_mode_commands=()
+# zvm_after_select_vi_mode_commands=()
+# zvm_before_lazy_keybindings_commands=()
+# zvm_after_lazy_keybindings_commands=()
 
-# This will function with the zsh-vi-mode
+# Initalize the prompt
+function zvm_before_init_commands(){
+        PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
+        PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{120}INSERT%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+        PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
+        RPROMPT=$'%F{blue}\ufa1a:${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON} %F{110} %D{%b %d, %Y}${PR_NO_COLOUR} - %{$fg[magenta]%}${CLOCK_ICON}%F{180} %D{%L:%M:%S %p}%{$fg[magenta]%} ] %{$reset_color%}'
+
+}
+# The plugin will auto execute this zvm_after_select_vi_mode function
+# It will overwrite the initial prompt: zvm_before_init_commands
 function zvm_after_select_vi_mode() {
   case $ZVM_MODE in
     $ZVM_MODE_NORMAL)
       # Something you want to do...
-      PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
-      #PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 [%{$bg[magenta]%}%F{PR_YELLOW}NORMAL%{$reset_color%}]%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} $(git_time_since_commit)${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
-      PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{121}NORMAL%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
-      #PS1+=$'\n%F{blue}\u2570%F{blue}${ARROW}%F{yellow}${ARROW}%F{red}${ARROW}%F{blue}%{$reset_color%}' #
-      PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
-      ;;
+    PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
+    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{120}NORMAL%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+    PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
+    ;;
     $ZVM_MODE_INSERT)
       # Something you want to do...
-      PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
-      PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{209}INSERT%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
-      #PS1+=$'\n%F{blue}\u2570%F{blue}${ARROW}%F{yellow}${ARROW}%F{red}${ARROW}%F{blue}%{$reset_color%}' #
-      PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
-      ;;
+    PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
+    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{1}INSERT%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+    PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
+    ;;
     $ZVM_MODE_VISUAL)
       # Something you want to do...
-      PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
-      PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{215}VISUAL%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} $(git_time_since_commit)${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
-      #PS1+=$'\n%F{blue}\u2570%F{blue}${ARROW}%F{yellow}${ARROW}%F{red}${ARROW}%F{blue}%{$reset_color%}' #
-      PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
-      ;;
+    PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
+    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{214}VISUAL%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+    PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
+    ;;
     $ZVM_MODE_VISUAL_LINE)
       # Something you want to do...
-      PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
-      PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{212}VISUAL*%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} $(git_time_since_commit)${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
-      #PS1+=$'\n%F{blue}\u2570%F{blue}${ARROW}%F{yellow}${ARROW}%F{red}${ARROW}%F{blue}%{$reset_color%}' #
-      PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
-      ;;
+    PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
+    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{201}VISUAL*%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+    PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
+    ;;
+    $ZVM_MODE_REPLACE)
+      # Something you want to do...
+    PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
+    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{204}REPLACE%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+    PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
+    ;;
   esac
+  RPROMPT=$'%F{blue}\ufa1a:${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON} %F{110} %D{%b %d, %Y}${PR_NO_COLOUR} - %{$fg[magenta]%}${CLOCK_ICON}%F{180} %D{%L:%M:%S %p}%{$fg[magenta]%} ] %{$reset_color%}'
 }
 
-RPROMPT=$'%F{blue}\ufa1a:${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON} %F{110} %D{%b %d, %Y}${PR_NO_COLOUR} - %{$fg[magenta]%}${CLOCK_ICON}%F{180} %D{%L:%M:%S %p}%{$fg[magenta]%} ] %{$reset_color%}'
+
+#zvm_before_init_commands
 # =============================================================================
 #    Reference: https://blog.carbonfive.com/writing-zsh-themes-a-quickref/
 # =============================================================================
