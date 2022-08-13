@@ -869,4 +869,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 #           Current Java for ARM Mac - M1
 #####################################################################
 #export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
-set editing-mode vi
+#set editing-mode vi
+
+

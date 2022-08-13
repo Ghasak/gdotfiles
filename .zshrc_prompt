@@ -491,6 +491,9 @@ function virtualenv_info {
 # =============================================================================
 #                            Configruations
 #                   zsh-bar of the right/left prompt
+#          Based on https://github.com/jeffreytse/zsh-vi-mode
+#          https://unix.stackexchange.com/questions/547/make-my-zsh-prompt-show-mode-in-vi-mode
+#          https://thevaluable.dev/zsh-line-editor-configuration-mouseless/
 # =============================================================================
 # zvm_before_init_commands=()
 # zvm_after_init_commands=()
@@ -526,19 +529,19 @@ function zvm_after_select_vi_mode() {
     $ZVM_MODE_VISUAL)
       # Something you want to do...
     PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
-    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{214}VISUAL%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{204}VISUAL%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
     PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
     ;;
     $ZVM_MODE_VISUAL_LINE)
       # Something you want to do...
     PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
-    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{201}VISUAL*%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{206}VISUAL*%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
     PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
     ;;
     $ZVM_MODE_REPLACE)
       # Something you want to do...
     PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
-    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{204}REPLACE%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{200}REPLACE%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
     PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
     ;;
   esac
@@ -546,7 +549,6 @@ function zvm_after_select_vi_mode() {
 }
 
 
-#zvm_before_init_commands
 # =============================================================================
 #    Reference: https://blog.carbonfive.com/writing-zsh-themes-a-quickref/
 # =============================================================================
