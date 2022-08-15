@@ -14,6 +14,7 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+#source $HOME/zsh-git-prompt/zshrc.sh
 export POWERLEVEL9K_INSTANT_PROMPT=quiet
 export POWERLEVEL9K_INSTANT_PROMPT=off
 ZSH_DISABLE_COMPFIX=true
@@ -22,9 +23,6 @@ ZSH_DISABLE_COMPFIX=true
 
 # Path to your oh-my-zsh installation.
 
-source $HOME/.zshrc_prompt
-source $HOME/.aliases
-source $HOME/zsh-git-prompt/zshrc.sh
 # Load the profiling the zsh
 zmodload zsh/zprof
 # Adding utf-8 for other langauges
@@ -49,7 +47,8 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
+source $HOME/.zshrc_prompt
+source $HOME/.aliases
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -206,7 +205,6 @@ source $ZSH/oh-my-zsh.sh
 if type brew &>/dev/null
 then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
   autoload -Uz compinit
   compinit
 fi
@@ -248,7 +246,6 @@ alias history='history -i'
 
 # New way to show the background you will need to follow
 # https://drasite.com/blog/Pimp%20my%20terminal
-#alias lsd='lsd -la'
 alias hist='history'
 alias home='cd ~'
 #alias up='cd ..'
@@ -258,28 +255,64 @@ alias home='cd ~'
 #figlet -f small "PersonalComputer"  |boxes | lolcat
 #
 
-# function WelcomeMessage(){
+function WelcomeMessage(){
 
-#       time_var=1
-#       echo -n "Uptime: "; uptime | lolcat #-a -d $time_var
-#       echo ""
-#       echo -n; cal
-#       echo""
-#       MYNAME='Ghasak Ibrahim'
-#       OPTIONX=$(echo $((1 + $RANDOM % 10)))
+        local RED="\e[31m"
+        local MAGENTA="\e[35m"
+        local LIGHT_GREEN="\e[36m"
+        local GRAY="\e[37m"
+        local BLUE="\e[34m"
+        local GREEN="\e[32m"
+        local LIGHT_YELLOW="\e[93m"
+        local ENDCOLOR="\e[0m"
+        local MYNAME='Ghasak Ibrahim'
+        local OPTIONX=$(echo $((1 + $RANDOM % 10)))
+        local FONTSTYLE="ANSI Shadow"
+        local WELCOM_VAR=$(echo $(tty) | awk -F "/" '{print $3}')
+        #varx=" "; for i in {0..$(echo ${COLUMNS}/3 | bc)}; do; varx="$varx "  ;done;
 
-#       FONTSTYLE=""
+        if [[ "${WELCOM_VAR}" = "ttys001" ]]; then # Checking if this is the first session for iTerm2 only
+            # ---------------- Start of the welcome message ----------------
+            # ---------------- Show clock on the right of the terminal -----
+            #while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-11));echo -e "\e[31m`date +%r`\e[39m";tput rc;done &
+            #figlet -f speed "Ghsaak"  |boxes | lolcat #-a -d $time_var
+            echo -n "Uptime: "; uptime | lolcat #-a -d $time_var
+            echo ""
+            echo -n; cal
+            figlet -f $FONTSTYLE "WELCOME \n$USER"|lolcat    #-a -d $time_var
+            echo -e "Welcome: ${RED}$MYNAME${ENDCOLOR} on your personal computer ${BLUE}$HOST${ENDCOLOR}"
+            echo -e "Operating System: ${GREEN}$(uname -s)${ENDCOLOR} ${GREEN}$(uname -r)${ENDCOLOR}"
+            echo -e "Kernel: ${GREEN}$(uname -r)${ENDCOLOR}"
+            echo -e "Shell: ${MAGENTA}$SHELL${ENDCOLOR}"
+            echo -e "Terminal: ${GREEN}$TERM${ENDCOLOR}"
+            echo -e "Working Directory: ${GREEN}$PWD${ENDCOLOR}"
+            echo -e "User: ${BLUE}$USER${ENDCOLOR}"
+            # echo -e "Directory: ${GREEN}$PWD${ENDCOLOR}"
+            # echo -e "Date: ${GREEN}$(date +"%d-%m-%Y")${ENDCOLOR}"
+            # echo -e "Time: ${GREEN}$(date +"%H:%M:%S")${ENDCOLOR}"
+            echo -e "Uptime: ${RED}$(uptime | awk -F "," '{print $1}')${ENDCOLOR}"
+            curl "wttr.in/tokyo?0"
+            # ---------------------------- Printing the weather ----------------------------
+            # echo -e "Load Average: ${GREEN}$(uptime | awk -F "load average:" '{print $2}')${ENDCOLOR}"
+            #echo -e "Memory Usage: ${GREEN}$(free -m | awk '/^Mem:/{printf "%dMB/%dMB\n", $3, $2}')${ENDCOLOR}"
+            #echo -e "Disk Usage: ${GREEN}$(df -h | awk '/^\/dev/{printf "%dMB/%dMB\n", $3, $2}')${ENDCOLOR}"
+            # echo -e "IP Address: ${GREEN}$(hostname -I)${ENDCOLOR}"
+            # echo -e "MAC Address: ${GREEN}$(ifconfig | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')${ENDCOLOR}"
+            # echo -e "Gateway: ${GREEN}$(ip route | awk '/default/ { print $3 }')${ENDCOLOR}"
+            # echo -e "Public IP: ${GREEN}$(curl -s icanhazip.com)${ENDCOLOR}"
+            #$MYNAME $USER $SHELL $ITERM_PROFILE $TERM_PROGRAM $LOGNAME $ZSH $(uptime)
+            echo -e  "You are about to experience a potent dosage of Neovim Watch your steps."
+            echo -e  "${MAGENTA}╔══════════════════════════════════════════╗${ENDCOLOR}"
+            echo -e  "${MAGENTA}║           ${BLUE}⎋  ${RED}HERE BE VIMPIRES ${BLUE}⎋ ${MAGENTA}         ║${ENDCOLOR}"
+            echo -e  "${MAGENTA}╚══════════════════════════════════════════╝${ENDCOLOR}"
+            if [[ -f $HOME/motivate/motivate/motivate.py ]]; then
+                motivate  # https://github.com/mubaris/motivate
+            fi
 
-#       if [[ OPTIONX -gt 5 ]]; then
-#         FONTSTYLE="3d"
-#       else
-#         FONTSTYLE="ANSI Shadow"
-#       fi
-#       # DEBUGGING fontStyle: echo "FONTSTYLE : $FONTSTYLE OPTION : $OPTIONX"
-#       figlet -f $FONTSTYLE "Ghasak" | lolcat #| pv --quiet --line-mode --rate-limit 200
-#       figlet -f $FONTSTYLE "@MBP-13" | lolcat
+        fi
+}
 
-# }
+WelcomeMessage
 
 # CHECKT_IF_ITERM_WAS_RUNNING=$(ps aux | grep iterm2 | wc -l)
 # if [ $CHECKT_IF_ITERM_WAS_RUNNING -gt 1 ]; then

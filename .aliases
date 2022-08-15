@@ -14,6 +14,7 @@
 # -le # Less than or equal
 # -gt # Greater than
 # -ge # Greater than or equal
+# Basics GNU commond : Ref: https://ss64.com/osx/
 
 # Shortcuts
 alias ch='history | grep "git commit"'
@@ -29,9 +30,33 @@ else # OS X `ls`
 	colorflag="-G"
 fi
 
+#------------------------------------------------------------------------------
+#           Show all the color that I have in my Terminal
+#------------------------------------------------------------------------------
+# for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
 function MY_ANSI_COLOR_PALLATE(){
     for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
   }
+
+# To choose the color you want, you can first use this function to print the palette:
+# https://github.com/Aloxaf/fzf-tab/wiki/Configuration
+# Usage: palette
+function palette() {
+    local -a colors
+    for i in {000..255}; do
+        colors+=("%F{$i}$i%f")
+    done
+    print -cP $colors
+}
+# And then use this helper function to get escape sequence for the color code:
+# Usage: printc COLOR_CODE : printc 123 <- number of the ASCII color form running the palette function
+function printc() {
+    local color="%F{$1}"
+    echo -E ${(qqqq)${(%)color}}
+}
+
+# Bold and Italic
+# Read here: https://ozzmaker.com/add-colour-to-text-in-python/
 
 #------------------------------------------------------------------------------
 #           Show all the color that I have in my Terminal
@@ -431,6 +456,7 @@ side_by_side(){
 }
 not_side_by_side(){
     export DELTA_FEATURES=+
+
 }
 
 #------------------------------------------------------------------------------
@@ -832,3 +858,166 @@ function  mans(){
       | less -R)"
 }
 
+
+#------------------------------------------------------------------------------
+#                 Search the wikipedia for a keyword
+#------------------------------------------------------------------------------
+alias fzwiki=fzwiki
+
+#------------------------------------------------------------------------------
+#                 fkill - kill processes  - list only the ones you can kill.
+#                  https://github.com/junegunn/fzf/wiki/examples#docker
+#------------------------------------------------------------------------------
+fkill() {
+    local pid
+    if [ "$UID" != "0" ]; then
+        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+    else
+        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    fi
+
+    if [ "x$pid" != "x" ]
+    then
+        echo $pid | xargs kill -${1:-9}
+    fi
+}
+
+#------------------------------------------------------------------------------
+#                 like normal cd but opens an interactive navigation window
+#                 when called with no arguments.
+#                 https://github.com/junegunn/fzf/wiki/examples#docker
+#------------------------------------------------------------------------------
+function cd() {
+    if [[ "$#" != 0 ]]; then
+        builtin cd "$@";
+        return
+    fi
+    while true; do
+        local lsd=$(echo ".." && ls -p | grep '/$' | sed 's;/$;;')
+        local dir="$(printf '%s\n' "${lsd[@]}" |
+            command fzf --reverse --preview '
+                __cd_nxt="$(echo {})";
+                __cd_path="$(echo $(pwd)/${__cd_nxt} | sed "s;//;/;")";
+                echo $__cd_path;
+                echo;
+                ls -p --color=always "${__cd_path}";
+        ')"
+        [[ ${#dir} != 0 ]] || return 0
+        builtin cd "$dir" &> /dev/null
+    done
+}
+
+#------------------------------------------------------------------------------
+#                 like normal autojump when used with arguments but dispalys an
+#                 fzf prompt when used without
+#                 https://github.com/junegunn/fzf/wiki/examples#docker
+#------------------------------------------------------------------------------
+j_storage() {
+    if [[ "$#" -ne 0 ]]; then
+        cd $(autojump $@)
+        return
+    fi
+    cd "$(autojump -s | sort -k1gr | awk '$1 ~ /[0-9]:/ && $2 ~ /^\// { for (i=2; i<=NF; i++) { print $(i) } }' |  command fzf --height 40% --reverse --inline-info)"
+}
+
+
+#------------------------------------------------------------------------------
+#                 google chrome book-marks reader with fzf
+#                 https://github.com/junegunn/fzf/wiki/examples#docker
+#------------------------------------------------------------------------------
+# c - browse chrome history
+chrome_bookmarks() {
+  local cols sep google_history open
+  cols=$(( COLUMNS / 3 ))
+  sep='{::}'
+
+  if [ "$(uname)" = "Darwin" ]; then
+    google_history="$HOME/Library/Application Support/Google/Chrome/Default/History"
+    open=open
+  else
+    google_history="$HOME/.config/google-chrome/Default/History"
+    open=xdg-open
+  fi
+  cp -f "$google_history" /tmp/h
+  sqlite3 -separator $sep /tmp/h \
+    "select substr(title, 1, $cols), url
+     from urls order by last_visit_time desc" |
+  awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
+  command fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
+}
+#------------------------------------------------------------------------------
+# PDF Reader with fzf
+# URL : https://github.com/bellecp/fast-p
+#
+#------------------------------------------------------------------------------
+if [[ ! -f "$HOME/go/bin/fast-p" ]]; then
+  echo -ne "Installing dependencies for fast-p\n"
+  #go get -u github.com/bellecp/fast-p
+  brew install ag
+  go install github.com/bellecp/fast-p@v0.2.5
+fi
+
+pxxx() {
+    local open
+    open=open   # on OSX, "open" opens a pdf in preview
+    ag -U -g ".pdf$" \
+    | fast-p \
+    |command fzf --read0 --reverse -e -d $'\t'  \
+        --preview-window down:80% --preview '
+            v=$(echo {q} | gtr " " "|");
+            echo -e {1}"\n"{2} | ggrep -E "^|$v" -i --color=always;
+        ' \
+    | gcut -z -f 1 -d $'\t' | gtr -d '\n' | gxargs -r --null $open > /dev/null 2> /dev/null
+}
+
+
+
+#------------------------------------------------------------------------------
+# Docker
+#------------------------------------------------------------------------------
+# Select a docker container to start and attach to
+function da() {
+  local cid
+  cid=$(docker ps -a | sed 1d | command fzf -1 -q "$1" | awk '{print $1}')
+
+  [ -n "$cid" ] && docker start "$cid" && docker attach "$cid"
+}
+# Select a running docker container to stop
+function ds() {
+  local cid
+  cid=$(docker ps | sed 1d | command fzf -q "$1" | awk '{print $1}')
+
+  [ -n "$cid" ] && docker stop "$cid"
+}
+# Select a docker container to remove
+function drm() {
+  local cid
+  cid=$(docker ps -a | sed 1d | command fzf -q "$1" | awk '{print $1}')
+
+  [ -n "$cid" ] && docker rm "$cid"
+}
+# Same as above, but allows multi selection:
+function drm() {
+  docker ps -a | sed 1d | command fzf -q "$1" --no-sort -m --tac | awk '{ print $1 }' | xargs -r docker rm
+}
+# Select a docker image or images to remove
+function drmi() {
+  docker images | sed 1d | command fzf -q "$1" --no-sort -m --tac | awk '{ print $3 }' | xargs -r docker rmi
+}
+alias ctop=ctop
+
+#------------------------------------------------------------------------------
+# Netowrking
+#------------------------------------------------------------------------------
+alias ping='prettyping --nolegend'
+alias gping=gping
+
+#------------------------------------------------------------------------------
+# Jrnal command using brew install jrnl check here
+# https://jrnl.sh/en/stable/
+#------------------------------------------------------------------------------
+# fjrnl - Search JRNL headlines
+fjrnl() {
+  title=$(jrnl --short | command fzf --tac --no-sort) &&
+  jrnl -on "$(echo $title | cut -c 1-16)" $1
+  }

@@ -208,8 +208,8 @@
 # Read more about configuration specific directory here:
 # https://stackoverflow.com/questions/14754762/can-gitconfig-options-be-set-conditionally
 
-[includeIf "gitdir:~/.dotfiles2022/"]
-  path = ~/.gitconfig_delta_config
+; [includeIf "gitdir:~/.dotfiles2022/"]
+;   path = ~/.gitconfig_delta_config
 [core]
     pager = delta
 

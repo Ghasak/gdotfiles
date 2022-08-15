@@ -10,8 +10,8 @@
 # ============================================================================================
 
 autoload -U colors && colors
-autoload -Uz vcs_info
 #precmd() { vcs_info }
+autoload -Uz vcs_info
 # - [] Adding douple sandwich layer while enter and exit a repo -> -<>- <- regular dir / repo dir.
 #https://www.nerdfonts.com/cheat-sheet
 OS_ICON=
@@ -502,14 +502,16 @@ function virtualenv_info {
 # zvm_before_lazy_keybindings_commands=()
 # zvm_after_lazy_keybindings_commands=()
 
+#while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-11));echo -e "\e[31m`date +%r`\e[39m";tput rc;done &
 # Initalize the prompt
 function zvm_before_init_commands(){
         PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
-        PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{120}INSERT%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+        PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{1}INSERT%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
         PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
         RPROMPT=$'%F{blue}\ufa1a:${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON} %F{110} %D{%b %d, %Y}${PR_NO_COLOUR} - %{$fg[magenta]%}${CLOCK_ICON}%F{180} %D{%L:%M:%S %p}%{$fg[magenta]%} ] %{$reset_color%}'
 
 }
+
 # The plugin will auto execute this zvm_after_select_vi_mode function
 # It will overwrite the initial prompt: zvm_before_init_commands
 function zvm_after_select_vi_mode() {
@@ -530,6 +532,7 @@ function zvm_after_select_vi_mode() {
       # Something you want to do...
     PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
     PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{204}VISUAL%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{204}VISUAL%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
     PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
     ;;
     $ZVM_MODE_VISUAL_LINE)
@@ -547,6 +550,19 @@ function zvm_after_select_vi_mode() {
   esac
   RPROMPT=$'%F{blue}\ufa1a:${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON} %F{110} %D{%b %d, %Y}${PR_NO_COLOUR} - %{$fg[magenta]%}${CLOCK_ICON}%F{180} %D{%L:%M:%S %p}%{$fg[magenta]%} ] %{$reset_color%}'
 }
+zvm_before_init_commands
+
+# It is important to call this fucntion at the beginning of the .zshrc_prompt file, otherwise the prompt will suffer from flashing the previous message.
+# *******************************************************************************
+# *                      Wediget for dynamic time                               *
+# This will allow to make the time of %D printed by forcing the prompt to       *
+# refresh every second., the problem is that it will affect other widegts such  *
+# as fzf-tab.                                                                   *
+# *******************************************************************************
+# TMOUT=1
+# TRAPALRM() {
+#     zle reset-prompt
+# }
 
 
 # =============================================================================
