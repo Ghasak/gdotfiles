@@ -238,38 +238,64 @@ alias home='cd ~'
 #neofetch | boxes -d whirly
 #figlet -f small "PersonalComputer"  |boxes | lolcat
 #
+function WelcomeMessage(){
 
-# function WelcomeMessage(){
+        local RED="\e[31m"
+        local MAGENTA="\e[35m"
+        local LIGHT_GREEN="\e[36m"
+        local GRAY="\e[37m"
+        local BLUE="\e[34m"
+        local GREEN="\e[32m"
+        local LIGHT_YELLOW="\e[93m"
+        local ENDCOLOR="\e[0m"
+        local MYNAME='Ghasak Ibrahim'
+        local OPTIONX=$(echo $((1 + $RANDOM % 10)))
+        local FONTSTYLE="ANSI Shadow"
+        local WELCOM_VAR=$(echo $(tty) | awk -F "/" '{print $3}')
+        #varx=" "; for i in {0..$(echo ${COLUMNS}/3 | bc)}; do; varx="$varx "  ;done;
 
-#       time_var=1
-#       echo -n "Uptime: "; uptime | lolcat #-a -d $time_var
-#       echo ""
-#       echo -n; cal
-#       echo""
-#       MYNAME='Ghasak Ibrahim'
-#       OPTIONX=$(echo $((1 + $RANDOM % 10)))
+        if [[ "${WELCOM_VAR}" = "ttys001" ]]; then # Checking if this is the first session for iTerm2 only
+            # ---------------- Start of the welcome message ----------------
+            # ---------------- Show clock on the right of the terminal -----
+            #while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-11));echo -e "\e[31m`date +%r`\e[39m";tput rc;done &
+            #figlet -f speed "Ghsaak"  |boxes | lolcat #-a -d $time_var
+            echo -n "Uptime: "; uptime | lolcat #-a -d $time_var
+            echo ""
+            echo -n; cal
+            figlet -f $FONTSTYLE "WELCOME \n$USER"|lolcat    #-a -d $time_var
+            echo -e "Welcome: ${RED}$MYNAME${ENDCOLOR} on your personal computer ${BLUE}$HOST${ENDCOLOR}"
+            echo -e "Operating System: ${GREEN}$(uname -s)${ENDCOLOR} ${GREEN}$(uname -r)${ENDCOLOR}"
+            echo -e "Kernel: ${GREEN}$(uname -r)${ENDCOLOR}"
+            echo -e "Shell: ${MAGENTA}$SHELL${ENDCOLOR}"
+            echo -e "Terminal: ${GREEN}$TERM${ENDCOLOR}"
+            echo -e "Working Directory: ${GREEN}$PWD${ENDCOLOR}"
+            echo -e "User: ${BLUE}$USER${ENDCOLOR}"
+            # echo -e "Directory: ${GREEN}$PWD${ENDCOLOR}"
+            # echo -e "Date: ${GREEN}$(date +"%d-%m-%Y")${ENDCOLOR}"
+            # echo -e "Time: ${GREEN}$(date +"%H:%M:%S")${ENDCOLOR}"
+            echo -e "Uptime: ${RED}$(uptime | awk -F "," '{print $1}')${ENDCOLOR}"
+            curl "wttr.in/tokyo?0"
+            # ---------------------------- Printing the weather ----------------------------
+            # echo -e "Load Average: ${GREEN}$(uptime | awk -F "load average:" '{print $2}')${ENDCOLOR}"
+            #echo -e "Memory Usage: ${GREEN}$(free -m | awk '/^Mem:/{printf "%dMB/%dMB\n", $3, $2}')${ENDCOLOR}"
+            #echo -e "Disk Usage: ${GREEN}$(df -h | awk '/^\/dev/{printf "%dMB/%dMB\n", $3, $2}')${ENDCOLOR}"
+            # echo -e "IP Address: ${GREEN}$(hostname -I)${ENDCOLOR}"
+            # echo -e "MAC Address: ${GREEN}$(ifconfig | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}')${ENDCOLOR}"
+            # echo -e "Gateway: ${GREEN}$(ip route | awk '/default/ { print $3 }')${ENDCOLOR}"
+            # echo -e "Public IP: ${GREEN}$(curl -s icanhazip.com)${ENDCOLOR}"
+            #$MYNAME $USER $SHELL $ITERM_PROFILE $TERM_PROGRAM $LOGNAME $ZSH $(uptime)
+            echo -e  "You are about to experience a potent dosage of Neovim Watch your steps."
+            echo -e  "${MAGENTA}╔══════════════════════════════════════════╗${ENDCOLOR}"
+            echo -e  "${MAGENTA}║           ${BLUE}⎋  ${RED}HERE BE VIMPIRES ${BLUE}⎋ ${MAGENTA}         ║${ENDCOLOR}"
+            echo -e  "${MAGENTA}╚══════════════════════════════════════════╝${ENDCOLOR}"
+            if [[ -f $HOME/motivate/motivate/motivate.py ]]; then
+                motivate  # https://github.com/mubaris/motivate
+            fi
 
-#       FONTSTYLE=""
+        fi
+}
 
-#       if [[ OPTIONX -gt 5 ]]; then
-#         FONTSTYLE="3d"
-#       else
-#         FONTSTYLE="ANSI Shadow"
-#       fi
-#       # DEBUGGING fontStyle: echo "FONTSTYLE : $FONTSTYLE OPTION : $OPTIONX"
-#       figlet -f $FONTSTYLE "Ghasak" | lolcat #| pv --quiet --line-mode --rate-limit 200
-#       figlet -f $FONTSTYLE "@MBP-13" | lolcat
-
-# }
-
-# CHECKT_IF_ITERM_WAS_RUNNING=$(ps aux | grep iterm2 | wc -l)
-# if [ $CHECKT_IF_ITERM_WAS_RUNNING -gt 1 ]; then
-#   echo ""
-# else
-#   WelcomeMessage
-
-# fi
-#
+WelcomeMessage
 #============================================================================
 #                   COLORING The MAN-Page
 #============================================================================
@@ -586,23 +612,23 @@ eval $(thefuck --alias)
 #       the last specified directory in ranger.
 #       - Added Wed. Feb. 24th 2021
 ##################################################
-function ranger-cd {
-    local IFS=$'\t\n'
-    local tempfile="$(mktemp -t tmp.XXXXXX)"
-    local ranger_cmd=(
-        command
-        ranger
-        --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
-    )
+# function ranger-cd {
+#     local IFS=$'\t\n'
+#     local tempfile="$(mktemp -t tmp.XXXXXX)"
+#     local ranger_cmd=(
+#         command
+#         ranger
+#         --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
+#     )
 
-    ${ranger_cmd[@]} "$@"
-    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
-        cd -- "$(cat "$tempfile")" || return
-    fi
-    command rm -f -- "$tempfile" 2>/dev/null
-}
+#     ${ranger_cmd[@]} "$@"
+#     if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
+#         cd -- "$(cat "$tempfile")" || return
+#     fi
+#     command rm -f -- "$tempfile" 2>/dev/null
+# }
 
-alias ranger=ranger-cd
+# alias ranger=ranger-cd
 
 ##################################################
 #             SDKMan for Java
@@ -637,6 +663,8 @@ export PATH="$PATH:$HOME/.GScript/"
 export PATH="$PATH:$HOME/.GScript/utility_functions/"
 export PATH="$PATH:$HOME/.GScript/nvimTimeMachine/"
 export PATH="$PATH:$HOME/.GScript/.markdownLanguageServer/"
+source $HOME/.GScript/forgit/forgit.plugin.zsh
+
 
 ##################################################
 #         Go libraries Export
