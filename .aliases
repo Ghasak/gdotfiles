@@ -1021,3 +1021,10 @@ fjrnl() {
   title=$(jrnl --short | command fzf --tac --no-sort) &&
   jrnl -on "$(echo $title | cut -c 1-16)" $1
   }
+
+#------------------------------------------------------------------------------
+#                      TMUX CONFIGURATION
+#                      The following are configuration for tmux
+#------------------------------------------------------------------------------
+# https://www.youtube.com/shorts/K1FxGIG_lcA
+alias v='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs nvim'
