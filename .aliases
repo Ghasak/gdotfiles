@@ -1028,3 +1028,11 @@ fjrnl() {
 #------------------------------------------------------------------------------
 # https://www.youtube.com/shorts/K1FxGIG_lcA
 alias v='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs nvim'
+
+#------------------------------------------------------------------------------
+#                   For Tmux Alter default colors:
+# https://stackoverflow.com/questions/60309665/neovim-losing-colorscheme-when-in-tmux-all-past-solutions-i-see-dont-work-for
+#------------------------------------------------------------------------------
+alias tmux="TERM=screen-256color-bce tmux"
+
+

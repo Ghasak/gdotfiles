@@ -717,6 +717,7 @@ export PATH="$HOME/.GScript/:$PATH"
 export PATH="$HOME/.GScript/myLatexDev/:$PATH"
 export PATH="$HOME/.GScript/utility_functions/:$PATH"
 export PATH="$HOME/.GScript/nvimTimeMachine/:$PATH"
+#source $HOME/.GScript/forgit/forgit.plugin.zsh
 ###################################################
 #       Configurtion of Neovid
 #       https://github.com/Kethku/neovide
@@ -903,5 +904,3 @@ export SDKMAN_DIR="$HOME/.sdkman"
 #####################################################################
 #export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
 #set editing-mode vi
-
-

@@ -24,6 +24,8 @@ if [ -d $HOME/documents/myObsidianDoc ]; then
   }
   #KEYWORD1=${KEYWORD1:=word}
   output=$(fif $KEYWORD1)
+
+  
   qlmanage -p $output
 else
   echo "Obsidian is not installed on your system, no notes are available"
