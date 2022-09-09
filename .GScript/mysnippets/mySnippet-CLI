@@ -1,0 +1,283 @@
+#!/usr/bin/env bash
+
+TITLE="Compile and watch on system: $HOSTNAME"
+RIGHT_NOW="$(date +"%x %r %Z")"
+CREAT_TIME_STAMP="Updated on $RIGHT_NOW by $USER"
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+YELLOW='\033[0;33m'
+GRAY="\e[37m"
+BLUE="\e[34m"
+LIGHT_YELLOW="\e[93m"
+ENDCOLOR="\e[0m"
+NC='\033[0m' # No Color
+TIME_STAMP=$(date +%Y-%m-%d-%H%M%S)
+
+function help() {
+
+    echo -e "
+Usage: ${BLUE}$0${NC}
+mysnippet [${YELLOW}OPTIONS${NC}]
+    ${GREEN}cs  ${NC} | (--${MAGENTA}create_snippet${NC})    : create a new capsules
+    ${GREEN}ls  ${NC} | (--${MAGENTA}list_snippet${NC})      : list all saved capsules
+    ${GREEN}[vV]${NC} | (--${MAGENTA}version${NC})           : current CLI version
+    ${GREEN}[hH]${NC} | (--${MAGENTA}help${NC})              : show this help
+    ${GREEN}[ts]${NC} | (--${MAGENTA}tag_selected${NC})      : selecting specific tags
+
+${YELLOW}OPTIONS${NC}:
+--------
+	(-${RED}cc${NC})   | (${YELLOW}--create_snippet${NC})    : create a new capsules
+	(-${RED}l${NC})    | (${YELLOW}--list_snippet${NC})      : list all saved capsules
+	(-${RED}[${BLUE}vV${RED}]${NC}) | (${YELLOW}--version${NC})           : current CLI version
+	(-${RED}[${BLUE}hH${RED}]${NC}) | (${YELLOW}--help${NC})              : show this help
+
+${YELLOW}DEPENDENCIES${NC}:
+-------------
+	- ${BLUE}fzf${NC}       : ${RED}brew${NC} install ${BLUE}fzf${NC}
+	- ${BLUE}rga${NC}        : ${RED}brew${NC} install ${BLUE}ripgrep${NC}
+
+${YELLOW}NOTES${NC}:
+------
+	${YELLOW}MacOSX${NC}: ${RED}\$HOME${NC} is ${BLUE}\$home${NC} for ${YELLOW}GNU Linux${NC}
+	Old Usage: ${RED}nvimTime${NC} [${YELLOW}OPTION${NC}] [${BLUE}FILE${NC}] [${MAGENTA}ARGUMENT${NC}] ...
+ ${GRAY}****************************${ENDCOLOR}
+ ${GREEN}     Search syntax:${ENDCOLOR}
+ ${GRAY}****************************${ENDCOLOR}
+ ${GRAY}Besides the already discussed fuzzy search, fzf supports special tokens that change the way search terms are processed:
+ ${LIGHT_YELLOW}\'wild${ENDCOLOR}    : ${GRAY}Exact match, return items that include wild.
+ ${LIGHT_YELLOW}^music${ENDCOLOR}   : ${GRAY}Prefix-exact-match, return items that start with music.
+ ${LIGHT_YELLOW}.mp3\$${ENDCOLOR}    : ${GRAY}Suffix-exact-match, return items that end with .mp3.
+ ${LIGHT_YELLOW}\!fire${ENDCOLOR}   : ${GRAY}Inverse-exact-match, return items that do not include fire.
+ ${LIGHT_YELLOW}\!^music${ENDCOLOR} : ${GRAY}Inverse-prefix-exact-match, return items that do not start with music.
+ ${LIGHT_YELLOW}\!.mp3\$${ENDCOLOR}  : ${GRAY}Inverse-suffix-exact-match, return items that do not end with .mp3.
+ ${GRAY}****************************${ENDCOLOR}
+ ${RED} Note${ENDCOLOR}
+ ${GRAY}****************************${ENDCOLOR}
+ ${GRAY}that SPACE acts as an AND operator and | as an OR. For example, a
+ ${GRAY}query that matches entries that start with music and end with either
+ ${GRAY}mp3, wav, or flac would look like this:
+ ${LIGHT_YELLOW}^music mp3$ | wav$ | flac$ ${ENDCOLOR}
+ ${GRAY}LINK: ${BLUE}https://betterprogramming.pub/boost-your-command-line-productivity-with-fuzzy-finder-985aa162ba5d#c4fb${ENDCOLOR}
+"
+    exit 0
+
+}
+
+function currentTime() {
+    TIME_STAMP=$(date +%Y-%m-%d-%H%M%S)
+    echo -ne "${RED}$(date +%Y-%m-%d-%H%M%S)${NC}\n"
+    #echo "$(date +"%x %r %Z")"
+}
+
+SYSTEM_TYPE=""
+function whichSystem() {
+    if [ "$(uname)" == "Darwin" ]; then
+        # Do something under Mac OS X platform
+        echo -ne "[${BLUE}\uf179${NC} ] Running on ${YELLOW}macOSX${NC}\n"
+        #currentTime
+        SYSTEM_TYPE='macOSX'
+    elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+        # Do something under GNU/Linux platform
+        SYSTEM_TYPE='Linux'
+        echo -ne "[${BLUE}\uf306${NC}] Running on LinuX"
+    fi
+}
+echo -ne "$RED$SYSTEM_TYPE$NC"
+
+# ****************************************************************************
+#                 prerequisites for the CLI
+# ****************************************************************************
+
+function mac_install_prerequisites() {
+    echo -e "[${YELLOW}\uf046${NC} ] ${MAGENTA}Installing prerequisites ...${NC}"
+    if [[ -d "$HOME/.mysnippetsCollection" ]]; then
+        echo -e "[${GREEN}\ue5fe${NC} ] ${BLUE}$HOME/.mysnippetsCollection${NC} already exists."
+    else
+        mkdir -p $HOME/.mysnippetsCollection
+        echo -e "[${GREEN}\uf413${NC} ] ${GREEN}$HOME/.mysnippetsCollection${NC} directory is created ... "
+    fi
+    SNIPPET_DIR="$HOME/.mysnippetsCollection/"
+}
+# ****************************************************************************
+##           Global variables
+# ****************************************************************************
+DEFAULTEDITOR="$HOME/dev/nvim/bin/nvim"
+TAGS_ARRAY=("$@")
+FINAL_TAG_ARRAY=()
+TAG_ARRAY_FILE_NAME=()
+TAGS_STORED=()
+whichSystem
+
+# ****************************************************************************
+##           Assistant scripts
+# ****************************************************************************
+function markdDownTempate() {
+    local selected_language=$(echo $1 | awk -F '_' '{print $2}')
+    local all_tags=$(echo $2)
+    cat <<EoF
+# Title: $selected_language - Snippet
+# ---
+### Tags: $all_tags
+
+### Content
+
+\`\`\`$selected_language
+
+\`\`\`
+### Link:
+### Note:
+EoF
+}
+
+# ****************************************************************************
+#               Function used to  fuzzy finding files and edit with
+#                     default editor --- pure dev
+# ****************************************************************************
+fe() {
+    local files
+    # unset fzf incase it is already aliased to other functionality
+    unset fzf
+    IFS=$'\n' files=($(fzf --exact --info=inline --border --margin=1 --padding=1 --sort --preview-window down:80%:wrap --preview 'glow --style=dark {}' --query=$1))
+    [[ -n "$files" ]] && $DEFAULTEDITOR "${files[@]}"
+}
+# ****************************************************************************
+#               Current version
+# ****************************************************************************
+function version() {
+    cat <<EOF
+Version: 0.0.1
+EOF
+}
+# ****************************************************************************
+#         Function used to get user custom snippet - backbone-function
+# ****************************************************************************
+function fileName_with_tags() {
+    local answer=$(echo $1)
+    local all_tags=$(echo $2)
+    # List must be sperated with space items
+    local languages_list=('python' 'cpp' 'bash' 'terminal' 'Terminal' 'shell' 'zsh' 'PHP' 'TypeScript' 'Scala'
+        'Shell' 'PowerShell' 'Perl' 'Haskell' 'Kotlin' 'SQL' 'MATLAB' 'Groovy' 'Lua' 'Rust' 'Ruby' 'HTML and CSS'
+        'Python' 'Java' 'JavaScript' 'Swift' 'C++' 'C#' 'R' 'Golang (Go)' 'vim' 'apple' 'mac' 'macOS' 'appleScript'
+        'linux' 'gnu-linux' 'ubuntu' 'note' 'memo'
+    )
+
+    for lang in "${languages_list[@]}"; do
+        if [[ "$lang" == "$answer" ]]; then
+            echo -e "The language$RED $answer$NC Is already existed.."
+            echo -e "Will create a template now ..."
+            # Create a file name with no ASCII characters
+            local FILEUNIQUENAME=$(echo "snippet_$(currentTime)_$answer" | sed -r 's/'$(echo -e "\033")'\[[0-9]{1,2}(;([0-9]{1,2})?)?[mK]//g')
+            echo $all_tags
+            FILEUNIQUENAME="$FILEUNIQUENAME$TAG_ARRAY_FILE_NAME.md"
+            touch "$SNIPPET_DIR$FILEUNIQUENAME"
+            echo "$SNIPPET_DIR$FILEUNIQUENAME"
+            # Will create the snippet file
+            markdDownTempate "_$answer" $FINAL_TAG_ARRAY >$SNIPPET_DIR$FILEUNIQUENAME
+            # Will open the file for editing
+            $DEFAULTEDITOR $SNIPPET_DIR$FILEUNIQUENAME
+            #Preseting the file in markdown viewer
+            glow $SNIPPET_DIR$FILEUNIQUENAME
+
+        fi
+    done
+
+}
+
+# ****************************************************************************
+#                      Main Function
+# ****************************************************************************
+
+if [[ $SYSTEM_TYPE == 'macOSX' ]]; then
+    currentTime
+    mac_install_prerequisites
+    while [[ "$1" != "" ]]; do
+        case $1 in
+        -cs | --create_snippet)
+            if [[ "$2" != "" ]]; then
+                Plang=$2
+                echo $Plang
+            else
+                read -p "Do you want to create a snippet? for which langauge ... ? " PLang
+            fi
+
+            if [ "$#" -eq 0 ]; then
+                echo " No tags were provided"
+            else
+                for arg in "${TAGS_ARRAY[@]:2}"; do
+                    FINAL_TAG_ARRAY+=$arg"::"
+                    TAG_ARRAY_FILE_NAME+="_"$arg
+                done
+            fi
+            fileName_with_tags $Plang $TAG_ARRAY_FILE_NAME
+            exit 1
+
+            ;;
+        -ls | --list_snippets | --list_snippet | --snippets | --search)
+            # Here you must provide keywords or simply search them all
+            # Searching all snippet will be implemented today
+            if [[ "$2" != "" ]]; then
+                rga --files-with-matches $2 | fzf --sort --preview-window down:80%:wrap --preview 'glow --style=dark {}'
+            else
+                # Using the tags that you will assigne to the file name
+                # https://fossies.org/linux/fzf/ADVANCED.md
+                if [[ -d "$SNIPPET_DIR" ]]; then
+                    cd $SNIPPET_DIR &&
+                        fzf --exact --info=inline --border --margin=1 --padding=1 --sort --preview-window down:80%:wrap --preview 'glow --style=dark {}'
+                # for selection specific --query .md
+                fi
+            fi
+            exit 1
+
+            ;;
+        -[e] | --edit | --amend | ---change | --add)
+
+            cd $SNIPPET_DIR
+            # Function will use fzf to edit and open a snippet
+            fe
+            exit 1
+            ;;
+        -[t] | --tag_selected)
+            cd $SNIPPET_DIR
+            search_dir=$SNIPPET_DIR
+            touch $SNIPPET_DIR"all_tags_stored".txt
+            for entry in "$search_dir"*; do
+                tag_file_array=$(head -n 3 $(basename $entry) | tail -1 | awk -F ": " '{print $2}' | awk -F "::" '{print $0}')
+                tag_file_array=$(echo $tag_file_array | tr "::" "\n")
+                for tag in $tag_file_array; do
+                    #echo $tag
+                    TAGS_STORED+=$tag""
+                    echo $tag >>$SNIPPET_DIR/"all_tags_stored".txt
+                done
+            done
+            tag_selected=$(cat $SNIPPET_DIR/all_tags_stored.txt | tr ' ' '\n'  | fzf --multi  --exact --info=inline --border --margin=1 --padding=1 --sort --preview-window down:80%:wrap --preview 'bat {}' )
+            echo $tag_selected
+            rm -rf $SNIPPET_DIR/all_tags_stored.txt
+            exit 1
+
+            ;;
+        -[hH] | --help)
+            #checking_font
+            help
+            exit 1
+            ;;
+        -[vV] | --version)
+            version
+            exit 1
+            ;;
+        *)
+            echo "Unknow flag or arg ... "
+            read -p "$(echo -e "See help: Continue? (${YELLOW}Y${NC}/${YELLOW}N${NC}): ")" confirm
+            if [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]]; then
+                help
+                exit 1
+            else
+                exit 1
+            fi
+            ;;
+
+        esac
+    done
+
+fi
