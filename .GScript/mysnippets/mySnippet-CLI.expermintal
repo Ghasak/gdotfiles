@@ -24,6 +24,7 @@ mysnippet [${YELLOW}OPTIONS${NC}]
     ${GREEN}ls  ${NC} | (--${MAGENTA}list_snippet${NC})      : list all saved capsules
     ${GREEN}[vV]${NC} | (--${MAGENTA}version${NC})           : current CLI version
     ${GREEN}[hH]${NC} | (--${MAGENTA}help${NC})              : show this help
+    ${GREEN}[ts]${NC} | (--${MAGENTA}tag_selected${NC})      : selecting specific tags
 
 ${YELLOW}OPTIONS${NC}:
 --------
@@ -106,6 +107,7 @@ DEFAULTEDITOR="$HOME/dev/nvim/bin/nvim"
 TAGS_ARRAY=("$@")
 FINAL_TAG_ARRAY=()
 TAG_ARRAY_FILE_NAME=()
+TAGS_STORED=()
 whichSystem
 
 # ****************************************************************************
@@ -135,14 +137,15 @@ EoF
 # ****************************************************************************
 fe() {
     local files
+    # unset fzf incase it is already aliased to other functionality
     IFS=$'\n' files=($(fzf --exact --info=inline --border --margin=1 --padding=1 --sort --preview-window down:80%:wrap --preview 'glow --style=dark {}' --query=$1))
     [[ -n "$files" ]] && $DEFAULTEDITOR "${files[@]}"
 }
 # ****************************************************************************
-#                Current version
+#               Current version
 # ****************************************************************************
 function version() {
-	cat <<EOF
+    cat <<EOF
 Version: 0.0.1
 EOF
 }
@@ -153,10 +156,11 @@ function fileName_with_tags() {
     local answer=$(echo $1)
     local all_tags=$(echo $2)
     # List must be sperated with space items
-    local languages_list=('python' 'cpp' 'bash' 'terminal' 'Terminal' 'shell' 'zsh' 'PHP' 'TypeScript' 'Scala' 'nvim' 'neovim'
-        'Shell' 'PowerShell' 'Perl' 'Haskell' 'Kotlin' 'SQL' 'MATLAB' 'Groovy' 'Lua' 'Rust' 'rust' 'Ruby' 'HTML and CSS'
+    local languages_list=('python' 'cpp' 'bash' 'terminal' 'Terminal' 'shell' 'zsh' 'PHP' 'TypeScript' 'Scala'
+        'Shell' 'PowerShell' 'Perl' 'Haskell' 'Kotlin' 'SQL' 'MATLAB' 'Groovy' 'Lua' 'Rust' 'Ruby' 'HTML and CSS'
         'Python' 'Java' 'JavaScript' 'Swift' 'C++' 'C#' 'R' 'Golang (Go)' 'vim' 'apple' 'mac' 'macOS' 'appleScript'
-        'linux' 'gnu-linux' 'ubuntu' 'note' 'memo' 'awk' 'sed' 'tr' 'cat' 'bat' )
+        'linux' 'gnu-linux' 'ubuntu' 'note' 'memo'
+    )
 
     for lang in "${languages_list[@]}"; do
         if [[ "$lang" == "$answer" ]]; then
@@ -231,6 +235,24 @@ if [[ $SYSTEM_TYPE == 'macOSX' ]]; then
             cd $SNIPPET_DIR
             # Function will use fzf to edit and open a snippet
             fe
+            exit 1
+            ;;
+        -[t] | --tag_selected)
+            cd $SNIPPET_DIR
+            search_dir=$SNIPPET_DIR
+            touch $SNIPPET_DIR"all_tags_stored".txt
+            for entry in "$search_dir"*; do
+                tag_file_array=$(head -n 3 $(basename $entry) | tail -1 | awk -F ": " '{print $2}' | awk -F "::" '{print $0}')
+                tag_file_array=$(echo $tag_file_array | tr "::" "\n")
+                for tag in $tag_file_array; do
+                    #echo $tag
+                    TAGS_STORED+=$tag""
+                    echo $tag >>$SNIPPET_DIR/"all_tags_stored".txt
+                done
+            done
+            tag_selected=$(cat $SNIPPET_DIR/all_tags_stored.txt | tr ' ' '\n'  | fzf --multi  --exact --info=inline --border --margin=1 --padding=1 --sort --preview-window down:80%:wrap --preview 'bat {}' )
+            echo $tag_selected
+            rm -rf $SNIPPET_DIR/all_tags_stored.txt
             exit 1
 
             ;;
