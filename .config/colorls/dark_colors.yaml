@@ -1,0 +1,41 @@
+all: ls_colors
+# Main Colors
+unrecognized_file: lightgray
+recognized_file: cadetblue
+dir:               blue
+
+# Link
+dead_link: red
+link:      magenta
+
+
+# Access Modes
+write:     yellow
+read:      gray
+exec:      red
+no_access: dimgray
+
+# Age
+day_old:     lightgray
+hour_old:    white
+no_modifier: darkgray
+
+# File Size
+file_large: darkred
+file_medium: lightgoldenrod
+file_small:  lightgreen
+
+# Random
+report: white
+user:   cyan
+tree:   dimgray
+empty:  yellow
+error:  red
+normal: darkgray
+
+# Git
+addition:     lightgreen
+modification: yellow
+deletion:     red
+untracked:    darkgray
+unchanged:    white

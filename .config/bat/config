@@ -1,4 +1,5 @@
 # Check list of themes using --list-themes
 # https://github.com/sharkdp/bat#configuration-file
 # bat --config-file, bat --list-themes
---theme="gruvbox-dark"
+#--theme="gruvbox-dark"
+--theme="OneHalfDark"

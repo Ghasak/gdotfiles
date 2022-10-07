@@ -37,3 +37,4 @@ Here I store the configurations that are hard to be configured by the command `s
 - [x] Added the integration to zathura with ranger
 - [x] Adding the Sioyek app configuration.
 
+
