@@ -515,11 +515,10 @@ function zvm_before_init_commands(){
 # The plugin will auto execute this zvm_after_select_vi_mode function
 # It will overwrite the initial prompt: zvm_before_init_commands
 function zvm_after_select_vi_mode() {
-  case $ZVM_MODE in
-    $ZVM_MODE_NORMAL)
+  case $ZVM_MODE in $ZVM_MODE_NORMAL)
       # Something you want to do...
     PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
-    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{120}NORMAL%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+    PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}\ufba7 %K{239}%F{122}NORMAL%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
     PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
     ;;
     $ZVM_MODE_INSERT)

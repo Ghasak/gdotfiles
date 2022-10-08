@@ -240,7 +240,8 @@ export HISTCONTROL=ignoreboth            # ignoredups+ ignorespace
 export HISTIGNORE="history:pwd:exit:df:df:ls:ls -la:ll"
 alias ll='ls -lahG'
 alias ctree='colorls --tree'
-alias lsd='colorls -lA --sd'
+#alias lsd='colorls -lA --sd'
+alias lsd='colorls -l -a -h --light -t --sort-dirs'
 # To make the history format working with zsh use:
 alias history='history -i'
 
