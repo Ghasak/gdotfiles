@@ -117,6 +117,8 @@ alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 #
 #   https://betterprogramming.pub/boost-your-command- \
 #   line-productivity-with-fuzzy-finder-985aa162ba5d
+#   More Advanced FZF
+#   https://snippets.cacher.io/snippet/d8f057bd128fdaed11e6
 #------------------------------------------------------------------------------
 # export FZF_DEFAULT_OPTS="
 # --layout=reverse
