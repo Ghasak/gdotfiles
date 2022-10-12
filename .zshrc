@@ -904,4 +904,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 #####################################################################
 #export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
 #set editing-mode vi
-
+######################################################################
+#           Neovide - IDE (neovide)
+#####################################################################
+export PATH="$PATH:/Applications/Neovide.app/Contents/MacOS/"
