@@ -1013,7 +1013,7 @@ alias ctop=ctop
 #------------------------------------------------------------------------------
 alias ping='prettyping --nolegend'
 alias gping=gping
-
+# you can also use: ping -c 10 www.apple.com
 #------------------------------------------------------------------------------
 # Jrnal command using brew install jrnl check here
 # https://jrnl.sh/en/stable/
@@ -1038,3 +1038,25 @@ alias v='fd --type f --hidden --exclude .git | fzf-tmux -p --reverse | xargs nvi
 alias tmux="TERM=screen-256color-bce tmux"
 
 
+#------------------------------------------------------------------------------
+#-                  ipython with vim support
+#------------------------------------------------------------------------------
+alias ipvim="ipython --TerminalInteractiveShell.editing_mode=vi"
+
+#------------------------------------------------------------------------------
+#-              Show all months in a given year  with Holidies
+#------------------------------------------------------------------------------
+# To show all the months for a given year with all holidies, use:
+# https://unix.stackexchange.com/questions/164555/how-to-emphasize-holidays-by-color-in-cal-command
+# gcal -H '\e[31;42m:\e[0m:\e[33;45m:\e[0m' -q JP 2022
+function show_Japanese_calendar(){
+  if [ ! "$#" -gt 0 ]; then
+        echo "using Default: Japanese calendar for 2022";
+        gcal -H '\e[31;42m:\e[0m:\e[33;45m:\e[0m' -q JP 2022
+        return 1;
+    else
+        #echo "Input must be in the form: gcal JP year (e.g., gcal JP 2034)"
+        gcal -H '\e[31;42m:\e[0m:\e[33;45m:\e[0m' -q $1 $2
+        return 1;
+  fi
+    }

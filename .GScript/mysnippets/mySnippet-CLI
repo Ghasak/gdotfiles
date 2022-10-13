@@ -102,7 +102,13 @@ function mac_install_prerequisites() {
 # ****************************************************************************
 ##           Global variables
 # ****************************************************************************
-DEFAULTEDITOR="$HOME/dev/nvim/bin/nvim"
+if [ -f "$HOME/dev/nvim/bin/nvim" ]; then
+    DEFAULTEDITOR="$HOME/dev/nvim/bin/nvim"
+else
+    # built from source
+    DEFAULTEDITOR="$HOME/dev/nvim/build/bin/nvim"
+fi
+
 TAGS_ARRAY=("$@")
 FINAL_TAG_ARRAY=()
 TAG_ARRAY_FILE_NAME=()

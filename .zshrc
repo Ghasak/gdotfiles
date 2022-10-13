@@ -279,8 +279,18 @@ function WelcomeMessage(){
             #figlet -f speed "Ghsaak"  |boxes | lolcat #-a -d $time_var
             echo -n "Uptime: "; uptime | lolcat #-a -d $time_var
             echo ""
-            echo -n; cal
-            figlet -f $FONTSTYLE "WELCOME \n$USER"|lolcat    #-a -d $time_var
+            if ! [ -x "$(command -v gcal)" ]; then
+                  echo 'Will install gcall from GNU ... will show current days and holidays ... ' >&2
+                  brew install gcal
+              else
+                gcal -H '\e[31;42m:\e[0m:\e[33;45m:\e[0m' -q JP # Setting for Japanese calendar.
+                # To show all the months for a given year with all holidies, use:
+                # https://unix.stackexchange.com/questions/164555/how-to-emphasize-holidays-by-color-in-cal-command
+                # gcal -H '\e[31;42m:\e[0m:\e[33;45m:\e[0m' -q JP 2022
+                # You can use also: echo -n; cal
+            fi
+
+            figlet -f $FONTSTYLE "WELCOME $USER"|lolcat    #-a -d $time_var
             echo -e "Welcome: ${RED}$MYNAME${ENDCOLOR} on your personal computer ${BLUE}$HOST${ENDCOLOR}"
             echo -e "Operating System: ${GREEN}$(uname -s)${ENDCOLOR} ${GREEN}$(uname -r)${ENDCOLOR}"
             echo -e "Kernel: ${GREEN}$(uname -r)${ENDCOLOR}"
@@ -308,6 +318,11 @@ function WelcomeMessage(){
             echo -e  "${MAGENTA}╚══════════════════════════════════════════╝${ENDCOLOR}"
             if [[ -f $HOME/motivate/motivate/motivate.py ]]; then
                 motivate  # https://github.com/mubaris/motivate
+            else
+                 git clone https://github.com/mubaris/motivate.git ~/motivate
+                 cd ~/motivate/motivate
+                 echo "Goning to install motivate ... Give Permission Please ... "
+                 sudo ./install.sh
             fi
 
         fi
