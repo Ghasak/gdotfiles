@@ -923,3 +923,9 @@ export SDKMAN_DIR="$HOME/.sdkman"
 #           Neovide - IDE (neovide)
 #####################################################################
 export PATH="$PATH:/Applications/Neovide.app/Contents/MacOS/"
+
+#####################################################################
+#       Using Chromium to lunch the cv-generator
+#####################################################################
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+export PUPPETEER_EXECUTABLE_PATH=`which chromium`

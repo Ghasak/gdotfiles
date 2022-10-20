@@ -160,7 +160,7 @@ function fileName_with_tags() {
     local all_tags=$(echo $2)
     # List must be sperated with space items
     local languages_list=('python' 'cpp' 'bash' 'terminal' 'Terminal' 'shell' 'zsh' 'PHP' 'TypeScript' 'Scala' 'nvim' 'neovim'
-        'Shell' 'PowerShell' 'Perl' 'Haskell' 'Kotlin' 'SQL' 'MATLAB' 'Groovy' 'Lua' 'Rust' 'rust' 'Ruby' 'HTML and CSS'
+        'Shell' 'PowerShell' 'Perl' 'Haskell' 'Kotlin' 'SQL' 'MATLAB' 'Groovy' 'Lua' 'Rust' 'rust' 'Ruby' 'HTML and CSS' 'ruby'
         'Python' 'Java' 'JavaScript' 'Swift' 'C++' 'C#' 'R' 'Golang (Go)' 'vim' 'apple' 'mac' 'macOS' 'appleScript'
         'linux' 'gnu-linux' 'ubuntu' 'note' 'memo' 'awk' 'sed' 'tr' 'cat' 'bat' )
 

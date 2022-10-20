@@ -1060,3 +1060,34 @@ function show_Japanese_calendar(){
         return 1;
   fi
     }
+
+
+#------------------------------------------------------------------------------
+#-             Assistnt functions for gh (GitHub CLI)
+#             change the pager to bat/cat/less in the ~/.configs/gh/config.yaml
+#------------------------------------------------------------------------------
+
+function ghpr(){
+ #  ->   https://www.youtube.com/watch?v=Bwzi63hEXwc
+ #  ->   https://cli.github.com/manual/gh
+ #  ->   https://cli.github.com/manual/gh_config_set
+ #  More functionality you can use:
+ #  ->   gh auth status --show-token
+        gh pr list | command fzf --ansi --preview 'GH_FORCE_TTY=100% gh pr view {1} | bat' --preview-window=bottom --header-lines 3 | awk '{print$1}' | xargs gh pr checkout
+    }
+
+function ghgist(){
+    #gh gist list | command fzf --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' --preview-window=bottom | awk '{print$1}' | xargs gh gist view
+    RED="\e[31m"
+    MAGENTA="\e[35m"
+    LIGHT_GREEN="\e[36m"
+    GRAY="\e[37m"
+    BLUE="\e[34m"
+    GREEN="\e[32m"
+    LIGHT_YELLOW="\e[93m"
+    ENDCOLOR="\e[0m"
+    args=$(gh gist list | command fzf --preview "GH_FORCE_TTY=100% gh gist view {1}" --preview-window=bottom | awk '{print$1}')
+    #gh gist list | command fzf --preview "GH_FORCE_TTY=100% gh gist view {1}" --preview-window=bottom | awk '{print$1}' | xargs gh gist view
+    echo -ne  "${MAGENTA} have selected Gist${BLUE}: ${RED}[${GREEN}${RED}]${LIGHT_YELLOW} $args${ENDCOLOR}"
+    echo $args | xargs gh gist view
+    }
