@@ -1091,3 +1091,26 @@ function ghgist(){
     echo -ne  "${MAGENTA} have selected Gist${BLUE}: ${RED}[${GREEN}${RED}]${LIGHT_YELLOW} $args${ENDCOLOR}"
     echo $args | xargs gh gist view
     }
+
+#####################################################################
+#       Network Speed-Tet
+#####################################################################
+alias speed-test="$HOME/.ookla-speedtest/speedtest --progress=yes | lolcat"
+
+
+#####################################################################
+#       Rust Documentation Helper
+#####################################################################
+#
+alias rusty-man=
+function rusty_man(){
+# You can use pager: glow or bat
+
+  if [ ! "$#" -gt 0 ]; then
+        echo " You must specify your keyword ...";
+        return 1;
+    else
+        "$HOME/rusty-man/target/release/rusty-man" --pager bat $1
+        return 0;
+  fi
+    }

@@ -929,3 +929,7 @@ export PATH="$PATH:/Applications/Neovide.app/Contents/MacOS/"
 #####################################################################
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 export PUPPETEER_EXECUTABLE_PATH=`which chromium`
+
+
+fpath=(~/.zsh.d/ $fpath)
+fpath=(~/.zsh.d/ $fpath)
