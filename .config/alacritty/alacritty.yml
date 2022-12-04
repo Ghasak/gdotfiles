@@ -83,27 +83,30 @@ colors:
 
 font:
   normal:
-    family: 'VictorMono NF'
-    style: Regular
+    family: 'SFMono Nerd Font'
+    style: Medium
   bold:
-    family: 'VictorMono NF'
-    style: Regular
+    #family: 'VictorMono NF'
+    family: 'SFMono Nerd Font'
+    style: Medium
   italic:
-    family: 'VictorMono NF'
-    style: Regular
+    #family: 'VictorMono NF'
+    family: 'SFMono Nerd Font'
+    style: Medium
   bold_italic:
-    family: 'VictorMono NF'
-    style: Regular
+    #family: 'VictorMono NF'
+    family: 'SFMono Nerd Font'
+    style: Medium
 
   # Point size
-  size: 14
+  size: 15
 
   offset:
-    x: 1
-    y: 1
+    x: -1
+    y: -1
   glyph_offset:
-    x: 0
-    y: 0
+    x: 2
+    y: 2
 
 window:
   #opacity: 0.9

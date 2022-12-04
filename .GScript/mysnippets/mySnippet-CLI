@@ -164,7 +164,7 @@ function fileName_with_tags() {
     local languages_list=('python' 'cpp' 'bash' 'terminal' 'Terminal' 'shell' 'zsh' 'PHP' 'TypeScript' 'Scala' 'nvim' 'neovim'
         'Shell' 'PowerShell' 'Perl' 'Haskell' 'Kotlin' 'SQL' 'MATLAB' 'Groovy' 'Lua' 'Rust' 'rust' 'Ruby' 'HTML and CSS' 'ruby'
         'Python' 'Java' 'JavaScript' 'Swift' 'C++' 'C#' 'R' 'Golang (Go)' 'vim' 'apple' 'mac' 'macOS' 'appleScript' 'git' 'GitHub'
-        'linux' 'gnu-linux' 'ubuntu' 'note' 'memo' 'awk' 'sed' 'tr' 'cat' 'bat' )
+        'linux' 'gnu-linux' 'ubuntu' 'note' 'memo' 'awk' 'sed' 'tr' 'cat' 'bat', 'latex', 'Latex' )
 
     for lang in "${languages_list[@]}"; do
         if [[ "$lang" == "$answer" ]]; then
