@@ -241,7 +241,7 @@ export HISTIGNORE="history:pwd:exit:df:df:ls:ls -la:ll"
 alias ll='ls -lahG'
 alias ctree='colorls --tree'
 #alias lsd='colorls -lA --sd'
-alias lsd='colorls -l -A -h --light -t --sort-dirs'
+alias lsd='colorls -l -A -h --light --sort-dirs'
 # To make the history format working with zsh use:
 alias history='history -i'
 
