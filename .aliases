@@ -1126,4 +1126,9 @@ function rusty_man(){
 # We will use vim as defult,
 #####################################################################
 alias ptpython_vim="ptpython --vi -i"
+# I have added a configurations at `~/.config/ptpython/config.py` which will be
+# used to trigger all the settings, you like instead of the `<F2>`.
+# Unfortunately, we cannot refer to the link, which is located at
+# ~/.config/ptpython/, instead, we must refer to the original file.
+alias ptpython="ptpython --config-file ~/.dotfiles2022/.config/ptpython/config.py"
 
