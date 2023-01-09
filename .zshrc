@@ -135,6 +135,11 @@ plugins=(git
         fzf-tab
   )
 # **************************************************************************
+#                     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE
+# **************************************************************************
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#97A7B3, bg=#ADB6C4  ,bold,underline"
+
+# **************************************************************************
 # Configurations for fzf-tab
 # **************************************************************************
 # disable sort when completing `git checkout`
