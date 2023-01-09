@@ -1,7 +1,7 @@
 # Colors (Gruvbox Material Dark Medium)
 colors:
   primary:
-    background: '#343a43'
+    background: '#2d333b'
     foreground: '#d8dee9'
     dim_foreground: '#a5abb6'
   cursor:
