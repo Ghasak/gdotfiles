@@ -1,3 +1,4 @@
+# https://manpages.ubuntu.com/manpages/xenial/man5/zathurarc.5.html
 # place in ~/.config/zathura/
 # Zathura configuration file
 # See man `man zathurarc'
@@ -24,11 +25,13 @@ set window-height 1000
 set adjust-open "best-fit"
 
 # scrollbars
-set show-scrollbars "true"
+#set show-scrollbars "true"
 set window-title-basename "true"
 set window-title-page "true"
 
-set scroll-wrap "true"
+# This option will make zathura loop from first/last page, by default its value
+# false.
+set scroll-wrap "false"
 set continuous-hist-save "true"
 # set zoom-center "true"
 # set vertical-center "true"
@@ -38,7 +41,7 @@ set pages-per-row 1
 
 #stop at page boundries
 set scroll-page-aware "true"
-set smooth-scroll "true"
+#set smooth-scroll "true"
 set scroll-full-overlap 0.01
 set scroll-step 100
 

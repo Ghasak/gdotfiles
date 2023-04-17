@@ -1132,3 +1132,14 @@ alias ptpython_vim="ptpython --vi -i"
 # ~/.config/ptpython/, instead, we must refer to the original file.
 alias ptpython="ptpython --config-file ~/.dotfiles2022/.config/ptpython/config.py"
 
+#####################################################################
+#   nbpreview - reading *.nbpy jupyter-notebook files in terminal
+#   link: https://github.com/paw-lu/nbpreview
+#####################################################################
+# If you change this NBPREVIEW_PAGING to false it will give you colored nbpy but conflict with
+# rich.console
+export NBPREVIEW_PAGING=true
+function nbpreviewx(){
+        nbpreview --theme "ansi_dark" $1
+    }
+

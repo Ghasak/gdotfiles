@@ -38,3 +38,20 @@ which is not supported anymore, it should be changed to the one above, as
 ```
 
 As we just need to add `table` infornt.
+
+## Current Configuratoins
+Since it is not preferable to stow the `.docker/config.json` as it might
+contain some sensitive information, here I will add the current configurations
+that I need for any machine in the future.
+```json
+
+{
+  "credsStore": "desktop",
+    "imagesFormat":"table {{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.CreatedSince}} \t{{.Size}}",
+    "psFormat":"table {{.ID}}\t{{.Image}}\t{{.Command}}\t{{.RunningFor}} ago\t{{.Status}}\t{{.Ports}}\t{{.Names}}"
+}
+```
+## Referencees
+
+-  [docker cli](https://docs.docker.com/engine/reference/commandline/cli/)
+-  [formatter for docker ](https://github.com/BrianBland/docker/blob/master/api/client/formatter/formatter.go)
