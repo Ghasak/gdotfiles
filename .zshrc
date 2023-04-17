@@ -125,7 +125,10 @@ plugins=(git
         autojump
         # syntax zsh-syntax-highlighting from here:
         # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/install.md
-        zsh-syntax-highlighting
+        #zsh-syntax-highlighting # Problem occured not used anymore
+        # I use instead fast-syntax-highlighting
+        # https://github.com/zdharma-continuum/fast-syntax-highlighting
+        fast-syntax-highlighting
         # adding vim support to my current zsh:
         # vi-mode
         # https://github.com/jeffreytse/zsh-vi-mode
@@ -136,6 +139,7 @@ plugins=(git
   )
 # **************************************************************************
 #                     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE
+#           This will alter the default for Auto-completetion
 # **************************************************************************
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#97A7B3, bg=#ADB6C4  ,bold,underline"
 
