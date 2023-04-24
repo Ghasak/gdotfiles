@@ -111,7 +111,8 @@ elif [ -f "$HOME/dev/neovim/bin/nvim" ]; then
     DEFAULTEDITOR="$HOME/dev/neovim/bin/nvim"
 else
     # built from source
-    DEFAULTEDITOR="$HOME/dev/nvim/build/bin/nvim"
+    #DEFAULTEDITOR="$HOME/dev/nvim/build/bin/nvim"
+    DEFAULTEDITOR="/usr/local/bin/nvim"
 fi
 
 TAGS_ARRAY=("$@")
