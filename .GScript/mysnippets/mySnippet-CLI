@@ -106,6 +106,9 @@ if [ -f "$HOME/dev/nvim/bin/nvim" ]; then
     DEFAULTEDITOR="$HOME/dev/nvim/bin/nvim"
 elif [ -f "$HOME/dev/neovim/build/bin/nvim" ]; then
     DEFAULTEDITOR="$HOME/dev/neovim/build/bin/nvim"
+
+elif [ -f "$HOME/dev/neovim/bin/nvim" ]; then
+    DEFAULTEDITOR="$HOME/dev/neovim/bin/nvim"
 else
     # built from source
     DEFAULTEDITOR="$HOME/dev/nvim/build/bin/nvim"
