@@ -40,3 +40,7 @@ Here I store the configurations that are hard to be configured by the command `s
 
 
 ## Adding some information
+## Debugging with lldb is created using
+The current steps I followed to generate the files which are now stowed both
+`./.lldbinit` and `./lldbinit.py` files. From following the steps here
+- [lldbinit](https://github.com/gdbinit/lldbinit)
