@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# check if emacs daemon is already running
+# Tested under the macOS arm64-11
+if pgrep -u "$USER" -x Emacs-arm64-11 --bg-daemon > /dev/null; then
+    # emacs daemon is already running, launch instance in given directory
+    if [ -z "$1" ]; then
+        # no file specified, open empty instance
+        emacsclient -c . &
+    else
+        # file specified, open instance with file
+        emacsclient -c "$1" &
+    fi
+else
+    # emacs daemon is not running, start it and launch instance
+    if [ -z "$1" ]; then
+        # no file specified, open empty instance
+        /opt/homebrew/bin/emacs --daemon && emacsclient -c . &
+    else
+        # file specified, open instance with file
+        /opt/homebrew/bin/emacs --daemon && emacsclient -c . "$1" &
+    fi
+fi

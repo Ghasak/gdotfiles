@@ -940,5 +940,84 @@ export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 export PUPPETEER_EXECUTABLE_PATH=`which chromium`
 
 
+#####################################################################
+#                 fpath utility_functions
+#####################################################################
 fpath=(~/.zsh.d/ $fpath)
-fpath=(~/.zsh.d/ $fpath)
+
+#####################################################################
+#                 coreutils utility_functions
+#####################################################################
+PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+#####################################################################
+#                 llvm utility_functions
+#####################################################################
+#==> llvm
+#To use the bundled libc++ please add the following LDFLAGS:
+#  LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++"
+#
+#llvm is keg-only, which means it was not symlinked into /opt/homebrew,
+#because macOS already provides this software and installing another version in
+#parallel can cause all kinds of trouble.
+#
+#If you need to have llvm first in your PATH, run:
+#  echo 'export PATH="/opt/homebrew/opt/llvm/bin:$PATH"' >> ~/.zshrc
+#
+#For compilers to find llvm you may need to set:
+#  export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+#  export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+# export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+#
+#####################################################################
+##              Other Utilities - After you upgarde brew
+#####################################################################
+#
+#==> ruby
+#ruby is keg-only, which means it was not symlinked into /opt/homebrew,
+#because macOS already provides this software and installing another version in
+#parallel can cause all kinds of trouble.
+#
+#If you need to have ruby first in your PATH, run:
+#  echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> ~/.zshrc
+#
+#For compilers to find ruby you may need to set:
+#  export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"
+#  export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"
+#
+#For pkg-config to find ruby you may need to set:
+#  export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig"
+#==> curl
+#curl is keg-only, which means it was not symlinked into /opt/homebrew,
+#because macOS already provides this software and installing another version in
+#parallel can cause all kinds of trouble.
+#
+#If you need to have curl first in your PATH, run:
+#  echo 'export PATH="/opt/homebrew/opt/curl/bin:$PATH"' >> ~/.zshrc
+#
+#For compilers to find curl you may need to set:
+#  export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
+#  export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
+#
+#For pkg-config to find curl you may need to set:
+#  export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig"
+#
+#zsh completions have been installed to:
+#  /opt/homebrew/opt/curl/share/zsh/site-functions
+## -------------------- BR command -----------------------
+#source /Users/gmbp/.config/broot/launcher/bash/br
+source $HOME/.config/broot/launcher/bash/br
+#
+#####################################################################
+##   Adapter for deubgging (used in Emacs [dap layer/dap-mode])
+#####################################################################
+#export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.14.5-darwin-arm64/debugAdapters/lldb-mi/bin"
+export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.15.4-darwin-arm64/debugAdapters/lldb-mi/bin"
+
+#####################################################################
+##             Markdown Reader Engine  - Emacs -layer
+##    Install it from here: https://github.com/yoshuawuyts/vmd/releases/tag/1.34.0
+#####################################################################
+export PATH="$PATH:/Applications/vmd.app/Contents/MacOS/"
+
+

@@ -1,5 +1,5 @@
 # Notes about the formatting for docker
-
+Adding more information about the current file is great.
 ## Current configuration support
 
 ```shell

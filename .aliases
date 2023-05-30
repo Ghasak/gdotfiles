@@ -740,17 +740,70 @@ alias koora="open -a safari 'https://hd.onlinekora.tv/'"
 #------------------------------------------------------------------------------
 #                    Testing nvim lunching speed
 #------------------------------------------------------------------------------
-function nvim_speed_test(){
+function nvim_speed_test() {
   RED="\e[31m"
   GREEN="\e[32m"
   LIGHT_YELLOW="\e[93m"
+  MAGENTA="\e[35m"
+  LIGHT_GREEN="\e[36m"
+  GRAY="\e[37m"
+  BLUE="\e[34m"
+  GREEN="\e[32m"
+  LIGHT_YELLOW="\e[93m"
   ENDCOLOR="\e[0m"
-  for ((i = 1; i < 10; i++)); do
-    echo "${RED}\uf9c4 ${GREEN}\ue7c5 ${LIGHT_YELLOW} \uf432  Trial no. ${RED}\ue27a  ${GREEN}${i}${ENDCOLOR}\n";
-    vim-startuptime --vimpath=nvim | head -n 4 | grep "Total Average";
-    echo "${GREEN}\uf6fb \uf6fb \uf6fb \uf6fb \uf6fb \uf6fb \uf6fb${ENDCOLOR}";
+
+  SPEED_METER[1]="󰓅"
+  SPEED_METER[2]="󰾅"
+  SPEED_METER[3]="󰾆"
+  SPEED_METER[4]="󰾅"
+  SPEED_METER[5]="󰓅"
+  SPEED_METER[6]="󰾆"
+  SPEED_METER[7]="󰾅"
+  SPEED_METER[8]="󰓅"
+  SPEED_METER[9]="󰾆"
+
+  total_iterations=10
+  bar_width=10
+  progress_char="󰡖 "
+  empty_char="󰄱 "
+  meter_length=${#SPEED_METER[@]}  # Get the length of the SPEED_METER list
+  meter_index=0  # Index to access items from SPEED_METER list
+  for ((i = 1; i <= total_iterations; i++)); do
+    # Calculate the progress percentage
+    progress=$((i * 100 / total_iterations))
+    # Calculate the number of progress bar characters to display
+    num_chars=$((i * bar_width / total_iterations))
+    # Generate the progress bar string
+    bar="${BLUE}|${ENDCOLOR}"
+    for ((j = 0; j < num_chars; j++)); do
+      bar+="${RED}${progress_char}${ENDCOLOR}"
+    done
+    for ((j = num_chars; j < bar_width; j++)); do
+      bar+="${BLUE}${empty_char}${ENDCOLOR}"
+    done
+    bar+="${BLUE}|${ENDCOLOR}"
+
+    # Get the current item from the SPEED_METER list
+    current_meter="${SPEED_METER[meter_index]}"
+
+    # If current_meter is empty, set it to a default value
+    if [[ -z "${current_meter}" ]]; then
+      current_meter="󰓅"
+    fi
+    # Increment the meter index and wrap around if necessary
+    meter_index=$(( (meter_index + 1) % meter_length ))
+    # Capture the output of vim-startuptime and store it in a variable
+    result=$(vim-startuptime --vimpath=nvim | head -n 4 | grep "Total Average")
+    result_part_one=$(echo $result | awk -F ':' '{print $1}')
+    result_part_two=$(echo $result | awk -F ':' '{print $2}')
+
+    echo -ne "\r ${GREEN}\uebb4 ${LIGHT_YELLOW} \uf432  Trial no. ${RED}\ue27a  ${GREEN}${i}${ENDCOLOR} ${bar} ${RED} ${current_meter} ${MAGENTA} ${progress}% ${LIGHT_YELLOW}${result_part_one} ${BLUE}${result_part_two}${ENDCOLOR}"
+    # Delay for a short interval to make the progress visible
+    sleep 0.1
   done
-  }
+
+  echo # Print a newline at the end to separate from the shell prompt
+}
 
 #------------------------------------------------------------------------------
 #                 Open obsidian in terminal
@@ -1143,3 +1196,44 @@ function nbpreviewx(){
         nbpreview --theme "ansi_dark" $1
     }
 
+#####################################################################
+#                   Emacs client Startup
+#####################################################################
+# Starting server using: emacs --daemon
+# -c for open a new window
+# -a alternative, if no client is opened alerady reterive to pure emacs
+#alias emacs="emacsclient -c -a 'emacs' &"
+
+
+##function emacs(){
+##  if [ ! "$#" -gt 0 ]; then
+##        emacsclient -c -a 'emacs' &
+##        return 0;
+##    else
+##        emacsclient -c -a 'emacs' $1 &
+##        return 0;
+##  fi
+##    }
+
+##function emacs(){
+##  if [ ! "$#" -gt 0 ]; then
+##        emacsclient -c -q --no-wait  -a  "/opt/homebrew/bin/emacs" &
+##        return 0;
+##    else
+##        emacsclient -c -q --no-wait -a  "/opt/homebrew/bin/emacs" $1 &
+##        return 0;
+##  fi
+##    }
+#
+#
+# ```formula
+# zip -vr <name_capsule> <files, can be several directories> -x <exceptions>
+# ```
+#
+#####################################################################
+#                 Using Zip
+#####################################################################
+# ```shell
+# ├─ﮧ INSERT 
+# ╰─ zip -vr emacs_capsule_Thu_May_2023_222334.zip ~/.emacs.d -x "*.DS_Store"
+# ```
