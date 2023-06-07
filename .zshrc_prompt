@@ -19,16 +19,17 @@ OS_ICON=
 OS_ICON=$'\uf179'
 MAC_ICON=󰇄
 ROBOT_ICON=󰚩
-ARROW=$'\uf641' #  
 ARROW=$'\ufb00'
 ARROW=$'\uf101'
 ARROW=$'\uf101'
+ARROW=$'\uf054'
+ARROW= #$'\uf641' #  
 ARROW=$'\uf054'
 CIRCEL=$'\uf7b0'
 #DIR_ICON=
 #MAC_FINDER_ICON=$'\uf535'
 MAC_FINDER_ICON=$'\uff115'
-CLOCK_ICON=$'\ue641'
+CLOCK_ICON=$'\uf43a'
 ROBIN_HOOD_ICON=$'\uf2ae'
 SINGEL_GEAR_ICON=$'\uf013'
 IRON_MAN_ICON=$'\uf1d1'
@@ -548,7 +549,7 @@ function zvm_after_select_vi_mode() {
     PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
     ;;
   esac
-  RPROMPT=$'%F{blue}\uf520:${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON} %F{110} %D{%b %d, %Y}${PR_NO_COLOUR} - %{$fg[magenta]%}${CLOCK_ICON}%F{180} %D{%L:%M:%S %p}%{$fg[magenta]%} ] %{$reset_color%}'
+  RPROMPT=$'%F{blue}󰔛 %F{white}:%F{180}${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON} %F{110} %D{%b %d, %Y}${PR_NO_COLOUR} - %{$fg[magenta]%}${CLOCK_ICON}%F{180} %D{%L:%M:%S %p}%{$fg[magenta]%} ] %{$reset_color%}'
 }
 zvm_before_init_commands
 

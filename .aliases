@@ -750,6 +750,7 @@ function nvim_speed_test() {
   BLUE="\e[34m"
   GREEN="\e[32m"
   LIGHT_YELLOW="\e[93m"
+  CYAN="\e[36m"
   ENDCOLOR="\e[0m"
 
   SPEED_METER[1]="󰓅"
@@ -762,10 +763,10 @@ function nvim_speed_test() {
   SPEED_METER[8]="󰓅"
   SPEED_METER[9]="󰾆"
 
-  total_iterations=10
-  bar_width=10
-  progress_char="󰡖 "
-  empty_char="󰄱 "
+  total_iterations=30
+  bar_width=30
+  progress_char="█"
+  empty_char="░"
   meter_length=${#SPEED_METER[@]}  # Get the length of the SPEED_METER list
   meter_index=0  # Index to access items from SPEED_METER list
   for ((i = 1; i <= total_iterations; i++)); do
@@ -774,14 +775,14 @@ function nvim_speed_test() {
     # Calculate the number of progress bar characters to display
     num_chars=$((i * bar_width / total_iterations))
     # Generate the progress bar string
-    bar="${BLUE}|${ENDCOLOR}"
+    bar="${BLUE}[${ENDCOLOR}"
     for ((j = 0; j < num_chars; j++)); do
-      bar+="${RED}${progress_char}${ENDCOLOR}"
+      bar+="${CYAN}${progress_char}${ENDCOLOR}"
     done
     for ((j = num_chars; j < bar_width; j++)); do
       bar+="${BLUE}${empty_char}${ENDCOLOR}"
     done
-    bar+="${BLUE}|${ENDCOLOR}"
+    bar+="${BLUE}]${ENDCOLOR}"
 
     # Get the current item from the SPEED_METER list
     current_meter="${SPEED_METER[meter_index]}"
