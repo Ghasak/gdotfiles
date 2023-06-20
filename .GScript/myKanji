@@ -5,6 +5,13 @@ import sys
 from rich import print as rprint
 import MeCab
 
+def requirements():
+    libraries = ['pykakasi', 'mecab-python3']
+    for lib in libraries:
+        try:
+            import lib
+        except ImportError:
+            print(f"{lib} is not installed")
 
 def show_hirigana_katakana_romanji(text: str):
     '''

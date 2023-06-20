@@ -854,22 +854,23 @@ export LC_CTYPE="en_US.UTF-8"
 ###################################################
 #           Anaconda Installation
 ###################################################
+export CONDA_AUTO_ACTIVATE_BASE=false # This will prevent from auto activiate (base) conda environment.
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/Users/gmbp/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# __conda_setup="$('/Users/gmbp/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 # if [ $? -eq 0 ]; then
 #     eval "$__conda_setup"
 # else
-#     if [ -f "/Users/gmbp/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/Users/gmbp/opt/anaconda3/etc/profile.d/conda.sh"
+#     if [ -f "/Users/gmbp/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/Users/gmbp/anaconda3/etc/profile.d/conda.sh"
 #     else
-#         export PATH="/Users/gmbp/opt/anaconda3/bin:$PATH"
+#         export PATH="/Users/gmbp/anaconda3/bin:$PATH"
 #     fi
 # fi
 # unset __conda_setup
 # <<< conda initialize <<<
-
-export PATH="$HOME/opt/anaconda3/bin:$PATH"
+export PATH="/Users/gmbp/anaconda3/bin:$PATH"
+# export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
 ###################################################
 #          Local Postgresql
 #                 v.14

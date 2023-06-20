@@ -67,7 +67,6 @@ ${YELLOW}NOTES${NC}:
 function currentTime() {
     TIME_STAMP=$(date +%Y-%m-%d-%H%M%S)
     echo -ne "${RED}$(date +%Y-%m-%d-%H%M%S)${NC}\n"
-    #echo "$(date +"%x %r %Z")"
 }
 
 SYSTEM_TYPE=""
@@ -91,13 +90,13 @@ echo -ne "$RED$SYSTEM_TYPE$NC"
 
 function mac_install_prerequisites() {
     echo -e "[${YELLOW}\uf046${NC} ] ${MAGENTA}Installing prerequisites ...${NC}"
-    if [[ -d "$HOME/Documents/myObsidianDoc/.mysnippetsCollection" ]]; then
-        echo -e "[${GREEN}\ue5fe${NC} ] ${BLUE}$HOME/Documents/myObsidianDoc/.mysnippetsCollection${NC} already exists."
+    if [[ -d "$HOME/Documents/myObsidianDoc/mysnippetsCollection" ]]; then
+        echo -e "[${GREEN}\ue5fe${NC} ] ${BLUE}$HOME/Documents/myObsidianDoc/mysnippetsCollection${NC} already exists."
     else
-        mkdir -p $HOME/Documents/myObsidianDoc/.mysnippetsCollection
-        echo -e "[${GREEN}\uf413${NC} ] ${GREEN}$HOME/Documents/myObsidianDoc/.mysnippetsCollection${NC} directory is created ... "
+        mkdir -p $HOME/Documents/myObsidianDoc/mysnippetsCollection
+        echo -e "[${GREEN}\uf413${NC} ] ${GREEN}$HOME/Documents/myObsidianDoc/mysnippetsCollection${NC} directory is created ... "
     fi
-    SNIPPET_DIR="$HOME/Documents/myObsidianDoc/.mysnippetsCollection/"
+    SNIPPET_DIR="$HOME/Documents/myObsidianDoc/mysnippetsCollection/"
 }
 # ****************************************************************************
 ##           Global variables
@@ -117,9 +116,9 @@ FINAL_TAG_ARRAY=()
 TAG_ARRAY_FILE_NAME=()
 whichSystem
 
-# ****************************************************************************
+# ********************************************
 ##           Assistant scripts
-# ****************************************************************************
+# ********************************************
 function markdDownTempate() {
     local selected_language=$(echo $1 | awk -F '_' '{print $2}')
     local all_tags=$(echo $2)

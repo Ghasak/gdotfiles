@@ -507,25 +507,27 @@ function virtualenv_info {
 
 #while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-11));echo -e "\e[31m`date +%r`\e[39m";tput rc;done &
 # Initalize the prompt
-function zvm_before_init_commands(){
-        PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{#88c0d0}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
-        PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}${ROBOT_ICON} %K{239}%F{1}INSERT%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
+# # Append a command directly
+function zvm_before_init(){
+        PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{#EF7A85}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{#88c0d0}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
+        PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}${ROBOT_ICON} %K{#533344}%F{#EF7A85}INSERT%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
         PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
-        RPROMPT=$'%F{blue}\uf520:${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON} %F{110} %D{%b %d, %Y}${PR_NO_COLOUR} - %{$fg[magenta]%}${CLOCK_ICON}%F{180} %D{%L:%M:%S %p}%{$fg[magenta]%} ] %{$reset_color%}'
-
+        RPROMPT=$'%F{blue}󰔛 %F{white}:%F{180}${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON} %F{110} %D{%b %d, %Y}${PR_NO_COLOUR} - %{$fg[magenta]%}${CLOCK_ICON}%F{180} %D{%L:%M:%S %p}%{$fg[magenta]%} ] %{$reset_color%}'
 }
 
 # The plugin will auto execute this zvm_after_select_vi_mode function
-# It will overwrite the initial prompt: zvm_before_init_commands
+# #The plugin will auto execute this zvm_after_select_vi_mode function
+# #It will overwrite the initial prompt: zvm_before_init_commands
 function zvm_after_select_vi_mode() {
-  case $ZVM_MODE in $ZVM_MODE_NORMAL)
-      # Something you want to do...
+  case $ZVM_MODE in
+    $ZVM_MODE_NORMAL)
+    # Something you want to do...
     PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{#94C9A9}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{#88c0d0}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
     PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}${ROBOT_ICON} %K{#37505C}%F{#94C9A9}NORMAL%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
     PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
     ;;
     $ZVM_MODE_INSERT)
-      # Something you want to do...
+    # Something you want to do...
     PROMPT=$'%F{blue}\u256D\U2500${OS_ICON} %F{#EF7A85}%n%f ${AT_SYMPOLE} ${MAC_ICON} %F{229}%m% ${PR_NO_COLOUR} on %F{#88c0d0}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(GPS)  '
     PS1+=$'\n%F{blue}${MULTILINE_NEWLINE_PROMPT_PREFIX}${ROBOT_ICON} %K{#533344}%F{#EF7A85}INSERT%{$reset_color%}%4v%f%F{120}%F{180}%F{blue}%{$reset_color%} %F{yellow}%1v%{$reset_color%} %K{239}$(git_time_since_commit)${PR_NO_COLOUR}${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} $(virtualenv_info)'
     PS1+=$'\n%F{blue}\u2570${RULER_CHAR}%F{blue}${ARROW}%{$reset_color%} ' #
@@ -551,98 +553,3 @@ function zvm_after_select_vi_mode() {
   esac
   RPROMPT=$'%F{blue}󰔛 %F{white}:%F{180}${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON} %F{110} %D{%b %d, %Y}${PR_NO_COLOUR} - %{$fg[magenta]%}${CLOCK_ICON}%F{180} %D{%L:%M:%S %p}%{$fg[magenta]%} ] %{$reset_color%}'
 }
-zvm_before_init_commands
-
-# It is important to call this fucntion at the beginning of the .zshrc_prompt file, otherwise the prompt will suffer from flashing the previous message.
-# *******************************************************************************
-# *                      Wediget for dynamic time                               *
-# This will allow to make the time of %D printed by forcing the prompt to       *
-# refresh every second., the problem is that it will affect other widegts such  *
-# as fzf-tab.                                                                   *
-# *******************************************************************************
-# TMOUT=1
-# TRAPALRM() {
-#     zle reset-prompt
-# }
-
-
-# =============================================================================
-
-# =============================================================================
-#
-#        ██████╗░██╗░██████╗██████╗░██╗░░░░░░█████╗░██╗░░░██╗
-#        ██╔══██╗██║██╔════╝██╔══██╗██║░░░░░██╔══██╗╚██╗░██╔╝
-#        ██║░░██║██║╚█████╗░██████╔╝██║░░░░░███████║░╚████╔╝░
-#        ██║░░██║██║░╚═══██╗██╔═══╝░██║░░░░░██╔══██║░░╚██╔╝░░
-#        ██████╔╝██║██████╔╝██║░░░░░███████╗██║░░██║░░░██║░░░
-#        ╚═════╝░╚═╝╚═════╝░╚═╝░░░░░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░
-# The current directory gets truncated from the left if the whole prompt doesn't fit on the line.
-# =============================================================================
-# PROMPT='%70F%n@%m%f '                                  # green user@host
-# PROMPT+='%39F%$((-GITSTATUS_PROMPT_LEN-1))<…<%~%<<%f'  # blue current working directory
-# PROMPT+='${GITSTATUS_PROMPT:+ $GITSTATUS_PROMPT}'      # git status
-# PROMPT+=$'\n'                                          # new line
-# PROMPT+='%F{%(?.76.196)}%#%f '                         # %/# (normal/root); green/red (ok/error)
-#PROMPT='${OS_ICON} %F{208}%n%f ${AT_SYMPOLE}  ${MAC_ICON}  %F{226}%m% on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(Iam_at_home)  '
-#PROMPT=$'\n%F{blue}\u256D\U2500${OS_ICON} %F{208}%n%f ${AT_SYMPOLE}  ${MAC_ICON}  %F{226}%m%  on %F{30}%~%f%F{%(0?.green.red)} %(0?.\uf08b.\uf071)  %F{140}$(Iam_at_home)  '
-#PROMPT+=$'\n'
-
-
-
-#$'%{\e]0;%(!.-=*[ROOT]*=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} | %y\a%}'
-# Symbols
-# if [[ "${langinfo[CODESET]}" = UTF-8 ]]; then
-#   PR_SET_CHARSET=""
-#   PR_HBAR="─"
-#   PR_ULCORNER="┌"
-#   PR_LLCORNER="└"
-#   PR_LRCORNER="┘"
-#   PR_URCORNER="┐"
-# fi
-
-# Need this so the prompt will work.
-#setopt prompt_subst
-
-#function theme_precmd {
-#        DISP=""
-#        PR_FILLBAR=""
-#        PR_PWDLEN=""
-#        local TERMWIDTH=$(( COLUMNS - ${ZLE_RPROMPT_INDENT:-1} ))
-#        local myString=$'\n\u256D\U2500${OS_ICON}%n${AT_SYMPOLE} ${MAC_ICON} %m  on   $(Iam_at_home)  '
-#        local promptsize=${#myString}
-#        local pwdsize=${#${(%):-%~}}
-#        local FILECOUNT=$' ' # How many icons you are using in your PROMPT
-#        local filesize=${#${(%):-$FILECOUNT}}
-#        typeset -g BUFFERLENGTH=9
-#        # if [[ $GITSTATUS_PROMPT_LEN = 0 ]];then
-#        #     BUFFERLENGTH=17
-#        # else
-#        #     BUFFERLENGTH=17
-#        # fi
-
-#        PR_HBAR=""
-#        PR_FILLBAR="\${(l:$(( TERMWIDTH - (promptsize + pwdsize + GITSTATUS_PROMPT_LEN + (2*GIT_TIME_SINCE_COMMIT_LEN) - (BUFFERLENGTH * filesize)) ))::${PR_HBAR}:)}"
-#        #psvar[2]=${DISP}
-
-
-#}
-#autoload -U add-zsh-hook
-#add-zsh-hook precmd theme_precmd
-
-
-## See if we can use colors.
-#autoload zsh/terminfo
-#for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE GREY; do
-#  typeset -g PR_$color="%{$terminfo[bold]$fg[${(L)color}]%}"
-#  typeset -g PR_LIGHT_$color="%{$fg[${(L)color}]%}"
-#done
-#PR_NO_COLOUR="%{$terminfo[sgr0]%}"
-
-
-#PROMPT=$'\n${PR_BLUE}${LCU}${OS_ICON}${PR_YELLOW} %n${PR_NO_COLOUR} ${AT_SYMPOLE} ${MAC_ICON} ${PR_MAGENTA}%m% ${PR_NO_COLOUR} on ${darkblue}%~%F{%(0?.green.red)} %(0?.\uf08b.\uf071) ${PR_GREY}$(git_time_since_commit)${GITSTATUS_PROMPT:+$GITSTATUS_PROMPT} ${(e)PR_FILLBAR}${PR_GREY}$(GPS)${PR_NO_COLOUR} ${RCU}'
-#PROMPT+=$'\n'
-##PROMPT+=$'${LCL}'
-##PS1+=$'${LCL}%F{blue}${ARROW}%F{yellow}${ARROW}%F{red}${ARROW}%F{blue}%{$reset_color%} ' #
-#PS1+=$'${LCL}%F{blue}%F{yellow}${ARROW}%F{blue}%{$reset_color%} ' #
-#RPROMPT=$'%F{blue}\ufa1a:${prompt_elapsed_time} %F{yellow}${SYNC_ICON}%{$reset_color%} %{$fg[magenta]%}[ ${Date_ICON}  %D{%b %d, %Y}- ${CLOCK_ICON}  %D{%L${blue}:%M${red}:%S %p}]%{$reset_color%} ${PR_YELLOW}%1v ${RCL}'
-
