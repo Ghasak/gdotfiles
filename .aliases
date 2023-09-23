@@ -142,7 +142,7 @@ alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 # !^music: Inverse-prefix-exact-match, return items that do not start with music.
 # !.mp3$: Inverse-suffix-exact-match, return items that do not end with .mp3.
 
-alias fzf="fzf --preview '([[ -f {} ]] && (bat --style=numbers --color=always\
+alias fzf="/opt/homebrew/bin/fzf --preview-window top:30 --preview '([[ -f {} ]] && (bat --style=numbers --color=always\
      {} || bat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
 # export FZF_DEFAULT_OPTS="
 # --info=inline
@@ -190,7 +190,7 @@ function myfzf(){
          ${GRAY}LINK: ${BLUE}https://betterprogramming.pub/boost-your-command-line-productivity-with-fuzzy-finder-985aa162ba5d#c4fb${ENDCOLOR}
         "
     else
-     /opt/homebrew/bin/fzf --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+     /opt/homebrew/bin/fzf --preview-window=top:50% --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
   fi
   }
 
@@ -927,7 +927,7 @@ alias fzwiki=fzwiki
 fkill() {
     local pid
     if [ "$UID" != "0" ]; then
-        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+        pid=$(ps -f -u $UID | sed 1d | fzf --preview-window=top:50% -m | awk '{print $2}')
     else
         pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
     fi

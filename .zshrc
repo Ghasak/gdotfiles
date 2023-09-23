@@ -379,8 +379,10 @@ batdiff() {
 #============================================================================
 
 alias vim='nvim'
-export EDITOR=vim   # Using NANO:/usr/bin/nano
-export VISUAL=vim
+# export EDITOR=vim   # Using NANO:/usr/bin/nano
+# export VISUAL=vim
+export EDITOR="/usr/local/bin/nvim"
+export VISUAL="/usr/local/bin/nvim"
 
 
 #============================================================================
@@ -1012,13 +1014,16 @@ source $HOME/.config/broot/launcher/bash/br
 #####################################################################
 ##   Adapter for deubgging (used in Emacs [dap layer/dap-mode])
 #####################################################################
+export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.17.4-darwin-arm64/debugAdapters/lldb-mi/bin"
 #export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.14.5-darwin-arm64/debugAdapters/lldb-mi/bin"
-export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.15.4-darwin-arm64/debugAdapters/lldb-mi/bin"
-
+#export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.15.4-darwin-arm64/debugAdapters/lldb-mi/bin/"
+#export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.15.4-darwin-arm64/bin/"
 #####################################################################
 ##             Markdown Reader Engine  - Emacs -layer
 ##    Install it from here: https://github.com/yoshuawuyts/vmd/releases/tag/1.34.0
 #####################################################################
 export PATH="$PATH:/Applications/vmd.app/Contents/MacOS/"
-
-
+#####################################################################
+#           ADDING 3rd party libraries (e.g. SDL2)
+#####################################################################
+export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"

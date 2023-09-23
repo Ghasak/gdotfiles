@@ -1,6 +1,9 @@
 # .dotfiles2022 Configuration farm files
 My custom .dot files for my machine MBP 14 stored and restored using stow.
 
+## ChangeLogs
+- `2023-09-23 16:44`: Update the config, for ranger and other minor updates.
+- `2023-06-20 18:17`: Update the anaconda to support python 3.10
 
 # Gnu-Stow restore my dot-files configuration and setup (for MACBOOK Setups):
 
@@ -16,10 +19,8 @@ I  have shifted my `dotfiles` now to be stored and recover with `Gnu-Stow` as a 
 stow . --verbose=1
 ```
 - To remove any stow symlink and rest to default (no symlink)
-
 ```
 stow -D .
-
 ```
 # To-do
 
