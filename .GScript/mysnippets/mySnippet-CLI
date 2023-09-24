@@ -24,6 +24,7 @@ mysnippet [${YELLOW}OPTIONS${NC}]
     ${GREEN}ls  ${NC} | (--${MAGENTA}list_snippet${NC})      : list all saved capsules
     ${GREEN}[vV]${NC} | (--${MAGENTA}version${NC})           : current CLI version
     ${GREEN}[hH]${NC} | (--${MAGENTA}help${NC})              : show this help
+    ${GREEN}[gG]${NC} | (--${MAGENTA}languages${NC})         : show all supported languages
 
 ${YELLOW}OPTIONS${NC}:
 --------
@@ -31,11 +32,12 @@ ${YELLOW}OPTIONS${NC}:
 	(-${RED}l${NC})    | (${YELLOW}--list_snippet${NC})      : list all saved capsules
 	(-${RED}[${BLUE}vV${RED}]${NC}) | (${YELLOW}--version${NC})           : current CLI version
 	(-${RED}[${BLUE}hH${RED}]${NC}) | (${YELLOW}--help${NC})              : show this help
+        (-${GREEN}[gG]${NC} | (--${MAGENTA}languages${NC}))         : show all supported languages
 
 ${YELLOW}DEPENDENCIES${NC}:
 -------------
 	- ${BLUE}fzf${NC}       : ${RED}brew${NC} install ${BLUE}fzf${NC}
-	- ${BLUE}rga${NC}        : ${RED}brew${NC} install ${BLUE}ripgrep${NC}
+	- ${BLUE}rga${NC}       : ${RED}brew${NC} install ${BLUE}ripgrep${NC}
 
 ${YELLOW}NOTES${NC}:
 ------
@@ -52,7 +54,7 @@ ${YELLOW}NOTES${NC}:
  ${LIGHT_YELLOW}\!^music${ENDCOLOR} : ${GRAY}Inverse-prefix-exact-match, return items that do not start with music.
  ${LIGHT_YELLOW}\!.mp3\$${ENDCOLOR}  : ${GRAY}Inverse-suffix-exact-match, return items that do not end with .mp3.
  ${GRAY}****************************${ENDCOLOR}
- ${RED} Note${ENDCOLOR}
+ ${RED}           Note${ENDCOLOR}
  ${GRAY}****************************${ENDCOLOR}
  ${GRAY}that SPACE acts as an AND operator and | as an OR. For example, a
  ${GRAY}query that matches entries that start with music and end with either
@@ -151,20 +153,25 @@ fe() {
 # ****************************************************************************
 function version() {
     cat <<EOF
-Version: 0.0.1
+Version: 0.0.2
 EOF
 }
 # ****************************************************************************
 #         Function used to get user custom snippet - backbone-function
-# ****************************************************************************
+# ****************************************************************************#
+#
+languages_list=('python' 'cpp' 'bash' 'terminal' 'shell' 'zsh' 'php'
+    'typescript' 'scala' 'nvim' 'neovim' 'pdf' 'markdown' 'org' 'text' 'shell'
+    'powerShell' 'perl' 'haskell' 'kotlin' 'sql' 'matlap' 'groovy' 'lua' 'rust'
+    'ruby' 'html and css' 'ruby' 'java' 'javascript' 'swift' 'c++' 'c#'
+    'rlang(R)' 'golang(Go)' 'vim' 'apple' 'mac' 'macos' 'applescript' 'git'
+    'github' 'linux' 'gnu-linux' 'ubuntu' 'note' 'memo' 'awk' 'sed' 'tr' 'cat'
+    'bat' 'latex' 'emacs')
+
 function fileName_with_tags() {
-    local answer=$(echo $1)
-    local all_tags=$(echo $2)
+    local answer=$(echo $1 | tr '[:upper:]' '[:lower:]')
+    local all_tags=$(echo $2 | tr '[:upper:]' '[:lower:]')
     # List must be sperated with space items
-    local languages_list=('python' 'cpp' 'bash' 'terminal' 'Terminal' 'shell' 'zsh' 'PHP' 'TypeScript' 'Scala' 'nvim' 'neovim' 'pdf' 'PDF' 'markdown' 'org' 'text'
-        'Shell' 'PowerShell' 'Perl' 'Haskell' 'Kotlin' 'SQL' 'MATLAB' 'Groovy' 'Lua' 'Rust' 'rust' 'Ruby' 'HTML and CSS' 'ruby'
-        'Python' 'Java' 'JavaScript' 'Swift' 'C++' 'C#' 'R' 'Golang (Go)' 'vim' 'apple' 'mac' 'macOS' 'appleScript' 'git' 'GitHub'
-        'linux' 'gnu-linux' 'ubuntu' 'note' 'memo' 'awk' 'sed' 'tr' 'cat' 'bat' 'latex' 'Latex' 'emacs' 'Emacs')
 
     for lang in "${languages_list[@]}"; do
         if [[ "$lang" == "$answer" ]]; then
@@ -250,6 +257,13 @@ if [[ $SYSTEM_TYPE == 'macOSX' ]]; then
             ;;
         -[vV] | --version)
             version
+            exit 1
+            ;;
+        -[gG] | --languages)
+
+            for lang in "${languages_list[@]}"; do
+                echo -ne "${RED}$lang ${YELLOW}⚡${NC}" | tr [:upper:] [:lower:]
+            done
             exit 1
             ;;
         *)
