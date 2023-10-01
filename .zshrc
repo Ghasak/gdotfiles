@@ -1027,3 +1027,12 @@ export PATH="$PATH:/Applications/vmd.app/Contents/MacOS/"
 #           ADDING 3rd party libraries (e.g. SDL2)
 #####################################################################
 export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
+#####################################################################
+#        VCPKG: Package Manager for C/C++ Libraries
+#####################################################################
+export PATH="$PATH:$HOME/vcpkg/" # Added by myself
+# Generated using ~/vcpkg/vcpkg integrate zsh
+autoload bashcompinit
+bashcompinit
+source $HOME/vcpkg/scripts/vcpkg_completion.zsh
+
