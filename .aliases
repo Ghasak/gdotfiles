@@ -1238,3 +1238,22 @@ function nbpreviewx(){
 # ├─ﮧ INSERT 
 # ╰─ zip -vr emacs_capsule_Thu_May_2023_222334.zip ~/.emacs.d -x "*.DS_Store"
 # ```
+#
+#
+##
+#####################################################################
+#            JSON file Parser
+#            Installed from:
+#            Build: https://github.com/jqlang/jq
+#            Pre-Build: https://github.com/jqlang/jq/releases
+#            Move binary to $HOME/.GScript/
+#            Usage:
+#            ::> jq '.' data.json
+#            ::> jq -n  '{field: 123}'
+#####################################################################
+alias jq=jq
+jqless () {
+  args=$1
+  shift
+  jq --color-output . $args "$@" | less --raw-control-chars
+}

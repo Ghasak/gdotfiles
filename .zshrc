@@ -384,7 +384,6 @@ alias vim='nvim'
 export EDITOR="/usr/local/bin/nvim"
 export VISUAL="/usr/local/bin/nvim"
 
-
 #============================================================================
     # New Features from Natelandau .bash_profile
 #============================================================================
@@ -731,20 +730,6 @@ export PATH="$HOME/nextword/:$PATH"
 #fi
 
 ###################################################
-#       Autheticate all my scripts thata
-#       I developed in the shell
-###################################################
-# export PATH="$HOME/.GScript/:$PATH"
-# export PATH="$HOME/.GScript/utility_functions:$PATH"
-# ----is will load Recursively all the files in the directory
-# for d in $HOME/.GScript/*; do PATH="$PATH:$d"; done
-export PATH="$HOME/.GScript/:$PATH"
-export PATH="$HOME/.GScript/myLatexDev/:$PATH"
-export PATH="$HOME/.GScript/utility_functions/:$PATH"
-export PATH="$HOME/.GScript/nvimTimeMachine/:$PATH"
-export PATH="$PATH:$HOME/.GScript/mysnippets/"
-#source $HOME/.GScript/forgit/forgit.plugin.zsh
-###################################################
 #       Configurtion of Neovid
 #       https://github.com/Kethku/neovide
 ###################################################
@@ -853,6 +838,7 @@ alias luamake=/Users/ghasak.ibrahim/.config/nvim/language_servers/lua-language-s
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
+
 ###################################################
 #           Anaconda Installation
 ###################################################
@@ -871,8 +857,24 @@ export CONDA_AUTO_ACTIVATE_BASE=false # This will prevent from auto activiate (b
 # fi
 # unset __conda_setup
 # <<< conda initialize <<<
-export PATH="/Users/gmbp/anaconda3/bin:$PATH"
+export PATH="$HOME/anaconda3/bin:$PATH"
 # export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
+###################################################
+#       Autheticate all my scripts thata
+#       I developed in the shell
+###################################################
+# export PATH="$HOME/.GScript/:$PATH"
+# export PATH="$HOME/.GScript/utility_functions:$PATH"
+# ----is will load Recursively all the files in the directory
+# for d in $HOME/.GScript/*; do PATH="$PATH:$d"; done
+export PATH="$HOME/.GScript/:$PATH"
+export PATH="$HOME/.GScript/myLatexDev/:$PATH"
+export PATH="$HOME/.GScript/utility_functions/:$PATH"
+export PATH="$HOME/.GScript/nvimTimeMachine/:$PATH"
+export PATH="$PATH:$HOME/.GScript/mysnippets/"
+#source $HOME/.GScript/forgit/forgit.plugin.zsh
+
+
 ###################################################
 #          Local Postgresql
 #                 v.14

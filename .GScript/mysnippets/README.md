@@ -1,5 +1,10 @@
 # Snippets Manager - CLI
+
 The following `CLI` is my daily-Dev assistant.
+
+## ChangingLog
+
+- `2023-10-04`: Change the name of the CLI and create a support for the language supported.
 
 ## Development Requirements
 
@@ -13,10 +18,10 @@ The following `CLI` is my daily-Dev assistant.
 - [ ] Add a selected tags with fzf
 - [ ] Add a seelcted language with fzf
 
-
 ## Working plan
 
 ### Rules
+
 0. When create, it will open the default `Terminal Editor` with template.
 1. Accept `positional arguments` by the language. if not, show the `default`.
 2. Integrated with `GitHub` for portability.
@@ -25,14 +30,13 @@ The following `CLI` is my daily-Dev assistant.
 5. support `hyperlinks`.
 
 ### System Setup
+
 Limitation for current `mysnippet` is maximum file name is set to less than `255` characters, due to many snippets.
-
-
 
 ### Dependencies
 
-
 ### Helper commands
+
 ```bash
 $ fzf --preview-window down:80% --preview "mdv {}"
 $ fzf -e -i --preview-window down:80% --preview "mdv {}"
@@ -49,5 +53,3 @@ echo one two three four five | tr ' ' '_'
 # Will search for specific word in the snippet
 rg --files-with-matches --no-messages "apple"  | fzf $FZF_PREVIEW_WINDOW --preview "rg --ignore-case --pretty --context 10 'apple' {}" --preview-window down:80%:wrap
 ```
-
-
