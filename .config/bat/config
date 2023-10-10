@@ -2,4 +2,5 @@
 # https://github.com/sharkdp/bat#configuration-file
 # bat --config-file, bat --list-themes
 #--theme="gruvbox-dark"
---theme="OneHalfDark"
+#--theme="OneHalfDark"
+--theme="ansi"

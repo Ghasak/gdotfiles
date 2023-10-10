@@ -874,7 +874,13 @@ export PATH="$HOME/.GScript/nvimTimeMachine/:$PATH"
 export PATH="$PATH:$HOME/.GScript/mysnippets/"
 #source $HOME/.GScript/forgit/forgit.plugin.zsh
 
-
+###################################################
+#           g-Cli Hub for cli dev.
+#       The developed cli - Operating here
+###################################################
+export PATH="$PATH:$HOME/gCliHub/nvimTimeMachine/"
+export PATH="$PATH:$HOME/gCliHub/tagSys/"
+export PATH="$PATH:$HOME/gCliHub/myLatex/"
 ###################################################
 #          Local Postgresql
 #                 v.14
