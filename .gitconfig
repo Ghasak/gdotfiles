@@ -59,7 +59,7 @@
   logtsa = log --graph --color --format=\"%C(auto)%h %d %<|(100,trunc) %s\" --all --simplify-by-decoration
 [core]
   # Don't paginate output by default
-  pager = cat
+  pager = bat
   # Global ignore file (not shared)
 	excludesfile = /Users/gmbp/.gitignore_global
   # Global shared hooks directory

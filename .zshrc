@@ -45,6 +45,16 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+#============================================================================
+#       Configuration nvim
+#============================================================================
+
+alias vim='nvim'
+# export EDITOR=vim   # Using NANO:/usr/bin/nano
+# export VISUAL=vim
+export EDITOR="/usr/local/bin/nvim"
+export VISUAL="/usr/local/bin/nvim"
+export PAGER="/opt/homebrew/bin/bat --style=numbers"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 source $HOME/.zshrc_prompt
@@ -136,6 +146,8 @@ plugins=(git
         # replace zsh's default completion selection menu with fzf!
         # https://github.com/aloxaf/fzf-tab
         fzf-tab
+        # clipboard
+        clipboard
   )
 # **************************************************************************
 #                     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE
@@ -217,6 +229,7 @@ then
   autoload -Uz compinit
   compinit
 fi
+
 
 #*************************************************************************
 #  __________________
@@ -374,15 +387,6 @@ batdiff() {
     git diff --name-only --diff-filter=d | xargs bat --diff
 }
 
-#============================================================================
-#       Configuration nvim
-#============================================================================
-
-alias vim='nvim'
-# export EDITOR=vim   # Using NANO:/usr/bin/nano
-# export VISUAL=vim
-export EDITOR="/usr/local/bin/nvim"
-export VISUAL="/usr/local/bin/nvim"
 
 #============================================================================
     # New Features from Natelandau .bash_profile
@@ -649,29 +653,6 @@ eval $(thefuck --alias)
 #alias python='/usr/bin/python'
 #alias python3='/Users/ghasak.ibrahim/opt/anaconda3/bin/python'
 
-##################################################
-#       This function is working with ranger
-#       using Capital (Q) to exit ranger to
-#       the last specified directory in ranger.
-#       - Added Wed. Feb. 24th 2021
-##################################################
-function ranger-cd {
-    local IFS=$'\t\n'
-    local tempfile="$(mktemp -t tmp.XXXXXX)"
-    local ranger_cmd=(
-        command
-        ranger
-        --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
-    )
-
-    ${ranger_cmd[@]} "$@"
-    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
-        cd -- "$(cat "$tempfile")" || return
-    fi
-    command rm -f -- "$tempfile" 2>/dev/null
-}
-
-alias ranger=ranger-cd
 
 ##################################################
 #       Direnv Hoocking to zsh
@@ -1015,6 +996,30 @@ PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 #
 #zsh completions have been installed to:
 #  /opt/homebrew/opt/curl/share/zsh/site-functions
+
+##################################################
+#       This function is working with ranger
+#       using Capital (Q) to exit ranger to
+#       the last specified directory in ranger.
+#       - Added Wed. Feb. 24th 2021
+##################################################
+function ranger-cd {
+    local IFS=$'\t\n'
+    local tempfile="$(mktemp -t tmp.XXXXXX)"
+    local ranger_cmd=(
+        command
+        ranger
+        --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
+    )
+
+    ${ranger_cmd[@]} "$@"
+    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
+        cd -- "$(cat "$tempfile")" || return
+    fi
+    command rm -f -- "$tempfile" 2>/dev/null
+}
+
+alias ranger=ranger-cd
 ## -------------------- BR command -----------------------
 #source /Users/gmbp/.config/broot/launcher/bash/br
 source $HOME/.config/broot/launcher/bash/br
@@ -1022,7 +1027,8 @@ source $HOME/.config/broot/launcher/bash/br
 #####################################################################
 ##   Adapter for deubgging (used in Emacs [dap layer/dap-mode])
 #####################################################################
-export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.17.4-darwin-arm64/debugAdapters/lldb-mi/bin"
+export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.17.5-darwin-arm64/debugAdapters/lldb-mi/bin"
+#export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.17.4-darwin-arm64/debugAdapters/lldb-mi/bin"
 #export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.14.5-darwin-arm64/debugAdapters/lldb-mi/bin"
 #export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.15.4-darwin-arm64/debugAdapters/lldb-mi/bin/"
 #export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.15.4-darwin-arm64/bin/"
