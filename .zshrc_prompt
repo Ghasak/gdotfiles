@@ -541,8 +541,14 @@ function virtualenv_info {
 # zle -N vi-yank-xclip
 # bindkey -M vicmd 'y' vi-yank-xclip
 #
-
-
+function vi-yank-xclip {
+    zle vi-yank
+   echo "$CUTBUFFER" | pbcopy -i
+}
+zle -N vi-yank-xclip
+bindkey -M visual 'y' vi-yank-xclip
+#
+#
 # \ufbf2 => ﯲ
 # \uf233 =>
 #  RED="\e[31m"

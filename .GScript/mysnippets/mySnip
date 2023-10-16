@@ -165,7 +165,7 @@ languages_list=('python' 'cpp' 'bash' 'terminal' 'shell' 'zsh' 'php'
     'powerShell' 'perl' 'haskell' 'kotlin' 'sql' 'matlap' 'groovy' 'lua' 'rust'
     'ruby' 'html and css' 'ruby' 'java' 'javascript' 'swift' 'c++' 'c#'
     'rlang(R)' 'golang(Go)' 'vim' 'apple' 'mac' 'macos' 'applescript' 'git' 'gnuplot'
-    'github' 'linux' 'gnu-linux' 'ubuntu' 'note' 'memo' 'awk' 'sed' 'tr' 'cat'
+    'github' 'linux' 'gnu-linux' 'ubuntu' 'note' 'memo' 'awk' 'sed' 'tr' 'cat' 'jupyter' 'jupyterlab' 'jupyter lab'
     'bat' 'latex' 'emacs')
 
 function fileName_with_tags() {

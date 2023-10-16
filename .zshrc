@@ -54,7 +54,7 @@ alias vim='nvim'
 # export VISUAL=vim
 export EDITOR="/usr/local/bin/nvim"
 export VISUAL="/usr/local/bin/nvim"
-export PAGER="/opt/homebrew/bin/bat --style=numbers"
+#export PAGER="/opt/homebrew/bin/bat --style=numbers"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 source $HOME/.zshrc_prompt
@@ -363,14 +363,26 @@ WelcomeMessage
 #============================================================================
 #                   COLORING The MAN-Page
 #============================================================================
-export LESS_TERMCAP_mb=$'\e[1;32m'
-export LESS_TERMCAP_md=$'\e[1;32m'
+# LESS_TERMCAP settings for improved man page colors
+# Reset: Clears all styles
 export LESS_TERMCAP_me=$'\e[0m'
 export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
+# Bold: Bright green
+export LESS_TERMCAP_md=$'\e[1;32m'
+# Blink: Same as bold (bright green) here, but could be changed
+export LESS_TERMCAP_mb=$'\e[1;32m'
+# Standout: Used for highlighting, set to bright yellow
+export LESS_TERMCAP_so=$'\e[01;33m'
+# Underline: Red with underline
 export LESS_TERMCAP_us=$'\e[1;4;31m'
-
+# Page for your man page
+# You can use less, more, or cat or bat
+# MANPAGER="less -N" man <command_you_want_to_view>
+# bat  --wrap=never --style=numbers
+MANPAGER="bat --wrap=never --style=plain"
+#MANPAGER="bat --wrap=never --style=plain" man grep
+# If you want numbers pass (--style=numbers)
 #============================================================================
 #                   Useful Functions and Utilities
 #============================================================================
@@ -466,7 +478,7 @@ alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\
 #           displays paginated result with colored search terms and two lines surrounding each hit.             Example: mans mplayer codec
 #   --------------------------------------------------------------------
 mans () {
-        man $1 | grep -iC2 --color=always $2 | less
+        man $1 | grep -iC2 --color=always $2 | bat
     }
 #   showa: to remind yourself of an alias (given some part of it)
 #   ------------------------------------------------------------

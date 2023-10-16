@@ -3,4 +3,4 @@
 # bat --config-file, bat --list-themes
 #--theme="gruvbox-dark"
 #--theme="OneHalfDark"
---theme="ansi"
+--theme="Nord"
