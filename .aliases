@@ -707,6 +707,7 @@ function portChecker() {
 #                 fuzzy searching the ports
 #------------------------------------------------------------------------------
 function fportChecker(){
+echo "search for the prot using 'port_number to get exact matching"
 lsof -iTCP -sTCP:LISTEN -n -P | fzf
 }
 
@@ -1393,3 +1394,10 @@ jqless () {
 #            brew install watch progress
 #####################################################################
 #watch progress -q
+
+
+#####################################################################
+#               Check all aliases I have
+#####################################################################
+alias myaliases="bat --language=bash ~/.aliases"
+

@@ -380,7 +380,9 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 # You can use less, more, or cat or bat
 # MANPAGER="less -N" man <command_you_want_to_view>
 # bat  --wrap=never --style=numbers
-MANPAGER="bat --wrap=never --style=plain"
+#MANPAGER="bat --wrap=never --style=plain"
+#alias man="MANPAGER='less' man"
+alias man="MANPAGER='bat --wrap=never --style=plain' man"
 #MANPAGER="bat --wrap=never --style=plain" man grep
 # If you want numbers pass (--style=numbers)
 #============================================================================
