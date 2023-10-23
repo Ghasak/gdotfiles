@@ -2,6 +2,7 @@
 
 * [Configuration dotfiles farm with stow](#configuration-dotfiles-farm-with-stow)
     * [ChangeLogs](#changelogs)
+    * [Current Versions](#current-versions)
         * [Gnu-Stow restore my dot-files configuration and setup (for MACBOOK Setups):](#gnu-stow-restore-my-dot-files-configuration-and-setup-for-macbook-setups)
         * [To-do](#to-do)
     * [Adding some information](#adding-some-information)
@@ -20,9 +21,32 @@ My custom .dot files for my machine MBP 14 stored and restored using stow.
 - `2023-09-23 16:44`: Update the config, for ranger and other minor updates.
 - `2023-06-20 18:17`: Update the anaconda to support python 3.10
 
+## Current Versions
+
+- Run `utilities_checker.sh` in the given repository.
+
+1. `iTerm2.0` : Build 3.4.21
+2. `zsh` : zsh 5.9 (x86_64-apple-darwin23.0
+3. `.oh-my-zsh` : `d41ca84` - (HEAD -> master, origin/master) fix(docker):
+   - `powerlevel10k` : `862440a` - (grafted, HEAD -> master, origin/master, origin/HEAD)
+   - `zsh-vi-mode` : `46a1985` - (HEAD) fix: visual mode stuck after typing `x`.
+   - `zsh-autosuggestions` : `a411ef3` - (HEAD -> master, tag: v0.7.0, origin/master, origin/HEAD)
+   - `fast-syntax-highlighting`: `13d7b4e` - (HEAD -> master, origin/master, origin/HEAD) add support for `goawk`.
+4. `bash`: GNU bash, version 5.2.15(1)-release (aarch64-apple-darwin22.1.0)
+5. `nvim`: NVIM v0.9.2 Build type: Release LuaJIT 2.1.1692716794
+6. `neovide`: neovide 0.11.2
+7. `rustc`: rustc 1.73.0 (cc66ad468 2023-10-03)
+8. `go`: go version go1.21.3 darwin/arm64
+9. `python`: Python 3.10.9
+10. node : `v20.8.0`
+11. `npm`: 10.1.0
+12. `clang++`: Apple clang version 15.0.0 (clang-1500.0.40.1) Target: arm64-apple-darwin23.0.0 Thread model: posix InstalledDir:
+13. `lldb`: lldb-1500.0.22.8 Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
+
 ### Gnu-Stow restore my dot-files configuration and setup (for MACBOOK Setups):
 
-I have shifted my `dotfiles` now to be stored and recover with `Gnu-Stow` as a farm of symlinks.
+I have shifted my `dotfiles` now to be stored and recover with `Gnu-Stow` as a
+farm of symlinks.
 
 - [`import`] You must be inside the `dotfile` directory to allow `stow` to
   interact with the home directory (parent directory).
