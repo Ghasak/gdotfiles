@@ -57,13 +57,14 @@ export VISUAL="/usr/local/bin/nvim"
 #export PAGER="/opt/homebrew/bin/bat --style=numbers"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-source $HOME/.zshrc_prompt
+#source $HOME/.zshrc_prompt
 source $HOME/.aliases
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -1063,4 +1064,3 @@ export PATH="$PATH:$HOME/vcpkg/" # Added by myself
 autoload bashcompinit
 bashcompinit
 source $HOME/vcpkg/scripts/vcpkg_completion.zsh
-

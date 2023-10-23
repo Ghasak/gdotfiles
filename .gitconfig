@@ -59,7 +59,8 @@
   logtsa = log --graph --color --format=\"%C(auto)%h %d %<|(100,trunc) %s\" --all --simplify-by-decoration
 [core]
   # Don't paginate output by default
-  pager = bat
+  #pager = bat
+  pager = delta
   # Global ignore file (not shared)
 	excludesfile = /Users/gmbp/.gitignore_global
   # Global shared hooks directory
@@ -223,7 +224,7 @@
     navigate = true    # use n and N to move between diff sections
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
     line-numbers = true
-    #side-by-side = true
+    side-by-side = false
     features = decorations
 
 [merge]
