@@ -1697,16 +1697,28 @@ function prompt_dice() {
 ##           DATE WITH TIME PROMPT
 ## ################################################
 function prompt_DATE_AND_TIME(){
- local DATE_ICON=$'\uF073'
+ local DATE_ICON=$'\uf073'
  local TIME_ICON=$'\ue38a'
  local DATE_ICON_COLOR='%F{#90c8bf}'  # Color code for icons
  local TIME_ICON_COLOR='%F{#D6D3F0}'  # Color code for icons
  local DATE_COLOR='%F{#FF90B3}'
- local TIME_COLOR='%F{#FFC2E2}'
- local dt="%F{blue}${DATE_ICON_COLOR}${DATE_ICON}${DATE_COLOR}  %D{%b %d, %Y} - ${TIME_ICON_COLOR}${TIME_ICON}${TIME_COLOR} %D{%L:%M:%S %p}" #-%D{%L:%M:%S %p}
- p10k segment -f "#eacda8" -t "$dt"
+ local TIME_COLOR='%F{#FFC2E2}'       # Using %a for short day string, and %A for longer day string.
+ local ordinal() {
+  case $(date "+%d") in
+    *1[0-9]) echo "th" ;;
+    *1) echo "st" ;;
+    *2) echo "nd" ;;
+    *3) echo "rd" ;;
+    *) echo "th" ;;
+  esac
 }
 
+local dt="%F{blue}${DATE_ICON_COLOR}${DATE_ICON}${DATE_COLOR} $(date "+%a").%D{%b.$(date "+%-d")$(ordinal),%Y}\
+-${TIME_ICON_COLOR}${TIME_ICON}${TIME_COLOR} %D{%L:%M:%S %p}"
+#  local dt="%F{blue}${DATE_ICON_COLOR}${DATE_ICON}${DATE_COLOR} $(date "+%a".)%D{%b.%d,%Y}\
+# -${TIME_ICON_COLOR}${TIME_ICON}${TIME_COLOR} %D{%L:%M:%S %p}"
+ p10k segment -f "#eacda8" -t "$dt"
+}
 ## ################################################
 #             ELLAPS_TIME FUNCTION
 #     Calculate the time between two prompt (hitting inter)

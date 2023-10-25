@@ -1,15 +1,18 @@
 # How to use STOW CLI
 
-<!-- vim-markdown-toc GitLab -->
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 
-* [Note](#note)
-* [Ignore given files/folders](#ignore-given-filesfolders)
-* [Running Stow (dry run)](#running-stow-dry-run)
-* [Perform stow](#perform-stow)
-* [Undo a stow](#undo-a-stow)
-    * [Example](#example)
+**Table of Contents**
 
-<!-- vim-markdown-toc -->
+- [How to use STOW CLI](#how-to-use-stow-cli)
+  - [Note](#note)
+  - [Ignore given files/folders](#ignore-given-filesfolders)
+  - [Running Stow (dry run)](#running-stow-dry-run)
+  - [Perform stow](#perform-stow)
+  - [Undo a stow](#undo-a-stow)
+    - [Example](#example)
+
+<!-- markdown-toc end -->
 
 ## Note
 
@@ -19,11 +22,11 @@
 
 You can ignore some files and folders base on regular expression, and cusotmize
 it similar to `.gitignore`, but the syntax of the `regular expression` a bit
-different. `GNU Stow` is a symlink farm manager which takes distinct sets of software
-and/or data located in separate directories on the filesystem, and makes them
-all appear to be installed in a single directory tree. By default, `stow` will
-create symlinks for all the files and directories within the specified
-directory. However, you can control this behavior by using a
+different. `GNU Stow` is a symlink farm manager which takes distinct sets of
+software and/or data located in separate directories on the filesystem, and
+makes them all appear to be installed in a single directory tree. By default,
+`stow` will create symlinks for all the files and directories within the
+specified directory. However, you can control this behavior by using a
 `.stow-local-ignore` file or a `.stow-global-ignore` file to specify patterns
 for files or directories that should be ignored.
 
@@ -43,11 +46,12 @@ Here's how you can prevent `stow` from creating symlinks for `.git` and
 ^\.gitignore$
 ```
 
-These regular expressions will match `.git`, `README.md`, `LICENSE` and `.gitignore`, instructing `stow`
-to ignore these files.
+These regular expressions will match `.git`, `README.md`, `LICENSE` and
+`.gitignore`, instructing `stow` to ignore these files.
 
 3. **Run `stow`**:
-   Now, when you run `stow`, it should ignore `.git` and `README.md` when creating symlinks.
+   Now, when you run `stow`, it should ignore `.git` and `README.md` when
+   creating symlinks.
 
 Alternatively, if you want to globally ignore these files for all `stow`
 operations regardless of the directory, you can create a `.stow-global-ignore`
@@ -94,7 +98,8 @@ stow -D --verbose=1
 ### Example
 
 ```sh
-╰─ stow --simulate . --verbose=1                                                                                                                      ─╯
+╰─ stow --simulate . --verbose=1
+
 LINK: .config/ranger/plugins => ../../gdotfiles/.config/ranger/plugins
 LINK: .config/ranger/rc.conf => ../../gdotfiles/.config/ranger/rc.conf
 LINK: .config/ranger/rifle.conf => ../../gdotfiles/.config/ranger/rifle.conf

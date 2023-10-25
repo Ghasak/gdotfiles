@@ -133,7 +133,7 @@ plugins=(git
         # https://github.com/zsh-users/zsh-autosuggestions/blob/master/install.md
         zsh-autosuggestions
         # auto jump from here:
-        autojump
+        #autojump
         # syntax zsh-syntax-highlighting from here:
         # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/install.md
         #zsh-syntax-highlighting # Problem occured not used anymore
@@ -313,7 +313,8 @@ function WelcomeMessage(){
                 # You can use also: echo -n; cal
             fi
 
-            figlet -f $FONTSTYLE "WELCOME $USER"|lolcat    #-a -d $time_var
+            figlet -f $FONTSTYLE "WELCOME"|lolcat    #-a -d $time_var
+            figlet -f $FONTSTYLE "   $USER" | lolcat
             echo -e "Welcome: ${RED}$MYNAME${ENDCOLOR} on your personal computer ${BLUE}$HOST${ENDCOLOR}"
             echo -e "Operating System: ${GREEN}$(uname -s)${ENDCOLOR} ${GREEN}$(uname -r)${ENDCOLOR}"
             echo -e "Kernel: ${GREEN}$(uname -r)${ENDCOLOR}"
@@ -1064,3 +1065,9 @@ export PATH="$PATH:$HOME/vcpkg/" # Added by myself
 autoload bashcompinit
 bashcompinit
 source $HOME/vcpkg/scripts/vcpkg_completion.zsh
+
+#####################################################################
+#         Using zoxide instead of autojump
+#   URL:https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation
+#####################################################################
+eval "$(zoxide init zsh --cmd j)"
