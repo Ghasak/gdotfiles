@@ -142,7 +142,27 @@ alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 # !^music: Inverse-prefix-exact-match, return items that do not start with music.
 # !.mp3$: Inverse-suffix-exact-match, return items that do not end with .mp3.
 
-alias fzf="/opt/homebrew/bin/fzf --preview-window top:30 --preview '([[ -f {} ]] && (bat --style=numbers --color=always\
+#########################################################
+#             CHECK THE BINARY OF FZF
+# URL: https://github.com/Homebrew/brew/blob/master/docs/\
+# FAQ.md#why-is-the-default-installation-prefix-opthomebrew-on-apple-silicon
+#########################################################
+case $(uname -s) in
+"Darwin")
+  if [ "$(uname -m)" = "arm64" ]; then
+    fzf_binary="/opt/homebrew/bin/fzf"
+  elif [ "$(uname -m)" = "x86_64" ]; then
+    fzf_binary="/usr/local/bin/fzf"
+  fi
+  ;;
+"Linux")
+  if [ "$(uname -m)" = "x86_64" ]; then
+    fzf_binary="/home/linuxbrew/.linuxbrew/bin/fzf"
+  fi
+  ;;
+esac
+
+alias fzf="$fzf_binary --preview-window top:30 --preview '([[ -f {} ]] && (bat --style=numbers --color=always\
      {} || bat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
 # export FZF_DEFAULT_OPTS="
 # --info=inline
@@ -190,7 +210,7 @@ function myfzf(){
          ${GRAY}LINK: ${BLUE}https://betterprogramming.pub/boost-your-command-line-productivity-with-fuzzy-finder-985aa162ba5d#c4fb${ENDCOLOR}
         "
     else
-     /opt/homebrew/bin/fzf --preview-window=top:50% --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+     $fzf_binary --preview-window=top:50% --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
   fi
   }
 
@@ -1401,3 +1421,11 @@ jqless () {
 #####################################################################
 alias myaliases="bat --language=bash ~/.aliases"
 
+
+#####################################################################
+#               CPP Man Page
+#               https://github.com/aitjcize/cppman
+#               1. brew install groff
+#               2. pip install html5lib
+#               3. pip install cppman
+#####################################################################

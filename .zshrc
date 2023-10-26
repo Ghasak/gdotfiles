@@ -666,10 +666,6 @@ alias ipy="python3 -c 'import IPython; IPython.terminal.ipapp.launch_new_instanc
 #============================================================================
 eval $(thefuck --alias)
 #============================================================================
-#alias python='/usr/bin/python'
-#alias python3='/Users/ghasak.ibrahim/opt/anaconda3/bin/python'
-
-
 ##################################################
 #       Direnv Hoocking to zsh
 ##################################################
@@ -836,26 +832,6 @@ export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
-###################################################
-#           Anaconda Installation
-###################################################
-export CONDA_AUTO_ACTIVATE_BASE=false # This will prevent from auto activiate (base) conda environment.
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/Users/gmbp/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/Users/gmbp/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/Users/gmbp/anaconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/Users/gmbp/anaconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<
-export PATH="$HOME/anaconda3/bin:$PATH"
-# export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
 ###################################################
 #       Autheticate all my scripts thata
 #       I developed in the shell
@@ -1071,3 +1047,29 @@ source $HOME/vcpkg/scripts/vcpkg_completion.zsh
 #   URL:https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation
 #####################################################################
 eval "$(zoxide init zsh --cmd j)"
+
+###################################################
+#           Anaconda Installation
+###################################################
+#alias python='/usr/bin/python'
+#alias python3='/Users/ghasak.ibrahim/opt/anaconda3/bin/python'
+export CONDA_AUTO_ACTIVATE_BASE=false # This will prevent from auto activiate (base) conda environment.
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/Users/gmbp/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/Users/gmbp/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/Users/gmbp/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="$HOME:/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# <<< conda initialize <<<
+#export PATH="$HOME:/usr/local/bin:$PATH"
+export PATH="$HOME/anaconda3/bin:$PATH"
+# export PATH="$HOME/anaconda3/bin:$PATH"  # commented out by conda initialize  # commented out by conda initialize
+#export PATH="$HOME/Applications/bin:$PATH"  # commented out by conda initialize  # commented out by conda initialize
+# export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
