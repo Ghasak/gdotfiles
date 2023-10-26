@@ -10,10 +10,6 @@ BASH_VERSION=$($BASH_PATH --version | head -n 1 | awk '{print $4}' | awk -F '(' 
 
 echo "ZSH Version: $ZSH_VERSION"
 echo "Bash Version: $BASH_VERSION"
-
-
-#!/bin/bash
-
 # Check if brew is installed
 if ! command -v brew &>/dev/null; then
     echo "Homebrew is not installed. Installing now..."
@@ -45,29 +41,43 @@ install_cask() {
 }
 
 # List of common packages for both macOS architectures and Linux x86_64
-pkgs="zoxide bat fzf tidy-viewer dust tokei hyperfine tealdeer gping grex neovide kalker jrnl ctop lazydocker navi gh rich mdv khal gnuplot"
-casks="appcleaner google-chrome sublime-text vlc neovide gh"
+pkgs=( zoxide bat fzf tidy-viewer dust tokei hyperfine
+    tealdeer gping grex kalker jrnl ctop lazydocker navi
+    gh rich mdv khal gnuplot vcpkg)
+casks=( appcleaner google-chrome sublime-text vlc )
 
 # Determine OS and architecture
 case $(uname -s) in
 "Darwin")
   if [ "$(uname -m)" = "arm64" ]; then
+      printf '#%.0s' {1..80}
+      echo -e "\n    RUNNING ON $(uname -s) System with CPU architecture : $(uname -m)"
+      printf '#%.0s' {1..80}
+      echo
 
-        install_package "$pkgs"
-        install_package "$casks"
+        install_package "${pkgs[@]}"
+        install_cask "${casks[@]}"
+
   elif [ "$(uname -m)" = "x86_64" ]; then
-        install_package "$pkgs"
+      printf '#%.0s' {1..80}
+      echo -e "\n    RUNNING ON $(uname -s) System with CPU architecture : $(uname -m)"
+      printf '#%.0s' {1..80}
+      echo
+        install_package "${pkgs[@]}"
+        install_cask "${casks[@]}"
   fi
   ;;
 "Linux")
   if [ "$(uname -m)" = "x86_64" ]; then
-        install_package "$pkgs"
+        install_package "${pkgs[@]}"
+        install_cask "${casks[@]}"
   fi
   ;;
 esac
 
-
-
-
-echo "All packages have been installed or checked."
+echo
+printf '-%.0s' {1..80}
+echo "\n    All packages have been installed or checked."
+printf '-%.0s' {1..80}
+echo
 
