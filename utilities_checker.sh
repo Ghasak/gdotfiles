@@ -41,17 +41,17 @@ install_cask() {
 }
 
 # List of common packages for both macOS architectures and Linux x86_64
-pkgs=( zoxide bat fzf tidy-viewer dust tokei hyperfine
+pkgs=( zoxide bat fzf tidy-viewer dust tokei hyperfine lolcat boxes figlet
     tealdeer gping grex kalker jrnl ctop lazydocker navi
     gh rich mdv khal gnuplot )
-casks=( appcleaner google-chrome sublime-text vlc )
+casks=( appcleaner google-chrome sublime-text vlc keycastr stats xquartz numi)
 
 # Determine OS and architecture
 case $(uname -s) in
 "Darwin")
   if [ "$(uname -m)" = "arm64" ]; then
       printf '#%.0s' {1..80}
-      echo -e "\n    RUNNING ON $(uname -s) System with CPU architecture : $(uname -m)"
+      echo -e "\n\tRUNNING ON $(uname -s) System with CPU architecture : $(uname -m)"
       printf '#%.0s' {1..80}
       echo
 
@@ -76,8 +76,8 @@ case $(uname -s) in
 esac
 
 echo
-printf '-%.0s' {1..80}
-echo -e "\n    All packages have been installed or checked."
-printf '-%.0s' {1..80}
+printf '#%.0s' {1..80}
+echo -e "\n\t\tAll packages have been installed or checked."
+printf '#%.0s' {1..80}
 echo
 
