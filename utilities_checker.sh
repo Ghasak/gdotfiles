@@ -43,7 +43,7 @@ install_cask() {
 # List of common packages for both macOS architectures and Linux x86_64
 pkgs=( zoxide bat fzf tidy-viewer dust tokei hyperfine
     tealdeer gping grex kalker jrnl ctop lazydocker navi
-    gh rich mdv khal gnuplot vcpkg)
+    gh rich mdv khal gnuplot )
 casks=( appcleaner google-chrome sublime-text vlc )
 
 # Determine OS and architecture
@@ -77,7 +77,7 @@ esac
 
 echo
 printf '-%.0s' {1..80}
-echo "\n    All packages have been installed or checked."
+echo -e "\n    All packages have been installed or checked."
 printf '-%.0s' {1..80}
 echo
 
