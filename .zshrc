@@ -147,8 +147,6 @@ plugins=(git
         # replace zsh's default completion selection menu with fzf!
         # https://github.com/aloxaf/fzf-tab
         fzf-tab
-        # clipboard
-        clipboard
   )
 # **************************************************************************
 #                     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE
@@ -177,7 +175,8 @@ zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 function zvm_config() {
   # ZVM_LINE_INIT_MODE=$ZVM_MODE_NORMAL
   ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-  ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+  #ZVM_VI_INSERT_ESCAPE_BINDKEY=jk #[[This causes a problem of hiccup in the
+  #prompt https://github.com/romkatv/powerlevel10k/issues/2469]]
 }
 # **************************************************************************
 # Souce all the plugins
@@ -869,13 +868,11 @@ export PATH="$PATH:$HOME/gCliHub/myLatex/"
 # One Port -p 5432 run the database called "postgres"
 # /Applications/Postgres.app/Contents/Versions/14/bin/psql -p5432 "postgres"
 export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/14/bin/"
-
 ###################################################
 #         MacBook 14 (ARM based) Config.
 ###################################################
 # upgrade the bash version comes with the original installation of mac
 export PATH="$HOME/opt/homebrew/bin/:$PATH"
-
 ###################################################
 #   MacOS terminal command History checking
 ###################################################
@@ -906,7 +903,6 @@ export PATH="$PATH:$HOME/go/bin/"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
 ######################################################################
 #           Current Java for ARM Mac - M1
 #####################################################################
@@ -916,14 +912,11 @@ export SDKMAN_DIR="$HOME/.sdkman"
 #           Neovide - IDE (neovide)
 #####################################################################
 export PATH="$PATH:/Applications/Neovide.app/Contents/MacOS/"
-
 #####################################################################
 #       Using Chromium to lunch the cv-generator
 #####################################################################
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 export PUPPETEER_EXECUTABLE_PATH=`which chromium`
-
-
 #####################################################################
 #                 fpath utility_functions
 #####################################################################

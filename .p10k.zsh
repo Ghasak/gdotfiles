@@ -34,15 +34,15 @@
     # =========================[ Line #1 ]=========================
     os_icon                  # os identifier
     user_name_and_machine
-    #context                 # user@hostname
+    context                 # user@hostname
     dir                      # current directory
     newline
     ROBOT
     vi_mode                  # vi mode (you don't need this if you've enabled prompt_char)
     dice
     vcs                      # git status
-    # =========================[ Line #2 ]=========================
     newline                  # \n
+    # =========================[ Line #2 ]=========================
     #prompt_char             # prompt symbol
   )
 

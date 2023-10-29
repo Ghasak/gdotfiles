@@ -17,6 +17,7 @@ My custom .dot files for my machine MBP 14 stored and restored using stow.
 
 ## ChangeLogs
 
+- `2023-10-29 22:58`: resolved the issue with the `zsh-vim-mode` confict with the `autojump`.
 - `2023-10-23 00:00`: Update the .zshrc workflow - for daily activities.
 - `2023-09-23 16:44`: Update the config, for ranger and other minor updates.
 - `2023-06-20 18:17`: Update the anaconda to support python 3.10
