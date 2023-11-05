@@ -262,10 +262,13 @@ export HISTCONTROL=ignoreboth            # ignoredups+ ignorespace
 export HISTIGNORE="history:pwd:exit:df:df:ls:ls -la:ll"
 alias ll='ls -lahG'
 alias ctree='colorls --tree'
+alias lsg="$HOME/lsd/target/release/lsd -A --icon=always -F -l -1 -h -v -G -L --group-dirs=first" # " -A --icon=always -F -l -1 -h -v -G -L --group-dirs=first"
 #alias lsd='colorls -lA --sd'
 alias lsd='colorls -l -A -h --light --sort-dirs'
+#alias lsd='exa -1 -l -g -H -m -a -x -F --color=always --group-directories-first --icons'
 # To make the history format working with zsh use:
 alias history='history -i'
+
 
 # New way to show the background you will need to follow
 # https://drasite.com/blog/Pimp%20my%20terminal
