@@ -1,7 +1,6 @@
 # Configuration dotfiles farm with stow
 
 <!-- vim-markdown-toc GitLab -->
-
 * [Configuration dotfiles farm with stow](#configuration-dotfiles-farm-with-stow)
     * [ChangeLogs](#changelogs)
     * [Current Versions](#current-versions)
@@ -18,6 +17,7 @@ My custom .dot files for my machine MBP 14 stored and restored using stow.
 
 ## ChangeLogs
 
+- `2023-11-11 21:46`: Updated the AppleScript for faster speed opening Emacs.
 - `2023-10-29 22:58`: resolved the issue with the `zsh-vim-mode` confict with the `autojump`.
 - `2023-10-23 00:00`: Update the .zshrc workflow - for daily activities.
 - `2023-09-23 16:44`: Update the config, for ranger and other minor updates.
@@ -98,8 +98,8 @@ The current steps I followed to generate the files which are now stowed both
 ```sh
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
-
-2. Configure it using the command `p10k configure. `, but we will stow our config file already with the file `.p10k.zsh`. We don't need this step.
+2. Configure it using the command `p10k configure. `, but we will stow our
+   config file already with the file `.p10k.zsh`. We don't need this step.
 3. As you can see in `.zshrc` we are sourcing the `.p10k.zsh` using
 
 ```sh
