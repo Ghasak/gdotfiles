@@ -1,3 +1,5 @@
+# Configuration dotfiles farm with stow
+
 <!-- vim-markdown-toc GitLab -->
 
 * [Configuration dotfiles farm with stow](#configuration-dotfiles-farm-with-stow)
@@ -11,7 +13,6 @@
 
 <!-- vim-markdown-toc -->
 
-# Configuration dotfiles farm with stow
 
 My custom .dot files for my machine MBP 14 stored and restored using stow.
 
