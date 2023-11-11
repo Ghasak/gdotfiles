@@ -1381,7 +1381,7 @@ function nbpreviewx(){
 # zip -vr <name_capsule> <files, can be several directories> -x <exceptions>
 # ```
 #
-alias myemacs="/opt/homebrew/bin/emacsclient -n -c --socket-name=server_ghasak_01 -a 'emacs' ~/. &"
+alias myemacs="/opt/homebrew/bin/emacs --daemon=server_ghasak_01 &"
 #####################################################################
 #                 Using Zip
 #####################################################################
