@@ -1380,8 +1380,8 @@ function nbpreviewx(){
 # ```formula
 # zip -vr <name_capsule> <files, can be several directories> -x <exceptions>
 # ```
-#
-alias myemacs="/opt/homebrew/bin/emacs --daemon=server_ghasak_01 &"
+# Unfortunately, the server always doesnt run the century tabs
+#alias myemacs="/opt/homebrew/bin/emacs --daemon=server &"
 #####################################################################
 #                 Using Zip
 #####################################################################
