@@ -139,7 +139,8 @@ plugins=(git
         #zsh-syntax-highlighting # Problem occured not used anymore
         # I use instead fast-syntax-highlighting
         # https://github.com/zdharma-continuum/fast-syntax-highlighting
-        fast-syntax-highlighting
+        #fast-syntax-highlighting
+	    F-Sy-H
         # adding vim support to my current zsh:
         # vi-mode
         # https://github.com/jeffreytse/zsh-vi-mode
@@ -354,7 +355,7 @@ function WelcomeMessage(){
         fi
 }
 
-WelcomeMessage
+#WelcomeMessage
 
 # CHECKT_IF_ITERM_WAS_RUNNING=$(ps aux | grep iterm2 | wc -l)
 # if [ $CHECKT_IF_ITERM_WAS_RUNNING -gt 1 ]; then
@@ -465,7 +466,7 @@ alias .4='cd ../../../../'                  # Go back 4 directory levels
 alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
 alias edit='sublime'                        # edit:         Opens any file in sublime editor
-alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
+alias f='nautilus ./'                 # f:            Opens current directory in MacOS Finder
 alias ~="cd ~"                              # ~:            Go Home
 alias c='clear'                             # c:            Clear terminal display
 alias which='type -a '                      # which:        Find executables
@@ -618,10 +619,10 @@ alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'
 alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'
 #   cleanupLS:  Clean up LaunchServices to remove duplicates in the "Open With" menu
 #   -----------------------------------------------------------------------------------
-alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+#alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 #    screensaverDesktop: Run a screensaver on the Desktop
 #   -----------------------------------------------------------------------------------
-alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
+#alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
 #   ---------------------------------------
 #   8.  WEB DEVELOPMENT
 #   ---------------------------------------
@@ -666,377 +667,12 @@ alias ipy="python3 -c 'import IPython; IPython.terminal.ipapp.launch_new_instanc
 #============================================================================
 #       For installting the fuck to correct your formula
 #============================================================================
-eval $(thefuck --alias)
+#eval $(thefuck --alias)
 #============================================================================
 ##################################################
 #       Direnv Hoocking to zsh
 ##################################################
 eval "$(direnv hook zsh)"
-
-##################################################
-#    Any thing added here is automated by
-#            an app or service
-##################################################
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-###################################################
-#        For mtr utility adding to the path
-###################################################
-PATH=$PATH:/usr/local/sbin
-
-###################################################
-#       Interactive Terminal for Git
-###################################################
-# source <(curl -sSL git.io/forgit)
-#
-if [ -f ~/.GScript/forgitScript.sh ]; then
-
-    source ~/.GScript/forgitScript.sh
-
-else
-
-    print "404: ~/.GScript/forgitScript.sh is not found."
-    print "For more details see :ttps://github.com/wfxr/forgit"
-    print "I will try to fetch it for you ... "
-    touch  ~/.GScript/forgitScript.sh
-    curl -sSL git.io/forgit >> ~/.GScript/forgitScript.sh
-    print "Yes, its available ... "
-    head ~/.GScript/forgitScript.sh | lolcat
-    print "Now Try again .. Restart your terminal "
-
-fi
-###################################################
-#           Predicting the nextword
-#           also working for coc-nextword
-#      https://github.com/high-moctane/nextword
-###################################################
-export NEXTWORD_DATA_PATH=$HOME/.nextword-data-large
-export PATH="$HOME/nextword/:$PATH"
-
-###################################################
-#       using fzf with reg
-#       https://irian.to/blogs/vim-fzf/
-###################################################
-
-#if type rg &> /dev/null; then
-#   export FZF_DEFAULT_COMMAND='rg --files'
-#  export FZF_DEFAULT_OPTS='-m --height 50% --border'
-
-#fi
-
-###################################################
-#       Configurtion of Neovid
-#       https://github.com/Kethku/neovide
-###################################################
-export PATH="$HOME/neovide/target/release/:$PATH"
-
-###################################################
-#       Confgurations for the yabai
-###################################################
-#export PATH="$HOME/.config/yabai/:$PATH"
-#export PATH="$HOME/.config/skhd/:$PATH"
-
-###################################################
-#       Google Driver for Seleinum
-#       Web Scraping and Automation
-###################################################
-export PATH="$HOME/.myServices/:$PATH"
-
-###################################################
-#       Project Template Builder
-#    Script to autoamte python project template
-###################################################
-export PATH="$HOME/.GScript/project_template_builder/:$PATH"
-
-###################################################
-#             gitstatus from
-#     the creator of the powerlevel10k
-###################################################
-#source /usr/local/opt/gitstatus/gitstatus.prompt.zsh
-#
-###################################################
-#           HISTORY SEARCHING COMMAND
-#           using: mcfly
-###################################################
-#eval "$(mcfly init zsh)"
-
-###################################################
-# HSTR configuration - add this to ~/.zshrc
-#       Following the configuration here
-#       Source:
-#       http://dvorka.github.io/hstr/CONFIGURATION.html
-###################################################
-alias hh=hstr                    # hh to be alias for hstr
-setopt histignorespace           # skip cmds w/ leading space from history
-export HSTR_CONFIG=hicolor       # get more colors
-bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
-
-###################################################
-#        Add Heskall to your path dir
-###################################################
-PATH=$PATH:/usr/local/sbin
-#PATH=$PATH:/Users/ghasak.ibrahim/.local/bin
-PATH=$PATH:/$HOME/.local/bin
-
-###################################################
-#   docui - TUI Client for Docker Written in Go
-#   Source: https://github.com/skanehira/docui
-###################################################
-export LC_CTYPE=en_US.UTF-8
-export TERM=xterm-256color
-
-###################################################
-#           CLICK-CLICK For Mac
-###################################################
-export PATH="$HOME/.GScript/utility_functions/cliclick/:$PATH"
-
-###################################################
-#           mcfly for command history
-###################################################
-#eval "$(mcfly init zsh)"
-
-###################################################
-#         Nvim 6.0 Stable Release
-###################################################
-#export PATH="$HOME/dev/nvim-os64/bin/:$PATH"
-#export PATH="$HOME/dev/nvim-os64/:$PATH"
-#export PATH="/Users/ghasak.ibrahim/dev/nvim-osx64/bin/"
-export PATH="$HOME/dev/nvim/bin/:$PATH"
-###################################################
-#             Lua Package Manager
-###################################################
-alias luamake=/Users/ghasak.ibrahim/.config/nvim/language_servers/lua-language-server/3rd/luamake/luamake
-###################################################
-###################################################
-#            Curl Configurtion
-#  If you need to have curl first in your PATH, run:
-#    echo 'export PATH="/usr/local/opt/curl/bin:$PATH"' >> ~/.zshrc
-#
-#  For compilers to find curl you may need to set:
-#    export LDFLAGS="-L/usr/local/opt/curl/lib"
-#    export CPPFLAGS="-I/usr/local/opt/curl/include"
-#
-#  For pkg-config to find curl you may need to set:
-#    export PKG_CONFIG_PATH="/usr/local/opt/curl/lib/pkgconfig"
-###################################################
-#export PATH="/usr/local/opt/curl/bin:$PATH"
-#export LDFLAGS="-L/usr/local/opt/curl/lib"
-#export CPPFLAGS="-I/usr/local/opt/curl/include"
-#export PKG_CONFIG_PATH="/usr/local/opt/curl/lib/pkgconfig"
-###################################################
-#           Correct Cmake Path
-###################################################
-# export PATH="/usr/local/bin:$PATH"
-###################################################
-#     This is for pipenv error message
-###################################################
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
-
-###################################################
-#       Autheticate all my scripts thata
-#       I developed in the shell
-###################################################
-# export PATH="$HOME/.GScript/:$PATH"
-# export PATH="$HOME/.GScript/utility_functions:$PATH"
-# ----is will load Recursively all the files in the directory
-# for d in $HOME/.GScript/*; do PATH="$PATH:$d"; done
-export PATH="$HOME/.GScript/:$PATH"
-export PATH="$HOME/.GScript/myLatexDev/:$PATH"
-export PATH="$HOME/.GScript/utility_functions/:$PATH"
-export PATH="$HOME/.GScript/nvimTimeMachine/:$PATH"
-export PATH="$PATH:$HOME/.GScript/mysnippets/"
-#source $HOME/.GScript/forgit/forgit.plugin.zsh
-
-###################################################
-#           g-Cli Hub for cli dev.
-#       The developed cli - Operating here
-###################################################
-export PATH="$PATH:$HOME/gCliHub/nvimTimeMachine/"
-export PATH="$PATH:$HOME/gCliHub/tagSys/"
-export PATH="$PATH:$HOME/gCliHub/myLatex/"
-###################################################
-#          Local Postgresql
-#                 v.14
-# Located at: "/Applications/PostgreSQL 14/SQL Shell (psql).app"
-# Data storage and command line: /Library/PostgreSQL/14/bin
-###################################################
-#export PATH="/Library/PostgreSQL/14/bin/:$PATH"
-# Put the path of Postgresql at the end
-#export PATH="$PATH:/Library/PostgreSQL/14/bin/"
-#export PATH="$PATH:/Library/PostgreSQL/14/bin/"
-#export PATH="$PATH:/Library/PostgreSQL/14/bin/"
-# Running Postgress in iTerm:
-# One Port -p 5432 run the database called "postgres"
-# /Applications/Postgres.app/Contents/Versions/14/bin/psql -p5432 "postgres"
-export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/14/bin/"
-###################################################
-#         MacBook 14 (ARM based) Config.
-###################################################
-# upgrade the bash version comes with the original installation of mac
-export PATH="$HOME/opt/homebrew/bin/:$PATH"
-###################################################
-#   MacOS terminal command History checking
-###################################################
-# checking the history using mcfly
-#eval "$(mcfly init zsh)"
-# checking the history using hstr
-###################################################
-#           Zathura -pdf reader
-#           will read form this location
-###################################################
-export PATH="$PATH:/usr/local/"
-###################################################
-#          Go Lang - Go Language
-###################################################
-# export GOPATH=$HOME/go-workspace # don't forget to change your path correctly!
-# export GOROOT=/usr/local/opt/go/libexec
-# export PATH=$PATH:$GOPATH/bin
-# export PATH=$PATH:$GOROOT/bin
-export PATH="$PATH:/usr/local/go/bin/"
-###################################################
-#        Export autoformatter for bash script
-#        Source:https://github.com/mvdan/sh
-###################################################
-export PATH="$PATH:$HOME/go/bin/"
-######################################################################
-#           SDKMAN - SDK Manager Package manager similar to brew
-######################################################################
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-######################################################################
-#           Current Java for ARM Mac - M1
-#####################################################################
-#export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
-#set editing-mode vi
-######################################################################
-#           Neovide - IDE (neovide)
-#####################################################################
-export PATH="$PATH:/Applications/Neovide.app/Contents/MacOS/"
-#####################################################################
-#       Using Chromium to lunch the cv-generator
-#####################################################################
-export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-export PUPPETEER_EXECUTABLE_PATH=`which chromium`
-#####################################################################
-#                 fpath utility_functions
-#####################################################################
-fpath=(~/.zsh.d/ $fpath)
-
-#####################################################################
-#                 coreutils utility_functions
-#####################################################################
-PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-#####################################################################
-#                 llvm utility_functions
-#####################################################################
-#==> llvm
-#To use the bundled libc++ please add the following LDFLAGS:
-#  LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -Wl,-rpath,/opt/homebrew/opt/llvm/lib/c++"
-#
-#llvm is keg-only, which means it was not symlinked into /opt/homebrew,
-#because macOS already provides this software and installing another version in
-#parallel can cause all kinds of trouble.
-#
-#If you need to have llvm first in your PATH, run:
-#  echo 'export PATH="/opt/homebrew/opt/llvm/bin:$PATH"' >> ~/.zshrc
-#
-#For compilers to find llvm you may need to set:
-#  export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
-#  export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-# export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
-# export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-#
-#####################################################################
-##              Other Utilities - After you upgarde brew
-#####################################################################
-#
-#==> ruby
-#ruby is keg-only, which means it was not symlinked into /opt/homebrew,
-#because macOS already provides this software and installing another version in
-#parallel can cause all kinds of trouble.
-#
-#If you need to have ruby first in your PATH, run:
-#  echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> ~/.zshrc
-#
-#For compilers to find ruby you may need to set:
-#  export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"
-#  export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"
-#
-#For pkg-config to find ruby you may need to set:
-#  export PKG_CONFIG_PATH="/opt/homebrew/opt/ruby/lib/pkgconfig"
-#==> curl
-#curl is keg-only, which means it was not symlinked into /opt/homebrew,
-#because macOS already provides this software and installing another version in
-#parallel can cause all kinds of trouble.
-#
-#If you need to have curl first in your PATH, run:
-#  echo 'export PATH="/opt/homebrew/opt/curl/bin:$PATH"' >> ~/.zshrc
-#
-#For compilers to find curl you may need to set:
-#  export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
-#  export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
-#
-#For pkg-config to find curl you may need to set:
-#  export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig"
-#
-#zsh completions have been installed to:
-#  /opt/homebrew/opt/curl/share/zsh/site-functions
-
-##################################################
-#       This function is working with ranger
-#       using Capital (Q) to exit ranger to
-#       the last specified directory in ranger.
-#       - Added Wed. Feb. 24th 2021
-##################################################
-function ranger-cd {
-    local IFS=$'\t\n'
-    local tempfile="$(mktemp -t tmp.XXXXXX)"
-    local ranger_cmd=(
-        command
-        ranger
-        --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
-    )
-
-    ${ranger_cmd[@]} "$@"
-    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
-        cd -- "$(cat "$tempfile")" || return
-    fi
-    command rm -f -- "$tempfile" 2>/dev/null
-}
-
-alias ranger=ranger-cd
-## -------------------- BR command -----------------------
-#source /Users/gmbp/.config/broot/launcher/bash/br
-source $HOME/.config/broot/launcher/bash/br
-#
-#####################################################################
-##   Adapter for deubgging (used in Emacs [dap layer/dap-mode])
-#####################################################################
-export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.17.5-darwin-arm64/debugAdapters/lldb-mi/bin"
-#export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.17.4-darwin-arm64/debugAdapters/lldb-mi/bin"
-#export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.14.5-darwin-arm64/debugAdapters/lldb-mi/bin"
-#export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.15.4-darwin-arm64/debugAdapters/lldb-mi/bin/"
-#export PATH="$PATH:$HOME/.vscode/extensions/ms-vscode.cpptools-1.15.4-darwin-arm64/bin/"
-#####################################################################
-##             Markdown Reader Engine  - Emacs -layer
-##    Install it from here: https://github.com/yoshuawuyts/vmd/releases/tag/1.34.0
-#####################################################################
-export PATH="$PATH:/Applications/vmd.app/Contents/MacOS/"
-#####################################################################
-#           ADDING 3rd party libraries (e.g. SDL2)
-#####################################################################
-export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
-#####################################################################
-#        VCPKG: Package Manager for C/C++ Libraries
-#####################################################################
-export PATH="$PATH:$HOME/vcpkg/" # Added by myself
-# Generated using ~/vcpkg/vcpkg integrate zsh
-autoload bashcompinit
-bashcompinit
-source $HOME/vcpkg/scripts/vcpkg_completion.zsh
 
 #####################################################################
 #         Using zoxide instead of autojump
@@ -1044,28 +680,16 @@ source $HOME/vcpkg/scripts/vcpkg_completion.zsh
 #####################################################################
 eval "$(zoxide init zsh --cmd j)"
 
-###################################################
-#           Anaconda Installation
-###################################################
-#alias python='/usr/bin/python'
-#alias python3='/Users/ghasak.ibrahim/opt/anaconda3/bin/python'
-export CONDA_AUTO_ACTIVATE_BASE=false # This will prevent from auto activiate (base) conda environment.
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/Users/gmbp/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/Users/gmbp/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/Users/gmbp/anaconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="$HOME:/anaconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<
-#export PATH="$HOME:/usr/local/bin:$PATH"
-export PATH="$HOME/anaconda3/bin:$PATH"
-# export PATH="$HOME/anaconda3/bin:$PATH"  # commented out by conda initialize  # commented out by conda initialize
-#export PATH="$HOME/Applications/bin:$PATH"  # commented out by conda initialize  # commented out by conda initialize
-# export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
+#########################################################################
+##                 INSTALL NODE JS AND NPM (UBUNTU)
+#########################################################################
+#zmodload zsh/zprof
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+#export NVM_DIR="$HOME/.nvm"
+export PATH="$PATH:$HOME/.nvm/versions/node/v21.4.0/bin/"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#zprof
+#
+#
+export PATH="$PATH:$HOME/go/bin/"
