@@ -1,4 +1,8 @@
 # CONFIGURATIONS FOR EMACS
+## Changing Log
+
+- [x] Update `2024-02-04`:
+    - Fixing the keybinding for macOS for `emacs`.
 
 ## Aestheatics Features
 
