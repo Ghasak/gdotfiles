@@ -686,10 +686,31 @@ eval "$(zoxide init zsh --cmd j)"
 #zmodload zsh/zprof
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 #export NVM_DIR="$HOME/.nvm"
-export PATH="$PATH:$HOME/.nvm/versions/node/v21.4.0/bin/"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="$PATH:$HOME/.nvm/versions/node/v21.6.2/bin/"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  This loads nvm bash_completion
 #zprof
 #
 #
 export PATH="$PATH:$HOME/go/bin/"
+
+#########################################################################
+#                Allow blinking cursor for wezterm
+#      website: https://github.com/wez/wezterm/discussions/3512
+#               It supports the zsh-vim-mode cursor
+#########################################################################
+export ZVM_CURSOR_STYLE_ENABLED=false
+function zle-keymap-select {
+    if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+        echo -ne '\e[1 q'
+    elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
+        echo -ne '\e[5 q'
+    fi
+}
+
+zle -N zle-keymap-select
+
+_fix_cursor() {
+    echo -ne '\e[5 q'
+}
+precmd_functions+=(_fix_cursor)

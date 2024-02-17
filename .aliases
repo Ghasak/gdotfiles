@@ -1430,3 +1430,12 @@ alias myaliases="bat --language=bash ~/.aliases"
 #               2. pip install html5lib
 #               3. pip install cppman
 #####################################################################
+#
+#####################################################################
+#                    WezTerm Launcher
+#####################################################################
+alias wezterm='flatpak run org.wezfurlong.wezterm'
+#alias wezterm='cargo run --release --bin wezterm -- start'
+##alias wezterm=$HOME/wezterm/target/release/wezterm
+
+
