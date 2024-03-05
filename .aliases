@@ -1430,3 +1430,24 @@ alias myaliases="bat --language=bash ~/.aliases"
 #               2. pip install html5lib
 #               3. pip install cppman
 #####################################################################
+
+
+##########################################################################
+#                      BETTER MAN PAGE                                   #
+##########################################################################
+#                  sudo npm install -g tldr                              #
+#                  tldr --update                                         #
+# Note: You can optionally enable automatic cache updates by adding the  #
+# following config to your config file:                                  #
+#                                                                        #
+#   [updates]                                                            #
+#   auto_update = true                                                   #
+#                                                                        #
+# The path to your config file can be looked up with `tldr --show-paths`.#
+# To create an initial config file, use `tldr --seed-config`.            #
+#                                                                        #
+# You can find more tips and tricks in our docs:                         #
+#                                                                        #
+#   https://dbrgn.github.io/tealdeer/config_updates.html                 #
+#                                                                        #
+##########################################################################
