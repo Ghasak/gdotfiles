@@ -17,6 +17,7 @@ My custom .dot files for my machine MBP 14 stored and restored using stow.
 
 ## ChangeLogs
 
+- `2024-03-13 18:00`: Added Nyan Mode (Nyan Cat Mode) for my spacemacs and also support yanking to end of line.
 - `2023-11-11 21:46`: Updated the AppleScript for faster speed opening Emacs.
 - `2023-10-29 22:58`: resolved the issue with the `zsh-vim-mode` confict with the `autojump`.
 - `2023-10-23 00:00`: Update the .zshrc workflow - for daily activities.
