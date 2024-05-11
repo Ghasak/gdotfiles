@@ -81,3 +81,30 @@ echo -e "\n\t\tAll packages have been installed or checked."
 printf '#%.0s' {1..80}
 echo
 
+# npm libraries
+#
+#   ╰─ npm -g list                                                                                                                                                                                                                                                                                                      ─╯
+#   /opt/homebrew/lib
+#   ├── @excalidraw/excalidraw@0.15.2
+#   ├── asciicast2gif@0.2.1
+#   ├── electron@24.4.0
+#   ├── eslint@8.53.0
+#   ├── js-beautify@1.14.9
+#   ├── live-server@1.2.2
+#   ├── markdown-it-anchor@8.6.7
+#   ├── markdown-it-toc-done-right@4.2.0
+#   ├── neovim@4.10.1
+#   ├── npm@10.5.0
+#   ├── phpdoc@0.3.0
+#   ├── puppeteer@19.0.0
+#   ├── react-dom@18.2.0
+#   ├── react@18.2.0
+#   ├── resume-cli@3.0.7
+#   ├── taskbook@0.3.0
+#   ├── typescript-language-server@4.1.0
+#   └── typescript@5.2.2
+#
+
+
+
+

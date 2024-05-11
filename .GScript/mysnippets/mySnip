@@ -163,7 +163,7 @@ EOF
 languages_list=('python' 'cpp' 'bash' 'terminal' 'shell' 'zsh' 'php'
     'typescript' 'scala' 'nvim' 'neovim' 'pdf' 'markdown' 'org' 'text' 'shell'
     'powerShell' 'perl' 'haskell' 'kotlin' 'sql' 'matlap' 'groovy' 'lua' 'rust'
-    'ruby' 'html and css' 'ruby' 'java' 'javascript' 'swift' 'c++' 'c#'
+    'ruby' 'html and css' 'ruby' 'java' 'javascript' 'swift' 'c++' 'c#' 'docker' 'kubernetes' 'docker-compose'
     'rlang(R)' 'golang(Go)' 'vim' 'apple' 'mac' 'macos' 'applescript' 'git' 'gnuplot'
     'github' 'linux' 'gnu-linux' 'ubuntu' 'note' 'memo' 'awk' 'sed' 'tr' 'cat' 'jupyter' 'jupyterlab' 'jupyter lab'
     'bat' 'latex' 'emacs')

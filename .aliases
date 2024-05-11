@@ -774,19 +774,178 @@ alias airport="airport" # you can use [-s => channels ]
 #                  bookmarks session
 #                  Source: https://apple.stackexchange.com/questions/389090/how-to-save-list-of-open-safari-tabs-in-a-text-file
 #------------------------------------------------------------------------------
-#List the URL of all tabs in the frontmost window:
-function safari_save_current_tabs(){
-  osascript -e{'set text item delimiters to linefeed','tell app"safari"to(url of tabs of window 1)as text'} |boxes | lolcat
-  }
-#List the URL of all tabs in all windows:
-function safari_save_all_tabs(){
-    osascript -e{'set text item delimiters to linefeed','tell app"safari"to(url of tabs of windows)as text'} | lolcat
-  }
-#List the URL and title of all tabs in the frontmost window:
-function safari_save_current_tabs_with_title(){
-  osascript -e{'set o to""','tell app"safari"','repeat with t in tabs of window 1','set o to o&url of t&" "&name of t&"\n"',end,end,o}|sed \$d | boxes | lolcat
+# #List the URL of all tabs in the frontmost window:
+# function safari_save_current_tabs(){
+#   osascript -e{'set text item delimiters to linefeed','tell app"safari"to(url of tabs of window 1)as text'} |boxes | lolcat
+#   }
 
+# #List the URL of all tabs in all windows:
+# function safari_save_all_tabs(){
+#     osascript -e{'set text item delimiters to linefeed','tell app"safari"to(url of tabs of windows)as text'} | lolcat
+#   }
+#List the URL and title of all tabs in the frontmost window:
+# function safari_save_current_tabs_with_title(){
+#   osascript -e{'set o to""','tell app"safari"','repeat with t in tabs of window 1','set o to o&url of t&" "&name of t&"\n"',end,end,o}|sed \$d | boxes | red
+#
+#   }
+#----------------------------------------------
+# Function: safari_save_all_tabs
+#
+# Description:
+#   This Bash function captures the URLs and titles of all open tabs from all Safari windows and
+#   formats them into a tab-separated table. The table includes a line number, the URL of each tab,
+#   and the tab's title. The function can output this data directly to the terminal with color
+#   formatting and truncated text, or save it to a file with complete data in a neatly aligned table.
+#
+# Parameters:
+#   filename (optional): Specifies the file name where the tab data will be saved. If not provided,
+#                        the function outputs the data to the terminal with ANSI color coding.
+#
+# Usage:
+#   To display all Safari tabs in the terminal with formatting:
+#     safari_save_all_tabs
+#
+#   To save all Safari tabs to a file:
+#     safari_save_all_tabs "filename.txt"
+#
+# Output:
+#   Terminal Output:
+#     - Displays a table with three columns: Line Number, URL (truncated to 60 characters), and Title (truncated to 60 characters).
+#     - Each column entry in the terminal is color-coded for clarity.
+#
+#   File Output:
+#     - Outputs a tab-separated file with three columns: Line Number, Full URL, and Full Title.
+#     - Columns are aligned based on the longest string in each column.
+#     - No data is truncated in the file output, providing complete URLs and titles.
+#
+# Examples:
+#   - To print all tabs in color in the terminal:
+#     safari_save_all_tabs
+#
+#   - To save all tabs into "tabs.txt", fully detailed and aligned:
+#     safari_save_all_tabs "tabs.txt"
+#
+# Note:
+#   - The function assumes that Safari is running and has at least one open tab.
+#   - Terminal must support ANSI color codes for color output to be correctly displayed.
+#   - The function uses `awk`, `sed`, and `osascript` (AppleScript), tools commonly available on macOS.
+
+function safari_save_all_tabs() {
+  local filename="$1"  # Optional filename argument
+
+  # Generate the output from Safari for all tabs across all windows
+  osascript <<EOF | if [[ -n "$filename" ]]; then cat > "$filename"; else awk 'BEGIN {FS="\t"} {url = substr($1, 1, 60); title = substr($2, 1, 60); printf "%d\t\033[1;34m%-60s\033[0m \033[1;32m%s\033[0m\n", NR, url, title;}' | column -t -s $'\t' | sed '$d'; fi
+set output to ""
+tell application "Safari"
+  repeat with w in every window
+    repeat with t in every tab of w
+      set current_tab_url to URL of t
+      set current_tab_title to name of t
+      set output to output & current_tab_url & "\t" & current_tab_title & "\n"
+    end repeat
+  end repeat
+end tell
+return output
+EOF
+
+  # If a filename is provided, format and align the columns in the file
+  if [[ -n "$filename" ]]; then
+    # Determine the longest URL and title length
+    awk -F'\t' '{
+      if (length($2) > max_url) {max_url = length($2)}
+      if (length($3) > max_title) {max_title = length($3)}
+    }
+    END {
+      print max_url, max_title
+    }' "$filename" | read max_url max_title
+
+    # Format each line according to the longest URL and title, add line numbers
+    awk -v mu="$max_url" -v mt="$max_title" -F'\t' 'BEGIN {OFS="\t"} {
+      printf "%d\t%-*s\t%-*s\n", NR, mu, $1, mt, $2
+    }' "$filename" > "$filename.tmp"
+    mv -f "$filename.tmp" "$filename"
+    echo "Tabs saved to $filename"
+  fi
+}
+
+#----------------------------------------------
+# Function: safari_save_current_tabs_with_title
+#
+# Description:
+#   Captures the URLs and titles of all open tabs in the first window of Safari and can either display
+#   them in the terminal with color coding and limited character lengths or save them to a file with
+#   full details in a tab-separated format. This function is ideal for quickly documenting open
+#   research or workflows in Safari.
+#
+# Parameters:
+#   filename (optional): Specifies the file name where the tabs' details will be saved. If not provided,
+#                        the function outputs the data to the terminal with color formatting.
+#
+# Usage:
+#   To display all current Safari tabs in the first window in the terminal:
+#     safari_save_current_tabs_with_title
+#
+#   To save the details of all current Safari tabs in the first window to a file:
+#     safari_save_current_tabs_with_title "filename.txt"
+#
+# Output:
+#   Terminal Output:
+#     - Displays a table with two columns: URL (truncated to 60 characters) and Title (truncated to 60 characters).
+#     - Each column entry in the terminal is color-coded for clarity (URLs in blue and titles in green).
+#
+#   File Output:
+#     - Saves a tab-separated file with two columns: Full URL and Full Title.
+#     - Each entry is fully detailed without truncation.
+#     - The output is aligned based on the longest string in each column using the `column` command.
+#
+# Examples:
+#   - Print all current tabs in color in the terminal:
+#     safari_save_current_tabs_with_title
+#
+#   - Save all current tabs into "tabs.txt" with full details:
+#     safari_save_current_tabs_with_title "tabs.txt"
+#
+# Notes:
+#   - This function only retrieves tabs from the first window of Safari. If multiple windows are open,
+#     tabs in other windows will not be included.
+#   - The function uses AppleScript (`osascript`), which is specific to macOS.
+#   - Ensure the terminal supports ANSI color codes for the output to display as intended.
+#   - The `column` command is used for aligning columns in the output file; ensure it is available on your system.
+
+function safari_save_current_tabs_with_title() {
+  local filename="$1"  # Optional filename argument
+
+  # Generate the output from Safari
+  osascript <<EOF | awk -v file="$filename" 'BEGIN {FS="\t"}
+{
+  # Adding line number as the first column
+  line_number = NR;
+
+  if (file != "") {
+    # Print to file with full URL and title, including line numbers
+    print line_number "\t" $1 "\t" $2 >> file;
+  } else {
+    # Print to terminal with colors and limited characters, including line numbers
+    url = substr($1, 1, 60);  # Limit URL to 60 characters
+    title = substr($2, 1, 60);  # Limit title to 60 characters
+    printf "%d\t\033[1;34m%-60s\033[0m \033[1;32m%s\033[0m\n", line_number, url, title;
   }
+}' | column -t -s $'\t' | sed '$d'
+set output to ""
+tell application "Safari"
+  repeat with t in tabs of window 1
+    set output to output & URL of t & "\t" & name of t & "\n"
+  end repeat
+end tell
+return output
+EOF
+
+  # If a filename is provided, align the columns in the file
+  if [[ -n "$filename" ]]; then
+    column -t -s $'\t' "$filename" > "$filename.tmp" && mv "$filename.tmp" "$filename"
+    echo "Tabs saved to $filename"
+  fi
+}
 
 #------------------------------------------------------------------------------
 #               CURRENT_SUB_DIRS_FILES

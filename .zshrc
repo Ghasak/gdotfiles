@@ -255,6 +255,7 @@ export MYNAME
 export LESS='-M'
 export HISTSIZE=10000    # Default 500
 export HISTFILESIZE=1000000
+setopt EXTENDED_HISTORY
 export HISTTIMEFORMAT='%b %d %I:%M %p ' # using strftime format
 #export HISTTIMEFORMAT="%d/%m/%y %T "  # for e.g. “29/02/99 23:59:59”
 #export HISTTIMEFORMAT="%F %T "        # for e.g. “1999-02-29 23:59:59”
@@ -267,9 +268,7 @@ alias lsg="$HOME/lsd/target/release/lsd -A --icon=always -F -l -1 -h -v -G -L --
 alias lsd='colorls -l -A -h --light --sort-dirs'
 #alias lsd='exa -1 -l -g -H -m -a -x -F --color=always --group-directories-first --icons'
 # To make the history format working with zsh use:
-#alias history='history -i'
-alias history="history 0 | fzf"
-
+alias history="history -i 0 | fzf"
 # New way to show the background you will need to follow
 # https://drasite.com/blog/Pimp%20my%20terminal
 alias hist='history'
@@ -1069,3 +1068,6 @@ export PATH="$HOME/anaconda3/bin:$PATH"
 # export PATH="$HOME/anaconda3/bin:$PATH"  # commented out by conda initialize  # commented out by conda initialize
 #export PATH="$HOME/Applications/bin:$PATH"  # commented out by conda initialize  # commented out by conda initialize
 # export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
+#
+#
+#
