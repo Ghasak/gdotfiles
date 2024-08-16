@@ -16,7 +16,7 @@
 # confirmations, etc.) must go above this block; everything else may go below.
 #source $HOME/zsh-git-prompt/zshrc.sh
 export POWERLEVEL9K_INSTANT_PROMPT=quiet
-export POWERLEVEL9K_INSTANT_PROMPT=off
+#export POWERLEVEL9K_INSTANT_PROMPT=off
 ZSH_DISABLE_COMPFIX=true
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -24,7 +24,7 @@ ZSH_DISABLE_COMPFIX=true
 # Path to your oh-my-zsh installation.
 
 # Load the profiling the zsh
-zmodload zsh/zprof
+#zmodload zsh/zprof
 # Adding utf-8 for other langauges
 export LC_ALL=en_US.UTF-8
 LANG="en_US.UTF-8"
@@ -34,7 +34,7 @@ LC_MESSAGES="en_US.UTF-8"
 LC_MONETARY="en_US.UTF-8"
 LC_NUMERIC="en_US.UTF-8"
 LC_TIME="en_US.UTF-8"
-LC_ALL="en_US.UTF-8"
+#LC_ALL="en_US.UTF-8"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -59,6 +59,8 @@ export VISUAL="/usr/local/bin/nvim"
 export ZSH="$HOME/.oh-my-zsh"
 #source $HOME/.zshrc_prompt
 source $HOME/.aliases
+
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -126,7 +128,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git
+plugins=(
+        git
         # zsh-autocomplete
         # other plugins...
         # auto suggestions from here:
@@ -228,10 +231,16 @@ if type brew &>/dev/null
 then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
   autoload -Uz compinit
-  compinit
+  compinit -C
 fi
 
-
+###################################################
+#Use zcompile to Precompile Scripts:
+#Precompile your .zshrc and any large sourced files to speed up sourcing
+####################################################
+zcompile ~/.zshrc
+zcompile ~/.p10k.zsh
+zcompile ~/.aliases
 #*************************************************************************
 #  __________________
 #
@@ -683,17 +692,22 @@ eval "$(zoxide init zsh --cmd j)"
 #########################################################################
 ##                 INSTALL NODE JS AND NPM (UBUNTU)
 #########################################################################
-#zmodload zsh/zprof
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-#export NVM_DIR="$HOME/.nvm"
-export PATH="$PATH:$HOME/.nvm/versions/node/v21.6.2/bin/"
+export PATH="$PATH:$HOME/.nvm/versions/node/v20.9.0/bin/"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  This loads nvm bash_completion
 #zprof
 #
 #
-export PATH="$PATH:$HOME/go/bin/"
 
+export PATH="$PATH:$HOME/go/bin/"
+export PATH="$HOME/anaconda3/bin:$PATH"
+
+if [[ -d "$HOME/.nvm" ]]; then
+    export PATH="$PATH:$HOME/.nvm/versions/node/v20.9.0/bin/"
+fi
+export PATH="$PATH:$HOME/go/bin/"
+export PATH="$HOME/anaconda3/bin:$PATH"
 #########################################################################
 #                Allow blinking cursor for wezterm
 #      website: https://github.com/wez/wezterm/discussions/3512

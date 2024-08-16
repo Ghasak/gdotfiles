@@ -1159,8 +1159,8 @@ chrome_bookmarks() {
 if [[ ! -f "$HOME/go/bin/fast-p" ]]; then
   echo -ne "Installing dependencies for fast-p\n"
   #go get -u github.com/bellecp/fast-p
-  brew install ag
-  go install github.com/bellecp/fast-p@v0.2.5
+  /home/linuxbrew/.linuxbrew/bin/brew install ag
+  /home/mdotgh/go/bin/go install github.com/bellecp/fast-p@v0.2.5
 fi
 
 pxxx() {

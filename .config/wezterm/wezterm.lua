@@ -26,7 +26,7 @@ config.line_height = 1.0
 config.enable_scroll_bar = true
 -- Window management
 --
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE" --"RESIZE"
 config.window_background_opacity = 1.0
 config.audible_bell = "Disabled" -- SystemBeep
 
