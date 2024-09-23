@@ -1,3 +1,4 @@
+#zmodload zsh/zprof
 # ###########################################
 #
 #      ███████╗███████╗██╗  ██╗██████╗  ██████╗
@@ -63,7 +64,7 @@ source $HOME/.aliases
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
@@ -1068,6 +1069,4 @@ export PATH="$HOME/anaconda3/bin:$PATH"
 # export PATH="$HOME/anaconda3/bin:$PATH"  # commented out by conda initialize  # commented out by conda initialize
 #export PATH="$HOME/Applications/bin:$PATH"  # commented out by conda initialize  # commented out by conda initialize
 # export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
-#
-#
-#
+#zprof

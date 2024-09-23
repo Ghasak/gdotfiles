@@ -1103,7 +1103,7 @@ function nvim_speed_test() {
     # Increment the meter index and wrap around if necessary
     meter_index=$(( (meter_index + 1) % meter_length ))
     # Capture the output of vim-startuptime and store it in a variable
-    result=$(vim-startuptime --vimpath=nvim | head -n 4 | grep "Total Average")
+    result=$(vim-startuptime --vimpath nvim | head -n 4 | grep "Total Average")
     result_part_one=$(echo $result | awk -F ':' '{print $1}')
     result_part_two=$(echo $result | awk -F ':' '{print $2}')
 
@@ -1619,4 +1619,29 @@ alias myaliases="bat --language=bash ~/.aliases"
 ##########################################################################
 # Download from here: https://github.com/Bhupesh-V/ugit                  #
 # brew install ugit
+#
+##########################################################################
+#                 Get all Applications IDs                               #
+#      Helpful function for Aerspace (Windows Tiling Manager)            #
+##########################################################################
+#
+function MyAppsID(){
+# Print header with proper column widths
+printf "%-10s | %-50s | %-s\n" "PID" "Bundle ID" "Application Name"
+echo "--------------------------------------------------------------------------------"
+
+# Get the list of currently running applications with their IDs and names
+osascript -e 'tell application "System Events" to get the name of every process whose background only is false' | tr ',' '\n' | while read app_name
+do
+    # Get the PID and bundle identifier for each app
+    app_pid=$(pgrep -x "$app_name")
+    app_id=$(osascript -e "id of app \"$app_name\"")
+
+    # Print the PID, bundle identifier, and app name with proper formatting
+    if [[ ! -z "$app_pid" ]]; then
+        printf "%-10s | %-50s | %-s\n" "$app_pid" "$app_id" "$app_name"
+    fi
+done
+}
+
 ##########################################################################
