@@ -1,14 +1,14 @@
 # Configuration dotfiles farm with stow
 
 <!-- vim-markdown-toc GitLab -->
-* [Configuration dotfiles farm with stow](#configuration-dotfiles-farm-with-stow)
-    * [ChangeLogs](#changelogs)
-    * [Current Versions](#current-versions)
-        * [Gnu-Stow restore my dot-files configuration and setup (for MACBOOK Setups):](#gnu-stow-restore-my-dot-files-configuration-and-setup-for-macbook-setups)
-        * [To-do](#to-do)
-    * [Adding some information](#adding-some-information)
-    * [Debugging with lldb is created using](#debugging-with-lldb-is-created-using)
-        * [How to Install PowerLevel10k](#how-to-install-powerlevel10k)
+
+* [ChangeLogs](#changelogs)
+* [Current Versions](#current-versions)
+    * [Gnu-Stow restore my dot-files configuration and setup (for MACBOOK Setups):](#gnu-stow-restore-my-dot-files-configuration-and-setup-for-macbook-setups)
+    * [To-do](#to-do)
+* [Adding some information](#adding-some-information)
+* [Debugging with lldb is created using](#debugging-with-lldb-is-created-using)
+    * [How to Install PowerLevel10k](#how-to-install-powerlevel10k)
 
 <!-- vim-markdown-toc -->
 
@@ -17,6 +17,7 @@ My custom .dot files for my machine MBP 14 stored and restored using stow.
 
 ## ChangeLogs
 
+- `2024-10-20 22:01`: Added several config files, elia and `aerospace.toml`.
 - `2024-03-13 18:00`: Added Nyan Mode (Nyan Cat Mode) for my spacemacs and also support yanking to end of line.
 - `2023-11-11 21:46`: Updated the AppleScript for faster speed opening Emacs.
 - `2023-10-29 22:58`: resolved the issue with the `zsh-vim-mode` confict with the `autojump`.

@@ -1,6 +1,3 @@
-# Load profiling tool
-# zmodload zsh/zprof
-# hyperfine --warmup 5 'zsh -i -c exit'
 # ########################################### #
 #      ███████╗███████╗██╗  ██╗██████╗  ██████╗
 #      ╚══███╔╝██╔════╝██║  ██║██╔══██╗██╔════╝
@@ -13,31 +10,16 @@
 #   \___\___/_||_|_| |_\__, (_) |_| |_|_\___|
 #                      |___/
 # ###########################################
+# Load profiling tool
+# zmodload zsh/zprof
+#hyperfine --warmup 5 'zsh -i -c exit'
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 #source $HOME/zsh-git-prompt/zshrc.sh
 #export POWERLEVEL9K_INSTANT_PROMPT=quiet
-export POWERLEVEL9K_INSTANT_PROMPT=off
-ZSH_DISABLE_COMPFIX=true
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
-
-# Load the profiling the zsh
-#zmodload zsh/zprof
-# Adding utf-8 for other langauges
-export LC_ALL=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
-export TERM=xterm-256color
-LANG="en_US.UTF-8"
-LC_COLLATE="en_US.UTF-8"
-LC_CTYPE="en_US.UTF-8"
-LC_MESSAGES="en_US.UTF-8"
-LC_MONETARY="en_US.UTF-8"
-LC_NUMERIC="en_US.UTF-8"
-LC_TIME="en_US.UTF-8"
+#export POWERLEVEL9K_INSTANT_PROMPT=on
+#typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 ###################################################
 #   docui - TUI Client for Docker Written in Go
 #   Source: https://github.com/skanehira/docui
@@ -49,9 +31,57 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-#============================================================================
-#       Configuration nvim
-#============================================================================
+ZSH_DISABLE_COMPFIX=true
+# Remove redundant or unnecessary paths
+fpath=(${fpath:#$HOME/gdotfiles/.oh-my-zsh/custom/plugins/fzf-tab/lib})
+fpath=(${fpath:#$HOME/.oh-my-zsh/cache/completions})
+fpath=($HOME/.oh-my-zsh/custom/plugins $fpath)
+
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+
+if [[ ! -f ~/.zcompdump ]] || [[ ~/.zshrc -nt ~/.zcompdump ]]; then
+  autoload -Uz compinit
+  compinit -C
+fi
+
+
+# Run direnv lazily to avoid console output interfering with Powerlevel10k.
+
+# Consolidate custom plugin directories (if applicable)
+#autoload -Uz bashcompinit compinit && bashcompinit
+# Run compinit with optimized settings
+# autoload -Uz compinit
+# compinit -C
+# if command -v brew &>/dev/null; then
+#   FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
+#   ZSH_DISABLE_COMPFIX=true
+#   compinit -C
+# fi
+
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+
+# Load the profiling the zsh
+#zmodload zsh/zprof
+# Adding utf-8 for other langauges
+
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export TERM=xterm-256color
+LANG="en_US.UTF-8"
+LC_COLLATE="en_US.UTF-8"
+LC_CTYPE="en_US.UTF-8"
+LC_MESSAGES="en_US.UTF-8"
+LC_MONETARY="en_US.UTF-8"
+LC_NUMERIC="en_US.UTF-8"
+LC_TIME="en_US.UTF-8"
+
+#==================================================
+#            CONFIGURATION NVIM
+#==================================================
 
 alias vim='nvim'
 # export EDITOR=vim   # Using NANO:/usr/bin/nano
@@ -114,6 +144,9 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
+## Adding speed for completion
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path ~/.zsh/cache
 # **************************************************************************
 # Configurations for fzf-vi-mode
 # **************************************************************************
@@ -145,14 +178,7 @@ source $ZSH/oh-my-zsh.sh
 #        VCPKG: Package Manager for C/C++ Libraries
 #####################################################################
 # For vcpkg and Homebrew
-autoload -Uz bashcompinit compinit && bashcompinit
 source "$HOME/vcpkg/scripts/vcpkg_completion.zsh"
-
-if command -v brew &>/dev/null; then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
-  ZSH_DISABLE_COMPFIX=true
-  compinit -C
-fi
 #*************************************************************************
 #  __________________
 #
@@ -275,7 +301,7 @@ function WelcomeMessage(){
         fi
 }
 
-WelcomeMessage
+autoload -Uz WelcomeMessage
 
 #============================================================================
 #                   COLORING The MAN-Page
@@ -883,3 +909,8 @@ export PATH="$HOME/anaconda3/bin:$PATH"
 # export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
 # Optional performance profiling
 # zprof
+#
+###################################################
+#      LOADING FASTER ZSHRC WITH OH-MY-ZSH
+###################################################
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet

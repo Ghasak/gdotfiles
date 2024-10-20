@@ -111,8 +111,8 @@
     newline
     rust_version          # rustc version (https://www.rust-lang.org)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
-    anaconda                # conda environment (https://conda.io/)
-    pyenv                   # python environment (https://github.com/pyenv/pyenv)
+    #anaconda                # conda environment (https://conda.io/)
+    #pyenv                   # python environment (https://github.com/pyenv/pyenv)
     #public_ip               # public IP address
     #proxy                   # system-wide http/https/ftp proxy
     #battery                 # internal battery
