@@ -910,7 +910,28 @@ export PATH="$HOME/anaconda3/bin:$PATH"
 # Optional performance profiling
 # zprof
 #
+
+
 ###################################################
+#              VIRTUALENVWRAPPER
+#     FOR EMACS PIPENV VIRTUALENV WITH PYTHON
+###################################################
+# Set up virtualenvwrapper
+# export WORKON_HOME=$HOME/.local/share/virtualenvs
+# export VIRTUALENVWRAPPER_PYTHON=$(which python3)  # Use the correct Python version
+# export VIRTUALENVWRAPPER_PYTHON=$HOME/anaconda3/bin/python3
+# source $(which virtualenvwrapper.sh)
+function yazix() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+########################################################
 #      LOADING FASTER ZSHRC WITH OH-MY-ZSH
-###################################################
+# This will make our zsh config super quick at loading
+########################################################
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
