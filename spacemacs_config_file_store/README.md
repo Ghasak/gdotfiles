@@ -1,6 +1,7 @@
 # CONFIGURATIONS FOR EMACS
 ## Changing Log
 
+- [x] Added supprt for using `latex`
 - [x] Update `2024-02-04`:
     - Fixing the keybinding for macOS for `emacs`.
 

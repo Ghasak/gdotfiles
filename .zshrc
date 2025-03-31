@@ -935,3 +935,14 @@ function yazix() {
 # This will make our zsh config super quick at loading
 ########################################################
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+########################################################
+#            C/C++, Rust developement
+########################################################
+export CC=clang
+export CXX=clang++
+export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
+
+
+
+
