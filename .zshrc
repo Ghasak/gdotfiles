@@ -1,25 +1,28 @@
-# ########################################### #
-#      ███████╗███████╗██╗  ██╗██████╗  ██████╗
-#      ╚══███╔╝██╔════╝██║  ██║██╔══██╗██╔════╝
-#        ███╔╝ ███████╗███████║██████╔╝██║
-#       ███╔╝  ╚════██║██╔══██║██╔══██╗██║
-#    ██╗███████╗███████║██║  ██║██║  ██║╚██████╗
-#    ___           __ _           __ _ _
-#   / __|___ _ _  / _(_)__ _     / _(_) |___
-#  | (__/ _ \ ' \|  _| / _` |_  |  _| | / -_)
-#   \___\___/_||_|_| |_\__, (_) |_| |_|_\___|
-#                      |___/
-# ###########################################
-# Load profiling tool
-# zmodload zsh/zprof
-#hyperfine --warmup 5 'zsh -i -c exit'
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-#source $HOME/zsh-git-prompt/zshrc.sh
-#export POWERLEVEL9K_INSTANT_PROMPT=quiet
-#export POWERLEVEL9K_INSTANT_PROMPT=on
-#typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+# ################################################
+#                                                #
+#      ███████╗███████╗██╗  ██╗██████╗  ██████╗  #
+#      ╚══███╔╝██╔════╝██║  ██║██╔══██╗██╔════╝  #
+#        ███╔╝ ███████╗███████║██████╔╝██║       #
+#       ███╔╝  ╚════██║██╔══██║██╔══██╗██║       #
+#    ██╗███████╗███████║██║  ██║██║  ██║╚██████╗ #
+#    ___           __ _           __ _ _         #
+#   / __|___ _ _  / _(_)__ _     / _(_) |___     #
+#  | (__/ _ \ ' \|  _| / _` |_  |  _| | / -_)    #
+#   \___\___/_||_|_| |_\__, (_) |_| |_|_\___|    #
+#                      |___/                     #
+# ################################################
+  # Load profiling tool
+  # zmodload zsh/zprof
+  #hyperfine --warmup 5 'zsh -i -c exit'
+  # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+  # Initialization code that may require console input (password prompts, [y/n]
+  # confirmations, etc.) must go above this block; everything else may go below.
+  #source $HOME/zsh-git-prompt/zshrc.sh
+  #export POWERLEVEL9K_INSTANT_PROMPT=quiet
+  #export POWERLEVEL9K_INSTANT_PROMPT=on
+  #typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+  #
+  #
 ###################################################
 #   docui - TUI Client for Docker Written in Go
 #   Source: https://github.com/skanehira/docui
@@ -765,7 +768,7 @@ export PATH="$PATH:$HOME/go/bin"
 ###################################################
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 # export SDKMAN_DIR="$HOME/.sdkman"
-# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 ###################################################
 #           Current Java for ARM Mac - M1
@@ -883,6 +886,10 @@ export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
 eval "$(zoxide init zsh --cmd j)"
 
 ###################################################
+#     Emacs 31 dependencies for `as` command
+###################################################
+export PATH="/usr/bin:$PATH"
+###################################################
 #           Anaconda Installation
 ###################################################
 # alias python='/usr/bin/python'
@@ -904,14 +911,12 @@ export CONDA_AUTO_ACTIVATE_BASE=false  # This will prevent auto activation of th
 # <<< conda initialize <<<
 # export PATH="$HOME:/usr/local/bin:$PATH"
 export PATH="$HOME/anaconda3/bin:$PATH"
+export PYTHONPATH="$HOME/anaconda3/bin:$PYTHONPATH"
 # export PATH="$HOME/anaconda3/bin:$PATH"  # commented out by conda initialize
 # export PATH="$HOME/Applications/bin:$PATH"  # commented out by conda initialize
 # export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
 # Optional performance profiling
 # zprof
-#
-
-
 ###################################################
 #              VIRTUALENVWRAPPER
 #     FOR EMACS PIPENV VIRTUALENV WITH PYTHON
@@ -931,18 +936,14 @@ function yazix() {
 }
 
 ########################################################
-#      LOADING FASTER ZSHRC WITH OH-MY-ZSH
-# This will make our zsh config super quick at loading
-########################################################
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-
-########################################################
 #            C/C++, Rust developement
 ########################################################
 export CC=clang
 export CXX=clang++
 export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
-
-
-
+########################################################
+#      LOADING FASTER ZSHRC WITH OH-MY-ZSH
+# This will make our zsh config super quick at loading
+########################################################
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 

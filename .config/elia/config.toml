@@ -1,5 +1,5 @@
 # the ID or name of the model that is selected by default on launch
-default_model = "ollama/llama3.2:latest"
+default_model = "ollama/llama3.3:latest"
 # the system prompt on launch
 system_prompt = "You are a helpful assistant, your name is Jarvis, who talks like Jarvis from Ironman with a very polite English Language, and you will address me with a welcome message only at begnning like welcome Sir!, and you will address me frequently as Sir."
 
@@ -15,7 +15,7 @@ message_code_theme = "github-dark"
 # example of adding local llama3 support
 # only the `name` field is required here.
 [[models]]
-name = "ollama/llama3.2:latest"
+name = "ollama/llama3.3:latest"
 
 
 
