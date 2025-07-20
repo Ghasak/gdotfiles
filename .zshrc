@@ -889,43 +889,6 @@ eval "$(zoxide init zsh --cmd j)"
 #     Emacs 31 dependencies for `as` command
 ###################################################
 export PATH="/usr/bin:$PATH"
-###################################################
-#           Anaconda Installation
-###################################################
-# alias python='/usr/bin/python'
-# alias python3='/Users/ghasak.ibrahim/opt/anaconda3/bin/python'
-export CONDA_AUTO_ACTIVATE_BASE=false  # This will prevent auto activation of the (base) conda environment.
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/Users/gmbp/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/Users/gmbp/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/Users/gmbp/anaconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="$HOME:/anaconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<
-# export PATH="$HOME:/usr/local/bin:$PATH"
-export PATH="$HOME/anaconda3/bin:$PATH"
-export PYTHONPATH="$HOME/anaconda3/bin:$PYTHONPATH"
-# export PATH="$HOME/anaconda3/bin:$PATH"  # commented out by conda initialize
-# export PATH="$HOME/Applications/bin:$PATH"  # commented out by conda initialize
-# export PATH="$HOME/opt/anaconda3/bin:$PATH"  # commented out by conda initialize
-# Optional performance profiling
-# zprof
-###################################################
-#              VIRTUALENVWRAPPER
-#     FOR EMACS PIPENV VIRTUALENV WITH PYTHON
-###################################################
-# Set up virtualenvwrapper
-# export WORKON_HOME=$HOME/.local/share/virtualenvs
-# export VIRTUALENVWRAPPER_PYTHON=$(which python3)  # Use the correct Python version
-# export VIRTUALENVWRAPPER_PYTHON=$HOME/anaconda3/bin/python3
-# source $(which virtualenvwrapper.sh)
 function yazix() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
@@ -941,9 +904,27 @@ function yazix() {
 export CC=clang
 export CXX=clang++
 export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
+
+
 ########################################################
 #      LOADING FASTER ZSHRC WITH OH-MY-ZSH
 # This will make our zsh config super quick at loading
 ########################################################
+
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 

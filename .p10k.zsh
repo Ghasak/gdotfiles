@@ -111,7 +111,7 @@
     newline
     rust_version          # rustc version (https://www.rust-lang.org)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
-    #anaconda                # conda environment (https://conda.io/)
+    anaconda                # conda environment (https://conda.io/)
     #pyenv                   # python environment (https://github.com/pyenv/pyenv)
     #public_ip               # public IP address
     #proxy                   # system-wide http/https/ftp proxy
@@ -971,7 +971,10 @@
   # The default value of POWERLEVEL9K_ANACONDA_CONTENT_EXPANSION expands to $CONDA_PROMPT_MODIFIER
   # without the surrounding parentheses, or to the last path component of CONDA_PREFIX if the former
   # is empty.
-  typeset -g POWERLEVEL9K_ANACONDA_CONTENT_EXPANSION='${${${${CONDA_PROMPT_MODIFIER#\(}% }%\)}:-${CONDA_PREFIX:t}}'
+  # typeset -g POWERLEVEL9K_ANACONDA_CONTENT_EXPANSION='${${${${CONDA_PROMPT_MODIFIER#\(}% }%\)}:-${CONDA_PREFIX:t}}'
+  # typeset -g POWERLEVEL9K_PYENV_CONTENT_EXPANSION='${P9K_CONTENT}${${P9K_CONTENT:#$P9K_PYENV_PYTHON_VERSION(|/*)}:+ $P9K_PYENV_PYTHON_VERSION}'
+  typeset -g POWERLEVEL9K_PYENV_CONTENT_EXPANSION='${P9K_CONTENT}${${P9K_CONTENT:#$P9K_PYENV_PYTHON_VERSION(|/*)}:+ $P9K_PYENV_PYTHON_VERSION}${${P9K_CONTENT}:-: ${${${CONDA_PROMPT_MODIFIER#\(}% }%\)}}'
+
 
   # Custom icon.
   # typeset -g POWERLEVEL9K_ANACONDA_VISUAL_IDENTIFIER_EXPANSION='⭐'
@@ -1694,31 +1697,32 @@ function prompt_dice() {
 }
 
 ## ################################################
-##           DATE WITH TIME PROMPT
+##       DATE WITH TIME PROMPT
 ## ################################################
 function prompt_DATE_AND_TIME(){
- local DATE_ICON=$'\uf073'
- local TIME_ICON=$'\ue38a'
- local DATE_ICON_COLOR='%F{#90c8bf}'  # Color code for icons
- local TIME_ICON_COLOR='%F{#D6D3F0}'  # Color code for icons
- local DATE_COLOR='%F{#FF90B3}'
- local TIME_COLOR='%F{#FFC2E2}'       # Using %a for short day string, and %A for longer day string.
- local ordinal() {
+  local DATE_ICON=$'\uf073'
+  local TIME_ICON=$'\ue38a'
+  local DATE_ICON_COLOR='%F{#90c8bf}'  # Color code for icons
+  local TIME_ICON_COLOR='%F{#D6D3F0}'  # Color code for icons
+  local DATE_COLOR='%F{#FF90B3}'
+  local TIME_COLOR='%F{#FFC2E2}'       # Using %a for short day string, and %A for longer day string.
+
+  local ordinal_suffix # Declare a local variable to hold the suffix
+
   case $(date "+%d") in
-    *1[0-9]) echo "th" ;;
-    *1) echo "st" ;;
-    *2) echo "nd" ;;
-    *3) echo "rd" ;;
-    *) echo "th" ;;
+    *1[0-9]) ordinal_suffix="th" ;;
+    *1) ordinal_suffix="st" ;;
+    *2) ordinal_suffix="nd" ;;
+    *3) ordinal_suffix="rd" ;;
+    *) ordinal_suffix="th" ;;
   esac
+
+  local dt="%F{blue}${DATE_ICON_COLOR}${DATE_ICON}${DATE_COLOR} $(date "+%a").%D{%b.$(date "+%-d")${ordinal_suffix},%Y}\
+-${TIME_ICON_COLOR}${TIME_ICON}${TIME_COLOR} %D{%L:%M:%S %p}"
+
+  p10k segment -f "#eacda8" -t "$dt"
 }
 
-local dt="%F{blue}${DATE_ICON_COLOR}${DATE_ICON}${DATE_COLOR} $(date "+%a").%D{%b.$(date "+%-d")$(ordinal),%Y}\
--${TIME_ICON_COLOR}${TIME_ICON}${TIME_COLOR} %D{%L:%M:%S %p}"
-#  local dt="%F{blue}${DATE_ICON_COLOR}${DATE_ICON}${DATE_COLOR} $(date "+%a".)%D{%b.%d,%Y}\
-# -${TIME_ICON_COLOR}${TIME_ICON}${TIME_COLOR} %D{%L:%M:%S %p}"
- p10k segment -f "#eacda8" -t "$dt"
-}
 ## ################################################
 #             ELLAPS_TIME FUNCTION
 #     Calculate the time between two prompt (hitting inter)
