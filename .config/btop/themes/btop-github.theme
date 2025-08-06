@@ -1,0 +1,70 @@
+# Primary background and text
+theme[main_bg]      = "#0d1117"  # --color-canvas-default :contentReference[oaicite:0]{index=0}
+theme[main_fg]      = "#c9d1d9"  # common GitHub Dark UI foreground :contentReference[oaicite:1]{index=1}
+
+# Box titles and selected items
+theme[title]        = "#c9d1d9"  # match main_fg :contentReference[oaicite:2]{index=2}
+theme[selected_bg]  = "#1f6feb33"  # 20% opacity of accent blue :contentReference[oaicite:3]{index=3}
+theme[selected_fg]  = "#c9d1d9"  # match main_fg :contentReference[oaicite:4]{index=4}
+
+# Highlights, inactive text, dividers
+theme[hi_fg]        = "#a5d6ff"  # --color-accent-fg :contentReference[oaicite:5]{index=5}
+theme[inactive_fg]  = "#8b949e"  # --color-fg-muted :contentReference[oaicite:6]{index=6}
+theme[div_line]     = "#6e7681"  # --color-fg-subtle :contentReference[oaicite:7]{index=7}
+
+# Graph overlays and meters
+theme[graph_text]   = "#c9d1d9"  # match main_fg :contentReference[oaicite:8]{index=8}
+theme[meter_bg]     = "#30363d"  # subtle border color (#30363d) :contentReference[oaicite:9]{index=9}
+
+# Process-box accents (magenta, amber, red, blue)
+theme[proc_misc]    = "#d2a8ff"  # soft magenta :contentReference[oaicite:10]{index=10}
+theme[cpu_box]      = "#a5d6ff"  # same magenta :contentReference[oaicite:11]{index=11}
+theme[mem_box]      = "#a5d6ff"  # --color-attention-fg :contentReference[oaicite:12]{index=12}
+theme[net_box]      = "#a5d6ff"  # --color-danger-fg :contentReference[oaicite:13]{index=13}
+theme[proc_box]     = "#a5d6ff"  # --color-accent-fg :contentReference[oaicite:14]{index=14}
+
+# Temperature graph (magenta → coral → red)
+theme[temp_start]   = "#d2a8ff"  # magenta :contentReference[oaicite:15]{index=15}
+theme[temp_mid]     = "#ff7b72"  # coral :contentReference[oaicite:16]{index=16}
+theme[temp_end]     = "#f85149"  # red :contentReference[oaicite:17]{index=17}
+
+# CPU graph (magenta → sky blue → amber)
+theme[cpu_start]    = "#79c0ff"  # sky blue :contentReference[oaicite:19]{index=19}
+theme[cpu_mid]      = "#d2a8ff"  # magenta :contentReference[oaicite:18]{index=18}
+theme[cpu_end]      = "#f85149"  # amber :contentReference[oaicite:20]{index=20}
+
+# Free memory/disk (blue → magenta → coral)
+theme[free_start]   = "#58a6ff"  # blue :contentReference[oaicite:21]{index=21}
+theme[free_mid]     = "#d2a8ff"  # magenta :contentReference[oaicite:22]{index=22}
+theme[free_end]     = "#ff7b72"  # coral :contentReference[oaicite:23]{index=23}
+
+# Cached memory (sky blue → blue → bright blue)
+theme[cached_start] = "#58a6ff"  # sky blue :contentReference[oaicite:24]{index=24}
+theme[cached_mid]   = "#d2a8ff"  # blue :contentReference[oaicite:25]{index=25}
+theme[cached_end]   = "#ff7b72"  # bright blue (approx.) :contentReference[oaicite:26]{index=26}
+
+# Available memory/disk (amber → orange → dark amber)
+theme[available_start] = "#58a6ff"  # amber :contentReference[oaicite:27]{index=27}
+theme[available_mid]   = "#d2a8ff"  # bright orange (approx.) :contentReference[oaicite:28]{index=28}
+theme[available_end]   = "#ff7b72"  # dark amber (approx.) :contentReference[oaicite:29]{index=29}
+
+# Used memory/disk (magenta → sky blue → blue)
+theme[used_start]   = "#d2a8ff"  # magenta :contentReference[oaicite:30]{index=30}
+theme[used_mid]     = "#79c0ff"  # sky blue :contentReference[oaicite:31]{index=31}
+theme[used_end]     = "#58a6ff"  # blue :contentReference[oaicite:32]{index=32}
+
+# Download graph (magenta → sky blue → blue)
+theme[download_start] = "#d2a8ff"  # magenta :contentReference[oaicite:33]{index=33}
+theme[download_mid]   = "#79c0ff"  # sky blue :contentReference[oaicite:34]{index=34}
+theme[download_end]   = "#58a6ff"  # blue :contentReference[oaicite:35]{index=35}
+
+# Upload graph (magenta → coral → red)
+theme[upload_start]  = "#d2a8ff"  # magenta :contentReference[oaicite:36]{index=36}
+theme[upload_mid]    = "#ff7b72"  # coral :contentReference[oaicite:37]{index=37}
+theme[upload_end]    = "#f85149"  # red :contentReference[oaicite:38]{index=38}
+
+# Process usage (blue → magenta → subtle)
+theme[process_start] = "#58a6ff"  # blue :contentReference[oaicite:39]{index=39}
+theme[process_mid]   = "#d2a8ff"  # magenta :contentReference[oaicite:40]{index=40}
+theme[process_end]   = "#6e7681"  # subtle gray :contentReference[oaicite:41]{index=41}
+

@@ -585,7 +585,7 @@ alias lazygit=lazygit
 # function busy_ports(){
 #  lsof -iTCP -sTCP:LISTEN -n -P | awk '{printf "%-15s %-10s %-20s\n", $1, $8, $9}'  | bat  --language=csv
 # }
-function listening() {
+function port_listener() {
 echo -e '
 █░█░█ █░█ █ █▀▀ █░█   █▀█ █▀█ █▀█ ▀█▀
 ▀▄▀▄▀ █▀█ █ █▄▄ █▀█   █▀▀ █▄█ █▀▄ ░█░
@@ -1414,8 +1414,8 @@ alias ipvim="ipython --TerminalInteractiveShell.editing_mode=vi"
 # gcal -H '\e[31;42m:\e[0m:\e[33;45m:\e[0m' -q JP 2022
 function show_Japanese_calendar(){
   if [ ! "$#" -gt 0 ]; then
-        echo "using Default: Japanese calendar for 2022";
-        gcal -H '\e[31;42m:\e[0m:\e[33;45m:\e[0m' -q JP 2022
+        echo "using Default: Japanese calendar for 2025";
+        gcal -H '\e[31;42m:\e[0m:\e[33;45m:\e[0m' -q JP 2025
         return 1;
     else
         #echo "Input must be in the form: gcal JP year (e.g., gcal JP 2034)"

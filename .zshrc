@@ -304,7 +304,7 @@ function WelcomeMessage(){
         fi
 }
 
-autoload -Uz WelcomeMessage
+#autoload -Uz WelcomeMessage
 
 #============================================================================
 #                   COLORING The MAN-Page
@@ -907,12 +907,8 @@ export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 
 
 ########################################################
-#      LOADING FASTER ZSHRC WITH OH-MY-ZSH
-# This will make our zsh config super quick at loading
+#              ANACONDA INITIALIZATION
 ########################################################
-
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -927,4 +923,11 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+########################################################
+#      LOADING FASTER ZSHRC WITH OH-MY-ZSH
+# This will make our zsh config super quick at loading
+########################################################
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
