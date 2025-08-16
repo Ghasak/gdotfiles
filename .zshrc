@@ -909,6 +909,7 @@ export SDKROOT=$(xcrun --sdk macosx --show-sdk-path)
 ########################################################
 #              ANACONDA INITIALIZATION
 ########################################################
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -930,4 +931,5 @@ unset __conda_setup
 ########################################################
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
 

@@ -1644,4 +1644,10 @@ do
 done
 }
 
+function benchmark_zsh(){
+  echo "Lazy loading utilities: conda & sdkman ..."
+  echo "You need to write the command once to load and again to work with it. "
+  hyperfine --warmup 5 'zsh -i -c exit'
+}
+
 ##########################################################################
