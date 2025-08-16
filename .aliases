@@ -1648,6 +1648,13 @@ function benchmark_zsh(){
   echo "Lazy loading utilities: conda & sdkman ..."
   echo "You need to write the command once to load and again to work with it. "
   hyperfine --warmup 5 'zsh -i -c exit'
+  echo " Running now bench "
+  bench "zsh -i -c exit"
+}
+function benchmark_nvim(){
+  hyperfine --warmup 5 'nvim -u NONE -c "qall"'
+  bench "nvim -u NONE -c 'qall'"
+
 }
 
 ##########################################################################

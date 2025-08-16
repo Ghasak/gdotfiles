@@ -17,6 +17,7 @@ My custom .dot files for my machine MBP 14 stored and restored using stow.
 
 ## ChangeLogs
 
+- `2025-08-16 17:36`: Increase the speed of `nvim` with lazy loading for conda and sdkman
 - `2024-10-20 22:01`: Added several config files, elia and `aerospace.toml`.
 - `2024-03-13 18:00`: Added Nyan Mode (Nyan Cat Mode) for my spacemacs and also support yanking to end of line.
 - `2023-11-11 21:46`: Updated the AppleScript for faster speed opening Emacs.
@@ -111,3 +112,5 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ```
+
+
